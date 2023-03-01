@@ -10,6 +10,7 @@ body{
 	margin:auto;
 }
 
+
 .header {
   display: flex;
 	align-items: center;
@@ -178,11 +179,12 @@ label {
   margin-bottom: 5px;
 }
 input{
-  width: 100%;
-  padding: 5px;
-  border: 0;
-	background-color:transparent;
+  	width: 100%;
+  	padding: 5px;
+	border: 0;
+  	background-color:transparent;
 	font-size: 18px;
+	text-align: end;
 }
 
 .rating{
