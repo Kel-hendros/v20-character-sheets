@@ -38,6 +38,32 @@ ratings.forEach(rating => {
   });
 });
 
+// // // // // Comportamiento de TABS
+const tabs = document.querySelectorAll(".tab-button");
+const contents = document.querySelectorAll(".tab-content");
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    //remove active class from all tabs
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    // Add active class to clicked tab
+    tab.classList.add("active");
+
+    //Hide All Contents
+    contents.forEach((content) => content.classList.remove("active"));
+    //Show content for clicked tab
+    const tabContentId = tab.dataset.tab;
+    document.getElementById(tabContentId).classList.add("active");
+  });
+});
+
+
+
+function toggleCollapse() {
+  const container = document.querySelector('.container.info');
+  container.classList.toggle('collapsed');
+}
+
 
 // Define function to update dots (que es llamada al cargar el archivo)
 function updateRatingDots(rating) {

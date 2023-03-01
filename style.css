@@ -6,20 +6,146 @@
 }
 
 body{
-	max-width:900px;
+	display: flex;
+	max-width: 100%;
 	margin:auto;
+	margin-left: 30px;
+	margin-right: 30px;
 }
+
+.super-column:nth-child(1),
+.super-column:nth-child(3){
+	flex-grow: 1;
+	width: 100%;
+	border:0px solid black;
+	margin:5px;
+}
+.super-column:nth-child(2){
+	min-width: 860px;
+	flex-grow: 2;
+	/* border: 2px solid black; */
+	padding: 10px;
+	box-shadow: 0px 2px 20px 0px gray;
+}
+
+.container.info{
+	position: relative;
+	margin-bottom: 0px;
+}
+
+/* LINEAS UNIENDO LOS PUNTITOS EN TODOS LADOS */
+.form-group::after{
+	content:"";
+	display:block;
+	position:absolute;
+	bottom: 8px;
+	height:1px;
+	background-color: black;
+	width: 100%;
+}
+
+/* PRIMERA SUPER COLUMN */
+
+.column-left{
+	padding: 10px;
+}
+.column-left .container.info{
+
+}
+
+
+/* TABS */
+.tab-buttons-container{
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-between;
+	gap: 0px
+	
+}
+.tab-button {
+	color: white;
+	font-family: 'DM Serif Display', serif;
+	font-size:15px;
+	flex-grow: 1;
+	background-color: black;
+	border: 2px solid black;
+	padding: 10px;
+	cursor: pointer;
+	display: inline-block;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.tab-button.active {
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border: 2px solid black;
+	border-bottom: none;
+}
+
+.tab-content{
+	display: none;
+}
+
+.tab-content.active{
+	display: block;
+	border: 2px solid black;
+	border-top: none;
+		
+}
+
+/* TAB: DISCIPLINAS */
+.discipline-container{
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	padding-top: 30px;
+
+}
+.form-group.discipline{
+   	position: relative;
+	display: flex;
+	margin-bottom:0px;
+   	position:relative;
+   	justify-content: space-between;
+   	width: 100%;
+	align-items: baseline;
+}
+.discipline-container input{
+	display: block;
+	font-size: 20px;
+	border: 0;
+	font-weight: bold;
+	flex-grow: 1;
+	padding-right: 5px;
+	margin-bottom: 5px;
+}
+
 
 /* Estilos del HEADER */
 /* TITULO Y BOTONES */
 
 .header {
-  display: flex;
+  	display: flex;
 	align-items: center;
 	text-align: center;
-	margin-top: 40px;
-	margin-bottom:10px;
+	margin-top: 10px;
+	margin-bottom:0px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
+
+.header .container.info{
+	display: flex;
+	flex-direction: column;
+	gap:0;
+	align-items: flex-start;
+	justify-content: center;
+	padding-right: 10px;
+}
+
 
 .header > div{
 	flex-basis:33.33%;
@@ -92,11 +218,13 @@ button,
 	transition: all 0.5s ease-in-out;
 }
 
+
+/* Titulos de secciones */
 .seccion{
 	text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+    margin-bottom: 0;
 	position:relative;
+	margin-top: 0;
 }
 
 .seccion::after{
@@ -104,7 +232,7 @@ button,
 	display:block;
 	position:absolute;
 	top:50%;
-	width:40%;
+	width:35%;
 	height:5px;
 	background-color:black;
 	right:0;
@@ -114,7 +242,7 @@ button,
 	display:block;
 	position:absolute;
 	top:50%;
-	width:40%;
+	width:35%;
 	height:5px;
 	background-color:black;
 	left:0;
@@ -123,16 +251,32 @@ button,
 
 
 .container{
-  display: flex;
- gap: clamp(0px, calc(3vw + 0px), 40px); /* set gap to a minimum of 3px and a maximum of 40px, based on viewport size */	
+  	display: flex;
+ 	gap: clamp(0px, calc(3vw + 0px), 40px); /* set gap to a minimum of 3px and a maximum of 40px, based on viewport size */	
 	justify-content: space-between;
 	margin-top:0px;
-	margin-bottom:30px;
+	margin-bottom:15px;
+}
+
+
+
+.container h2{
+	margin-top: 0;
 }
 
 .container.info label{
-	font-size: 20px;
+	font-size: 15px;
 	font-family: 'DM Serif Display', serif;
+}
+
+.container input{
+	width: 100%;
+	padding: 5px;
+  	border: 0;
+	background-color:transparent;
+  	font-size: 19px;
+	font-weight: bold;
+  	text-align: end;
 }
 
 .column{
@@ -141,13 +285,13 @@ button,
 	margin-left: 0px;
 	flex-grow:1;
 	text-align: center;
-  padding: 0 0px;
+  	padding: 0 0px;
 }
 .column label{
 	font-size: 20px;
 }
 
-.column label::after{
+.container.info label::after{
 	content:"";
 	display:block;
 	position:absolute;
@@ -158,10 +302,12 @@ button,
 }
 
 .form-group{
-  display:flex;
-  margin-bottom:10px;
-  text-align: left;
+ 	display:flex;
+ 	margin-bottom:0px;
+  	text-align: left;
 	position:relative;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .form-group.info{
@@ -180,14 +326,7 @@ label {
   font-weight: bold;
   margin-bottom: 5px;
 }
-input{
-  	width: 100%;
-  	padding: 5px;
-	border: 0;
-  	background-color:transparent;
-	font-size: 18px;
-	text-align: end;
-}
+
 
 .rating{
   display:flex;
