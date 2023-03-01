@@ -1,0 +1,524 @@
+<!-- TITULO -->
+<div class="header">
+		<div></div>
+		<div class:"title-container">
+			<h1>VAMPIRO</h1>
+  		<h2>La Mascarada</h2>
+		</div>
+		<div class="buttons-container">
+			<button onclick="downloadCharacterData()">GUARDAR<br>PERSONAJE</button>
+			<label for="file-input" class="custom-file-upload">CARGAR<br>PERSONAJE </label>
+			<input type="file" id="file-input" hidden accept=".json">
+		</div>
+</div>
+
+<!-- INFORMACION -->
+<div class="container info">
+  <div class="column">
+    <div class="form-group info">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" autocomplete="off">
+    </div>
+    <div class="form-group info">
+      <label for="jugador">Jugador:</label>
+      <input type="text" id="jugador" autocomplete="off">
+    </div>
+    <div class="form-group info">
+      <label for="cronica">Cronica:</label>
+      <input type="text" id="cronica" autocomplete="off">
+    </div>  
+  </div>
+    <div class="column">
+    <div class="form-group info">
+      <label for="naturaleza">Naturaleza:</label>
+      <input type="text" id="naturaleza" autocomplete="off">
+    </div>
+    <div class="form-group info">
+      <label for="conducta">Conducta:</label>
+      <input type="text" id="conducta" autocomplete="off">
+    </div>
+    <div class="form-group info">
+      <label for="concepto">Concepto:</label>
+      <input type="text" id="concepto" autocomplete="off">
+    </div>  
+  </div>
+    <div class="column">
+    <div class="form-group info">
+      <label for="clan">Clan:</label>
+      <input type="text" id="clan" autocomplete="off">
+    </div>
+    <div class="form-group info">
+      <label for="generacion">Generacion:</label>
+      <input type="number" id="generacion" autocomplete="off">
+    </div>
+    <div class="form-group info">
+      <label for="sire">Sire:</label>
+      <input type="text" id="sire" autocomplete="off">
+    </div>  
+  </div>
+</div>
+  
+<!--  ATRIBUTOS  -->
+<h1 class="seccion">Atributos</h1>
+<div class="container attributes">
+<!-- PRIMERA COLUMNA ATRIBUTOS: FISICOS  -->
+  <div class="column">
+    <h2>Fisicos</h2>
+    <div class="form-group attribute">
+      <label for="fuerza">Fuerza:</label>
+      <div class="rating" id="fuerza-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="fuerza-value" name="fuerza" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="destreza">Destreza:</label>
+      <div class="rating" id="destreza-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="destreza-value" name="destreza" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="resistencia">Resistencia:</label>
+      <div class="rating" id="resistencia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="resistencia-value" name="resistencia" value="0">
+  </div>
+  </div>
+<!-- SEGUNDA COLUMNA ATRIBUTOS: SOCIALES  -->
+  <div class="column">
+    <h2>Sociales</h2>
+    <div class="form-group attribute">
+      <label for="carisma">Carisma:</label>
+      <div class="rating" id="carisma-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="carisma-value" name="carisma" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="manipulacion">Manipulacion:</label>
+      <div class="rating" id="manipulacion-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="manipulacion-value" name="manipulacion" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="apariencia">Apariencia:</label>
+      <div class="rating" id="apariencia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="apariencia-value" name="apariencia" value="0">
+    </div>      
+  </div>
+<!-- TERCERA COLUMNA ATRIBUTOS: MENTALES  -->
+  <div class="column">
+    <h2>Mentales</h2>
+    <div class="form-group attribute">
+      <label for="percepcion">Percepcion:</label>
+      <div class="rating" id="percepcion-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="percepcion-value" name="percepcion" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="inteligencia">Inteligencia:</label>
+      <div class="rating" id="inteligencia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="inteligencia-value" name="inteligencia" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="astucia">Astucia:</label>
+      <div class="rating" id="astucia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="astucia-value" name="astucia" value="0">
+    </div>      
+  </div>
+</div>  
+
+<!-- HABILIDADES --> 
+<h1 class="seccion">Habilidades</h1>
+<div class="container abilities">
+<!-- PRIMERA COLUMNA HABILIDADES: TALENTOS  -->
+  <div class="column">
+    <h2>Talentos</h2>
+    <div class="form-group attribute">
+      <label for="alerta">Alerta:</label>
+      <div class="rating" id="alerta-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="alerta-value" name="alerta" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="atletismo">Atletismo:</label>
+      <div class="rating" id="atletismo-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="atletismo-value" name="atletismo" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="callejeo">Callejeo:</label>
+      <div class="rating" id="callejeo-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="callejeo-value" name="callejeo" value="0">
+  </div>
+	  <div class="form-group attribute">
+      <label for="consciencia">Consciencia:</label>
+      <div class="rating" id="consciencia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="consciencia-value" name="consciencia" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="empatia">Empatia:</label>
+      <div class="rating" id="empatia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="empatia-value" name="empatia" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="expresion">Expresion:</label>
+      <div class="rating" id="expresion-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="expresion-value" name="expresion" value="0">
+  </div>
+    <div class="form-group attribute">
+      <label for="intimidacion">Intimidacion:</label>
+      <div class="rating" id="intimidacion-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="intimidacion-value" name="intimidacion" value="0">
+  </div>
+	  <div class="form-group attribute">
+      <label for="liderazgo">Liderazgo:</label>
+      <div class="rating" id="liderazgo-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="liderazgo-value" name="liderazgo" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="pelea">Pelea:</label>
+      <div class="rating" id="pelea-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="pelea-value" name="pelea" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="subterfugio">Subterfugio:</label>
+      <div class="rating" id="subterfugio-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="subterfugio-value" name="subterfugio" value="0">
+  </div>  
+	</div>
+<!-- SEGUNDA COLUMNA HABILIDADES: TECNICAS  -->
+    <div class="column">
+    <h2>Tecnicas</h2>
+    <div class="form-group attribute">
+      <label for="armasDeFuego">Armas de Fuego:</label>
+      <div class="rating" id="armasDeFuego-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="armasDeFuego-value" name="armasDeFuego" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="artesania">Artesania:</label>
+      <div class="rating" id="artesania-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="artesania-value" name="artesania" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="conducir">Conducir:</label>
+      <div class="rating" id="conducir-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="conducir-value" name="conducir" value="0">
+  </div>
+	  <div class="form-group attribute">
+      <label for="etiqueta">Etiqueta:</label>
+      <div class="rating" id="etiqueta-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="etiqueta-value" name="etiqueta" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="interpretacion">Interpretacion:</label>
+      <div class="rating" id="interpretacion-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="interpretacion-value" name="interpretacion" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="latrocinio">Latrocinio:</label>
+      <div class="rating" id="latrocinio-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="latrocinio-value" name="latrocinio" value="0">
+  </div>
+    <div class="form-group attribute">
+      <label for="peleaConArmas">Pelea con Armas:</label>
+      <div class="rating" id="peleaConArmas-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="peleaConArmas-value" name="peleaConArmas" value="0">
+  </div>
+	  <div class="form-group attribute">
+      <label for="sigilo">Sigilo:</label>
+      <div class="rating" id="sigilo-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="sigilo-value" name="sigilo" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="supervivencia">Supervivencia:</label>
+      <div class="rating" id="supervivencia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="supervivencia-value" name="supervivencia" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="tratoConAnimales">Trato con Animales:</label>
+      <div class="rating" id="tratoConAnimales-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="tratoConAnimales-value" name="tratoConAnimales" value="0">
+  </div>  
+	</div>
+<!-- TERCERA COLUMNA HABILIDADES: CONOCIMIENTOS  -->
+  <div class="column">
+    <h2>Conocimientos</h2>
+    <div class="form-group attribute">
+      <label for="academicismo">Academicismo:</label>
+      <div class="rating" id="academicismo-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="academicismo-value" name="academicismo" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="ciencias">Ciencias:</label>
+      <div class="rating" id="ciencias-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="ciencias-value" name="ciencias" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="finanzas">Finanzas:</label>
+      <div class="rating" id="finanzas-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="finanzas-value" name="finanzas" value="0">
+  </div>
+	  <div class="form-group attribute">
+      <label for="informatica">Informatica:</label>
+      <div class="rating" id="informatica-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="informatica-value" name="informatica" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="investigacion">Investigacion:</label>
+      <div class="rating" id="investigacion-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="investigacion-value" name="investigacion" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="leyes">Leyes:</label>
+      <div class="rating" id="leyes-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="leyes-value" name="leyes" value="0">
+  </div>
+    <div class="form-group attribute">
+      <label for="medicina">Medicina:</label>
+      <div class="rating" id="medicina-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="medicina-value" name="medicina" value="0">
+  </div>
+	  <div class="form-group attribute">
+      <label for="ocultismo">Ocultismo:</label>
+      <div class="rating" id="ocultismo-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+      <input type="hidden" id="ocultismo-value" name="ocultismo" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="politica">Politica:</label>
+      <div class="rating" id="politica-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+      </div>
+    <input type="hidden" id="politica-value" name="politica" value="0">
+    </div>
+    <div class="form-group attribute">
+      <label for="tecnologia">Tecnologia:</label>
+      <div class="rating" id="tecnologia-rating">
+        <span class="dot" data-value="0"></span>
+        <span class="dot" data-value="1"></span>
+        <span class="dot" data-value="2"></span>
+        <span class="dot" data-value="3"></span>
+        <span class="dot" data-value="4"></span>
+     </div>
+    <input type="hidden" id="tecnologia-value" name="tecnologia" value="0">
+  </div>  
+	</div>
+</div>  
+
+
