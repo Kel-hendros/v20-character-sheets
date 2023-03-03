@@ -84,8 +84,8 @@ function updateRatingDots(rating) {
 function getCharacterData() {
   let characterData = {};
 
-  // Loop through all input elements
-  const inputs = document.querySelectorAll('input');
+  // Loop through all input or select elements
+  const inputs = document.querySelectorAll('input' + ', select');
   inputs.forEach(input => {
     const id = input.id;
     const value = input.value;

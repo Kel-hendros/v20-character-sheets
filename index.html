@@ -26,7 +26,7 @@
               <input type="text" id="debilidad" autocomplete="off">
             </div>
           </div>
-          </div>
+        </div>
         
         <!-- TAB CONTENEDOR -->
         <div class="tab-container">
@@ -186,8 +186,8 @@
                     <span class="dot" data-value="3"></span>
                     <span class="dot" data-value="4"></span>
                   </div>
-                <input type="hidden" id="trasfondo1-value" name="trasfondo1" value="0">
-              </div>
+                  <input type="hidden" id="trasfondo1-value" name="trasfondo1" value="0">
+                </div>
                 <div class="form-group discipline">
                   <input type="text" id="trasfondo2" autocomplete="off">
                   <div class="rating" id="trasfondo2-rating">
@@ -311,12 +311,53 @@
                 </div>
             </div>
           </div>
+          <!-- Virtudes -->
           <div id="tab3" class="tab-content">
-            <!-- CONTENIDO PARA LO QUE VAYA ACA -->
+            <div class="discipline-container">
+              <!-- dropdown field with two options-->
+              <div class="form-group discipline">
+                <select id="virtue1" name="virtue1">
+                  <option value="conciencia" selected>Conciencia</option>
+                  <option value="conviccion">Conviccion</option>
+                </select>
+                <div class="rating" id="virtue1-rating">
+                  <span class="dot" data-value="0"></span>
+                  <span class="dot" data-value="1"></span>
+                  <span class="dot" data-value="2"></span>
+                  <span class="dot" data-value="3"></span>
+                  <span class="dot" data-value="4"></span>
+                </div>
+                <input type="hidden" id="virtue1-value" name="virtue1" value="0">
+              </div>
+              <div class="form-group discipline">
+                <select id="virtue2" name="virtue2">
+                  <option value="autocontrol" selected>Autocontrol</option>
+                  <option value="instinto">Instinto</option>
+                </select>
+                <div class="rating" id="virtue2-rating">
+                  <span class="dot" data-value="0"></span>
+                  <span class="dot" data-value="1"></span>
+                  <span class="dot" data-value="2"></span>
+                  <span class="dot" data-value="3"></span>
+                  <span class="dot" data-value="4"></span>
+                </div>
+                <input type="hidden" id="virtue2-value" name="virtue2" value="0">
+              </div>
+              <div class="form-group discipline">
+                <label for="virtue3">Coraje:</label>
+                <div class="rating" id="virtue3-rating">
+                  <span class="dot" data-value="0"></span>
+                  <span class="dot" data-value="1"></span>
+                  <span class="dot" data-value="2"></span>
+                  <span class="dot" data-value="3"></span>
+                  <span class="dot" data-value="4"></span>
+                </div>
+                <input type="hidden" id="virtue3-value" name="virtue3" value="0">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    
     </div>
     <div class="super-column">
       <!-- TITULO -->
