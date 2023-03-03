@@ -59,12 +59,6 @@ tabs.forEach((tab) => {
 
 
 
-function toggleCollapse() {
-  const container = document.querySelector('.container.info');
-  container.classList.toggle('collapsed');
-}
-
-
 // Define function to update dots (que es llamada al cargar el archivo)
 function updateRatingDots(rating) {
   // Get the hidden input and dot elements
@@ -96,8 +90,9 @@ function getCharacterData() {
     const id = input.id;
     const value = input.value;
 
-    // Check if the input has an ID and a value
-    if (id && value) {
+
+    // Check if the input has an ID and a value and is not a file input
+    if (id && value && input.type !== 'file') {
       // Add the input ID and value to the characterData object
       characterData[id] = value;
     }
@@ -134,7 +129,7 @@ function downloadCharacterData() {
 
 
 ///////////////////////////
-// Descargar el archivo ///
+// Cargar el archivo ///
 //////////////////////////
 
 const fileInput = document.getElementById('file-input');

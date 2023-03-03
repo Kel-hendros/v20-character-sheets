@@ -48,6 +48,7 @@ body{
 
 .column-left{
 	padding: 10px;
+	padding-left: 0;
 }
 
 
@@ -307,6 +308,7 @@ button,
 	position:relative;
 	justify-content: space-between;
 	width: 100%;
+	white-space: nowrap;
 }
 
 .form-group.info{
@@ -314,8 +316,8 @@ button,
 }
 
 .form-group.attribute{
-  justify-content:space-between;
-  gap:2px;
+  	justify-content:space-between;
+  	gap:2px;
 	align-items: baseline;
 
 }
@@ -346,3 +348,4 @@ label {
 .dot.filled{
   background-color: black;
 }
+
