@@ -12,8 +12,10 @@
 	font-family: 'Cormorant Garamond', serif;
 }
 
-
-
+/* I need to set the max height of the entire proyect no more than the viewport */
+html, body{
+	max-height: 100vh;
+}
 
 body{
 	display: flex;
@@ -25,18 +27,23 @@ body{
 
 .super-column:nth-child(1),
 .super-column:nth-child(3){
+	display: flex;
+	flex-direction: column;
 	flex-grow: 1;
-	min-width: 26rem;
+	min-width: 25rem;
 	width: 50%;
 	border:0px solid black;
 	margin:5px;
+	margin-top: 20px;
+	max-height: 100vh;
 }
 .super-column:nth-child(2){
 	min-width: 860px;
 	flex-grow: 2;
-	/* border: 2px solid black; */
 	padding: 10px;
 	box-shadow: 0px 2px 20px 0px gray;
+	min-height: fit-content;
+	/* border: 3px solid limegreen; */
 }
 
 .container.info{
@@ -57,14 +64,18 @@ body{
 
 /* PRIMERA SUPER COLUMN */
 
+
 .column-left{
-	padding: 10px;
+	padding: 1px;
 	padding-left: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 
 
 /* TABS */
+
 .tab-buttons-container{
 	margin-top: 10px;
 	display: flex;
@@ -87,6 +98,9 @@ body{
 	border-top-left-radius: 20px;
 	border-bottom-left-radius: 0;
 	border-bottom-right-radius: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .tab-button.active {
@@ -104,6 +118,9 @@ body{
 	display: block;
 	border: 2px solid black;
 	border-top: none;
+	min-height: fit-content;
+	height: 410px;
+	
 		
 }
 
@@ -133,6 +150,79 @@ body{
 	flex-grow: 1;
 	padding-right: 5px;
 	margin-bottom: 5px;
+}
+
+
+/* Virtudes - HUMANIDAD / SENDA */
+.humanidad-container
+{
+	display: grid;
+	padding-top: 0px;
+	margin-top: 35px;
+	
+}
+
+/* display the two items inside form-group.humanidad one under the other, 
+bowth centered and filling 80% of the space */
+.form-group.humanidad
+{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	margin-top: 15px;
+	gap:15px;
+	margin-inline: auto;
+	margin-bottom: 10px;
+}
+
+.form-group.humanidad input
+{
+	position: relative;
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid black;
+}
+
+.form-group.humanidad .rating
+{
+	width: 80%;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	
+}
+
+.form-group.humanidad::after {
+    display: none;
+}
+
+
+/* FUERZA DE VOLUNTAD */
+.voluntad-container{
+	display: grid;
+	padding-top: 0px;
+	margin-top: 35px;
+	
+}
+
+
+.form-group.voluntad{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	margin-top: 15px;
+	gap:15px;
+	margin-inline: auto;
+	margin-bottom: 10px;
+	border: 2px solid black;
+}
+
+.form-group.voluntad::after {
+    display: none;
 }
 
 /* Estilos del HEADER 
@@ -182,7 +272,7 @@ body{
 .header h2 {
 	margin-top: -20px;
 	letter-spacing: 9px;
-
+	
 }
 
 h1,
@@ -233,10 +323,13 @@ button,
 
 /* Titulos de secciones */
 
+
+
 .seccion-container{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
 
 .seccion{
@@ -244,7 +337,7 @@ button,
     margin-bottom: 0;
 	position:relative;
 	margin-top: 0;
-	
+	white-space: nowrap;
 }
 .seccion-linea{
 	display: block;
@@ -255,30 +348,6 @@ button,
 	height: 4px;
 	margin: 3px;
 }
-
-/* .seccion::after{
-	content:"";
-	display:block;
-	position:absolute;
-	top:50%;
-	min-width: 10%;
-	max-width:35%;
-	height:5px;
-	background-color:black;
-	right:0;
-}
-.seccion::before{
-	content:"";
-	display:block;
-	position:absolute;
-	top:50%;
-	width:35%;
-	height:5px;
-	background-color:black;
-	left:0;
-} */
-
-
 
 .container{
   	display: flex;
