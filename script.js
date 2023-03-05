@@ -1,8 +1,14 @@
 const ratings = document.querySelectorAll('.rating');
+let editMode = true;
+
+
+
+
 
 /// FUNCIONALIDAD DE LOS PUNTITOS AL HACER CLICK ///
 ////////////////////////////////////////////////////
 // Loop through each rating element
+if(editMode===true){
 ratings.forEach(rating => {
   // Get the hidden input and dot elements
   const input = rating.nextElementSibling;
@@ -33,10 +39,12 @@ ratings.forEach(rating => {
         // Update the hidden input value
         input.value = index + 1;
         console.log(input.value);
+        saveCharacterData();
       }
     });
   });
 });
+}
 
 // // // // // Comportamiento de TABS
 const tabs = document.querySelectorAll(".tab-button");
@@ -77,6 +85,57 @@ function updateRatingDots(rating) {
     }
   });
 }
+
+// GUARDAR EN LOCAL STORAGE
+// Save character data to local storage
+function saveCharacterData() {
+  // Get character data as JSON string
+  const characterJSON = getCharacterData();
+  // Save character data to local storage
+  localStorage.setItem('characterData', characterJSON);
+}
+
+// Load character data from local storage
+function loadCharacterData() {
+  // Get character data from local storage
+  const characterJSON = localStorage.getItem('characterData');
+  // Parse character data from JSON string
+  const characterData = JSON.parse(characterJSON);
+  // Loop through all input or select elements
+  const inputs = document.querySelectorAll('input' + ', select');
+  inputs.forEach(input => {
+    const id = input.id;
+    const value = characterData[id];
+    // Check if the input has an ID and a value
+    if (id && value) {
+      // Set the input value from the characterData object
+      input.value = value;
+    }
+  });
+}
+
+// Call loadCharacterData when the page loads
+window.onload = function() {
+  loadCharacterData();
+  // Loop through each rating element and update the dots
+  const ratings = document.querySelectorAll('.rating');
+  ratings.forEach(rating => {
+  updateRatingDots(rating);
+  });
+  //update health squares
+  updateHealthSquares()
+  //update blood per turn
+  updateBloodPerTurn()
+  //block the blood pool based on generation
+  blockBloodPool();
+}
+
+// Call saveCharacterData when an input is changed
+const inputs = document.querySelectorAll('input' + ', select');
+inputs.forEach(input => {
+  input.addEventListener('change', saveCharacterData);
+});
+
 
 
 
@@ -164,8 +223,12 @@ fileInput.addEventListener('change', (e) => {
 		ratings.forEach(rating => {
 		updateRatingDots(rating);
 		});
-    //update helth squares
+    //update health squares
     updateHealthSquares()
+    //update blood per turn
+    updateBloodPerTurn()
+    //block the blood pool based on generation
+    blockBloodPool();
 	};
 
 	reader.readAsText(file);
@@ -220,6 +283,7 @@ function updateHealthSquares() {
     } else if (squareValue == 3) {
       square.classList.add("agravado");
     }
+    saveCharacterData();
   });
 }
 
@@ -325,9 +389,98 @@ removeButtons.forEach((button) => {
   });
 });
 
+// PUNTOS DE SANGRE POR TURNO SEGUN GENERACION
 
 
+//funcion para calcular el texto del label #bloodPerTurn 
+//segun el valor del input #generacion
+function calculateBloodPerTurn(){
+  const bloodPerTurn = document.querySelector("#bloodPerTurn");
+  const generationValue = document.querySelector("#generacion").value;
+  //generacion = o mayor que 10 = 1 punto de sangre por turno
+  //generacion = 9 = 2 puntos de sangre por turno
+  //generacion = 8 = 3 puntos de sangre por turno
+  //generacion = 7 = 4 puntos de sangre por turno
+  //generacion = 6 = 6 puntos de sangre por turno
+  //generacion = 5 = 8 puntos de sangre por turno
+  //generacion = 4 = 10 puntos de sangre por turno 
+  //generacion =< 3 = "???" puntos de sangre por turno 
+  if (generationValue >= 10) {
+    bloodPerTurn.innerHTML = "1";
+  }
+  if (generationValue == 9) {
+    bloodPerTurn.innerHTML = "2";
+  }
+  if (generationValue == 8) {
+    bloodPerTurn.innerHTML = "3";
+  }
+  if (generationValue == 7) {
+    bloodPerTurn.innerHTML = "4";
+  }
+  if (generationValue == 6) {
+    bloodPerTurn.innerHTML = "6";
+  }
+  if (generationValue == 5) {
+    bloodPerTurn.innerHTML = "8";
+  }
+  if (generationValue == 4) {
+    bloodPerTurn.innerHTML = "10";
+  }
+  if (generationValue <= 3) {
+    bloodPerTurn.innerHTML = "???";
+  }
+}
 
+//funcion para actualizar el texto del label #bloodPerTurn usando la func calculateBloodPerTurn()
+function updateBloodPerTurn() {
+  console.log("updateBloodPerTurn");
+  calculateBloodPerTurn();
+}
 
+// llamar a la funcion updateBloodPerTurn() cuando se cambia el campo #generacion
+document.querySelector("#generacion").addEventListener("change", function(){
+  updateBloodPerTurn();
+  blockBloodPool();
+});
 
+// Funcion: Bloquear blood pool
+function blockBloodPool (){
+  const generationValue = parseInt(document.querySelector("#generacion").value);
+  const bloodRating = document.querySelector("#blood-rating");
+  const dots = bloodRating.querySelectorAll(".dot");
 
+  //maximum blood pool based on generation
+  let maxBloodPool = 30;
+  if (generationValue <= 6){
+    maxBloodPool = 29;
+  }else if (generationValue <= 7){
+    maxBloodPool = 19;
+  }else if (generationValue <= 8){
+    maxBloodPool = 14;
+  }else if (generationValue <= 9){
+    maxBloodPool = 13;
+  }else if (generationValue <= 10){
+    maxBloodPool = 12;
+  }else if (generationValue <= 11){
+    maxBloodPool = 11;
+  }else if (generationValue <= 12){
+    maxBloodPool = 10;
+  }else if (generationValue >= 13){
+    maxBloodPool = 9;
+  }
+
+  //disable dots based on maxBloodPool
+  for(let i = 0; i < dots.length; i++){
+    const dot = dots[i];
+    const dotValue = parseInt(dot.getAttribute("data-value"));
+    if(dotValue > maxBloodPool){
+      dot.classList.add("disabled");
+    }else{
+      dot.classList.remove("disabled");
+    }
+  }
+  
+  //set the initial blood value to the maximum blood pool
+  const bloodValue = document.querySelector("#blood-value");
+  bloodValue.value = maxBloodPool;
+}

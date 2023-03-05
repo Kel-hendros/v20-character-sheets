@@ -674,3 +674,54 @@ select{
 	background-color: transparent;
 
 }
+
+/* SANGRE! */
+.blood-container
+{
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+.blood-pool
+{
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+.blood-row .rating
+{
+	display: grid;
+	grid-template-columns: repeat(10, auto);
+	grid-template-rows: repeat(3, auto);
+	gap: 5px;
+	justify-items: center;
+	align-items: center;
+}
+
+.blood-row .dot
+{
+	width:12;
+	height:12px;
+	border-radius:0;
+	border: 2px solid black;
+	margin: 0 1px;
+	cursor:pointer;
+}
+.info-sangre
+{
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+}
+
+.rating .dot.disabled{
+	background-color: rgb(225, 225, 225);
+	border-color: rgb(220, 225, 225);
+}
