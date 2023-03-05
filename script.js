@@ -169,3 +169,113 @@ fileInput.addEventListener('change', (e) => {
 	reader.readAsText(file);
 });
 	
+/////////////////////////////
+////// SISTEMA DE SALUD ////
+////////////////////////////
+
+// funcion para obtener un listado de todos los values de los hidden inputs
+// asociados a los span class="square" y ordenarlos de mayor a menor
+const healthSquares = document.querySelectorAll('.square');
+
+function getHealthValues() {
+  let healthValues = [];
+  healthSquares.forEach((square) => {
+    healthValues.push(square.nextElementSibling.value);
+  });
+  healthValues.sort((a, b) => b - a);
+  return healthValues;
+}
+
+// funcion para actualizar el value del hidden input asociado al span class="square"
+// una vez que se ordenaron con la funcion getHealthValues()
+function updateHealthValues() {
+  let healthValues = getHealthValues();
+  healthSquares.forEach((square, index) => {
+    square.nextElementSibling.value = healthValues[index];
+  });
+}
+
+
+
+// funcion para actualizar cada span class="square" agregandole la clase segun el value que tenga el hidden input 
+// segun los siguientes valores:
+// 0 = sin clase agregada
+// 1 = "contundente"
+// 2 = "letal"
+// 3 = "agravado"
+
+function updateHealthSquares() {
+  healthSquares.forEach((square) => {
+    square.classList.remove("contundente");
+    square.classList.remove("letal");
+    square.classList.remove("agravado");
+
+    let squareValue = square.nextElementSibling.value;
+    if (squareValue == 1) {
+      square.classList.add("contundente");
+    } else if (squareValue == 2) {
+      square.classList.add("letal");
+    } else if (squareValue == 3) {
+      square.classList.add("agravado");
+    }
+  });
+}
+
+
+
+const addButtons = document.querySelectorAll(".button-add");
+const removeButtons = document.querySelectorAll(".button-remove");
+
+addButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let healthValues = getHealthValues();
+    console.log("Al clickear, este es el valor de healthValues" + healthValues);
+    
+    //Buscar un "0" en el array "healthValues
+    let searchValue = "0";
+    let i;
+    for(i = 0; i < healthValues.length; i++) {
+      if (healthValues[i] === searchValue) {
+        console.log("hay un 0 en la posicion " + i);
+        break;
+      }
+    }
+    
+    if (i < healthValues.length) {
+      if (button.id == "contundenteAdd") {
+        healthValues[i] = 1;
+        console.log("contundente clickeado");
+        console.log(healthValues);
+      }
+      if (button.id == "letalAdd") {
+        healthValues[i] = 2;
+        console.log("letal clickeado");
+        console.log(healthValues);
+      }
+      if (button.id == "agravadoAdd") {
+        healthValues[i] = 3;
+        console.log(healthValues);
+      }
+      
+    } else {
+      console.log("no hay un 0 en el array");
+    }
+    //Ordena los valores
+    healthValues.sort((a, b) => b - a);
+    
+    //Pone en los valores del array healthValues en los hidden inputs values.
+    healthSquares.forEach((square, index) => {
+      square.nextElementSibling.value = healthValues[index];
+    });
+    updateHealthSquares();
+    console.log("final" + healthValues);
+  });
+});
+
+
+
+
+
+
+
+

@@ -25,8 +25,8 @@ body{
 	margin-right: 30px;
 }
 
-.super-column:nth-child(1),
-.super-column:nth-child(3){
+.super-column:nth-child(1)
+{
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -125,14 +125,17 @@ body{
 }
 
 /* TAB: DISCIPLINAS */
-.discipline-container{
+.discipline-container
+{
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
 	padding-top: 30px;
 }
 
-.form-group.discipline{
+.form-group.discipline,
+.form-group.merito
+{
    	position: relative;
 	display: flex;
 	margin-bottom:0px;
@@ -162,18 +165,14 @@ body{
 	
 }
 
-/* display the two items inside form-group.humanidad one under the other, 
-bowth centered and filling 80% of the space */
 .form-group.humanidad
 {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	width: 90%;
+	gap: 1px;
 	margin-top: 15px;
-	gap:15px;
 	margin-inline: auto;
 	margin-bottom: 10px;
 }
@@ -184,11 +183,15 @@ bowth centered and filling 80% of the space */
 	width: 100%;
 	text-align: center;
 	border-bottom: 1px solid black;
+	
 }
 
-.form-group.humanidad .rating
+.form-group.humanidad .rating,
+.form-group.voluntad .rating,
+.form-group.voluntadTemp .rating
 {
-	width: 80%;
+	display: flex;
+	gap:8px;
 	flex-wrap: nowrap;
 	justify-content: space-between;
 	
@@ -204,25 +207,49 @@ bowth centered and filling 80% of the space */
 	display: grid;
 	padding-top: 0px;
 	margin-top: 35px;
-	
+		
 }
-
-
-.form-group.voluntad{
+.form-group.voluntad
+{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
 	width: 90%;
-	margin-top: 15px;
+	margin-top: 25px;
 	gap:15px;
 	margin-inline: auto;
-	margin-bottom: 10px;
-	border: 2px solid black;
+	margin-bottom: 0px;
 }
 
-.form-group.voluntad::after {
+.form-group.voluntadTemp
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 90%;
+	margin-top: 10px;
+	gap:15px;
+	margin-inline: auto;
+	margin-bottom: 0px;
+	
+}
+
+.form-group.voluntad::after,
+.form-group.voluntadTemp::after {
     display: none;
+}
+
+/* Fuerza de Voluntad temporal */
+.form-group.voluntadTemp .dot
+{
+	width:12;
+ 	height:12px;
+ 	border-radius:0;
+ 	border: 2px solid black;
+ 	margin: 0 1px;
+	cursor:pointer;
 }
 
 /* Estilos del HEADER 
@@ -439,33 +466,211 @@ select{
 	
   
 }
-.dot{
-  width:10px;
-  height:15px;
-  border-radius:50%;
-  border: 1px solid black;
-  border-left: 3px solid black;
+.dot
+{
+	width:10px;
+ 	height:15px;
+ 	border-radius:50%;
+ 	border: 1px solid black;
+ 	border-left: 3px solid black;
 	border-right: 3px solid black;
 	margin: 0 1px;
-  cursor:pointer;
+	cursor:pointer;
 }
+
 .dot.filled{
-  background-color: black;
+	background-color: black;
 }
 
 
 /* Tercer Super Columna */
 
-
-
-.column-right{
+.super-column:nth-child(3){
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	border: 2px solid black;
-	background-color: black;
-	width: 60%;
-	padding: 10px;
-	padding-right: 0;
+	flex-grow: 1;
+	min-width: 15rem;
+	width: 50%;
+	margin:5px;
+	margin-top: 20px;
+	max-height: 100vh;
+}
+
+.column-right{
+	padding: 1px;
+	padding-left: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+/* SALUD */
+
+.health-container 
+{
+	--contundente: #9a9a9a;
+	--letal: #a76a24;
+	--agravado: #bb1515;
+}
+
+
+.health-table
+{
+	width: 210px;
+	margin-inline: auto; 
+	display: grid;
+	grid-template-rows: repeat(7, 25px);
 	
+}
+
+.table-row.salud
+{
+	display: grid;
+	grid-template-columns: 1fr 30px 20px;
+}
+
+
+.square
+{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.square.contundente
+{
+	background-color: var(--contundente);
+}
+
+
+.square.letal
+{
+	background-color: var(--letal);
+}
+
+.square.agravado
+{
+	background-color: var(--agravado);
+}
+
+.health-buttons-container
+{
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
+	margin-top: 20px;
+	margin-inline: auto;
+	flex-direction: column;
+}
+.botonera
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-direction: row-reverse;
+	margin-bottom: 5px;
+	box-shadow: 0 3px 1px 0px rgb(86, 86, 86);
+}
+
+.botonera:hover
+{
+	box-shadow: inset 0 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.botonera.contundente
+{
+	background-color: var(--contundente);
+	border-radius: 20px;
+	padding: 1px;
+	color:white;
+	font-size: 18px;
+	
+}
+
+.botonera.letal
+{
+	background-color: var(--letal);
+	border-radius: 20px;
+	padding: 1px;
+	color:white;
+	font-size: 18px;
+}
+
+.botonera.agravado
+{
+	background-color: var(--agravado);
+	border-radius: 20px;
+	padding: 1px;
+	color: white;
+	font-size: 18px;
+}
+
+.botonera .button-remove
+{
+	position: relative;
+	font-weight: normal;
+	font-size: 0;
+	height: 26px;
+	width: 50px;
+	border: none;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 0;
+	background-color: transparent;
+
+}
+
+.botonera .button-add
+{
+	position: relative;
+	font-weight: normal;
+	font-size: 0px;
+	height: 26px;
+	width: 50px;
+	border: none;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 20px;
+	background-color: transparent;
+
+}
+.botonera .button-add::after
+{
+	color: black;
+	position: absolute;
+	content: "+";
+	font-size: 20px;
+	right: 10px;
+	top:3px;
+}
+
+.botonera .button-remove::after
+{
+	color: black;
+	position: absolute;
+	content: "-";
+	font-size: 20px;
+	left: 11px;
+	top:1px;
+}
+
+
+.botonera .button-remove
+{
+	position: relative;
+	font-weight: normal;
+	font-size: 0;
+	height: 26px;
+	width: 50px;
+	border: none;
+	border-top-right-radius: 0px;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 0;
+	background-color: transparent;
+
 }
