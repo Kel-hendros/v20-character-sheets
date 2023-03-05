@@ -528,19 +528,14 @@ function rollDice(pool1, pool2, modifier, difficulty) {
     resultText = "Fallo";
   } else if (successes === 0 && botches > 0) {
     resultText = "Fracaso";
-  } else {
-    successes -= botches;
-    if (successes === 0) {
+  }else if (successes <= botches) {
       resultText = "Fallo";
-    }else if (successes > 1) {
-      resultText = `${successes} Exitos`;
-    } else {
-      resultText = `${successes} Exito`;
-    }
+  }else if (successes - botches > 1) {
+    resultText = `${successes} Exitos`;
+  } else {
+    resultText = `${successes} Exito`;
   }
-    
-  
-    return [rolls, resultText];
+  return [rolls, resultText];
 }
 
 
