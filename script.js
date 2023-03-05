@@ -493,6 +493,9 @@ function blockBloodPool (){
   bloodValue.value = maxBloodPool;
 }
 
+
+
+
 // ROLL THE DICE!!!
 function rollDice(pool1, pool2, modifier, difficulty) {
   // combine the two dice pools into one array
@@ -567,5 +570,77 @@ document.querySelector("#diceButton").addEventListener("click", function() {
 });
 
 
+const dicePoolAttribute = {
+  name: "",
+  die: 0,
+}
+const dicePoolAbility = {
+  name: "",
+  die: 0,
+}
 
 
+//DICE POOL 1
+const attributesPool = document.querySelectorAll('.attributes .form-group.attribute label');
+let dicePool1 = {};
+
+attributesPool.forEach((attributePool) => {
+  attributePool.addEventListener('click', (event) => {
+    const input = event.currentTarget.nextElementSibling.nextElementSibling;
+    dicePoolAttribute.name = capitalizeFirstLetter(input.getAttribute('name'));
+    dicePoolAttribute.die = input.getAttribute('value');
+    console.log(dicePoolAttribute);
+    updateDicePool1();
+    updateDicePool1Label();
+  });
+});
+
+//DICE POOL 2
+const abilitiesPool = document.querySelectorAll('.abilities .form-group.attribute label');
+let dicePool2 = {};
+
+abilitiesPool.forEach((abilityPool) => {
+  abilityPool.addEventListener('click', (event) => {
+    const input = event.currentTarget.nextElementSibling.nextElementSibling;
+    dicePoolAbility.name = capitalizeFirstLetter(input.getAttribute('name'));
+    dicePoolAbility.die = input.getAttribute('value');
+    console.log(dicePoolAbility);
+    updateDicePool2();
+    updateDicePool2Label();
+  });
+});
+
+
+
+
+// Poner en mayuscula la primera letra de un string
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+//funcion para actualizar el campo #dicePool1 con el valor guardado en la const dicePoolAttribute
+function updateDicePool1() {
+  console.log("updateDicePool1");
+  document.querySelector("#dicePool1").value = dicePoolAttribute.die;
+}
+
+//funcion para actualizar el campo #dicePool2 con el valor guardado en la const dicePoolAbility
+function updateDicePool2() {
+  console.log("updateDicePool2");
+  document.querySelector("#dicePool2").value = dicePoolAbility.die;
+}
+
+//funcion para actualizar el label #dicePool2Label con el valor 
+//guardado en la const dicePoolAbility.name
+function updateDicePool2Label() {
+  console.log("updateDicePool2Label");
+  document.querySelector("#dicePool2Label").innerHTML = dicePoolAbility.name;
+}
+
+
+//funcion para actualizar el label #dicePool1Label con el valor 
+//guardado en la const dicePoolAttribute.name
+function updateDicePool1Label() {
+  console.log("updateDicePool1Label");
+  document.querySelector("#dicePool1Label").innerHTML = dicePoolAttribute.name;
+}
