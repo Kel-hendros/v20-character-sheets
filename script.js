@@ -2,6 +2,14 @@ const ratings = document.querySelectorAll('.rating');
 let editMode = true;
 
 
+//Los que tienen que quedar sin edicion son:
+//los INFO
+//La voluntad temporal
+//La reserva de sangre
+//Las Disciplinas
+//Los trasfondos
+//las Virtudes
+//Meritos y defectos
 
 
 
@@ -484,3 +492,85 @@ function blockBloodPool (){
   const bloodValue = document.querySelector("#blood-value");
   bloodValue.value = maxBloodPool;
 }
+
+// ROLL THE DICE!!!
+function rollDice(pool1, pool2, modifier, difficulty) {
+  // combine the two dice pools into one array
+  const dicePool = [...Array(pool1).fill(0), ...Array(pool2).fill(0)];
+  
+  // add or subtract dice based on the modifier
+  if (modifier > 0) {
+    dicePool.push(...Array(modifier).fill(0));
+  } else if (modifier < 0) {
+    dicePool.splice(0, -modifier);
+  }
+  
+  // roll the dice and count successes and botches
+  let successes = 0;
+  let fails = 0;
+  let botches = 0;
+  const rolls = [];
+  for (const die of dicePool) {
+    const roll = Math.floor(Math.random() * 10) + 1;
+    rolls.push(roll);
+    if (roll >= difficulty) {
+      successes++;
+    } else if (roll === 1) {
+      botches++;
+    }else{
+      fails++;
+    }
+  }
+  
+  // calculate the final result
+  let resultText;
+  if (successes === 0 && botches === 0) {
+    resultText = "Fallo";
+  } else if (successes === 0 && botches > 0) {
+    resultText = "Fracaso";
+  } else {
+    successes -= botches;
+    if (successes === 0) {
+      resultText = "Fallo";
+    }else if (successes > 1) {
+      resultText = `${successes} Exitos`;
+    } else {
+      resultText = `${successes} Exito`;
+    }
+  }
+    
+  
+    return [rolls, resultText];
+}
+
+
+document.querySelector("#diceButton").addEventListener("click", function() {
+  const pool1 = parseInt(document.querySelector("#dicePool1").value);
+  const pool2 = parseInt(document.querySelector("#dicePool2").value);
+  const modifier = parseInt(document.querySelector("#diceMod").value);
+  const difficulty = parseInt(document.querySelector("#difficulty").value);
+  const [rolls, resultText] = rollDice(pool1, pool2, modifier, difficulty);
+  const rollsList = document.querySelector("#diceRolls");
+  const resultElement = document.querySelector("#diceResult");
+  
+  // clear any previous results
+  rollsList.innerHTML = "";
+  resultElement.innerHTML = "";
+  
+  // display individual rolls
+  rolls.sort((a, b) => b - a); // sort in descending order
+  for (const roll of rolls) {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = roll;
+    rollsList.appendChild(listItem);
+  }
+  
+  // display final result
+  const resultTextElement = document.createElement("p");
+  resultTextElement.innerHTML = resultText;
+  resultElement.appendChild(resultTextElement);
+});
+
+
+
+
