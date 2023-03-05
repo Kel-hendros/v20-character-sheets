@@ -164,6 +164,8 @@ fileInput.addEventListener('change', (e) => {
 		ratings.forEach(rating => {
 		updateRatingDots(rating);
 		});
+    //update helth squares
+    updateHealthSquares()
 	};
 
 	reader.readAsText(file);
