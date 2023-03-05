@@ -1061,16 +1061,27 @@
       <!-- DADOS! -->
       <div class="dice-container">
         <div class="dice-row">
-          <label class="diceLabel" for="dicePool1" id="dicePool1Label"></label>
-          <input class="dicePool" id="dicePool1" type="number" value=0>
+          <div class="groupDie">
+            <label class="diceLabel" for="dicePool1" id="dicePool1Label"></label>
+            <input class="dicePool" id="dicePool1" type="number" value=0>
+          </div>
           <span> + </span>
-          <label class="diceLabel" for="dicePool2" id="dicePool2Label"></label>
-          <input class="dicePool" id="dicePool2" type="number" value=0>
+          <div class="groupDie">
+            <label class="diceLabel" for="dicePool2" id="dicePool2Label"></label>
+            <input class="dicePool" id="dicePool2" type="number" value=0>
+          </div>
           <span> + </span>
-          <input class="diceMod" id="diceMod" type="number" value=0>
-          <label class="dificultadLabel" for="difficulty">Dificultad: </label>
-          <input class="diceDifficulty" id="difficulty" type="number" value=6>
+          <div class="groupDie">
+            <label class="diceLabel" for="dieMod" id="modLabel">Modificador</label>
+            <input class="diceMod" id="diceMod" type="number" value=0>
+          </div>
+          <div class="groupDie">
+            <label class="dificultadLabel" for="difficulty">Dificultad</label>
+            <input class="diceDifficulty" id="difficulty" type="number" value=6>
+          </div>
           <button class="diceButton" id="diceButton">Lanzar</button>
+        </div>
+        <div class="diceResults" id="diceResults">
           <label class="diceRolls" id="diceRolls"></label>
           <label class="diceResult" id="diceResult"></label>
         </div>

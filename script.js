@@ -508,12 +508,15 @@ function rollDice(pool1, pool2, modifier, difficulty) {
     dicePool.splice(0, -modifier);
   }
   
+  // calculate actual size of the pool, excluding any added or removed dice from modifier
+  const finalPoolSize = pool1 + pool2 + Math.max(modifier, 0);
+
   // roll the dice and count successes and botches
   let successes = 0;
   let fails = 0;
   let botches = 0;
   const rolls = [];
-  for (const die of dicePool) {
+  for (let i = 0; i < finalPoolSize; i++) {
     const roll = Math.floor(Math.random() * 10) + 1;
     rolls.push(roll);
     if (roll >= difficulty) {
@@ -533,14 +536,15 @@ function rollDice(pool1, pool2, modifier, difficulty) {
     resultText = "Fracaso";
   }else if (successes <= botches) {
       resultText = "Fallo";
-  }else if (successes - botches > 1) {
+  }else if ((successes - botches) > 1) {
+    successes -= botches;
     resultText = `${successes} Exitos`;
   } else {
+    successes -= botches;
     resultText = `${successes} Exito`;
   }
   return [rolls, resultText];
 }
-
 
 document.querySelector("#diceButton").addEventListener("click", function() {
   const pool1 = parseInt(document.querySelector("#dicePool1").value);
@@ -558,16 +562,30 @@ document.querySelector("#diceButton").addEventListener("click", function() {
   // display individual rolls
   rolls.sort((a, b) => b - a); // sort in descending order
   for (const roll of rolls) {
-    const listItem = document.createElement("li");
-    listItem.innerHTML = roll;
-    rollsList.appendChild(listItem);
+    const rollElement = document.createElement("span");
+    rollElement.innerHTML = roll;
+    if (roll === 1) {
+      rollElement.classList.add("botch");
+    } else if (roll >= difficulty) {
+      rollElement.classList.add("success");
+    } else {
+      rollElement.classList.add("fail");
+    }
+    rollsList.appendChild(rollElement);
   }
   
   // display final result
   const resultTextElement = document.createElement("p");
   resultTextElement.innerHTML = resultText;
   resultElement.appendChild(resultTextElement);
+  const botchElement = document.querySelectorAll('.botch');
+  //need to iterate on each botchElement and set its innerHTML to "M"
+  for (let i = 0; i < botchElement.length; i++) {
+    botchElement[i].innerHTML = "G";
+  }
+  
 });
+
 
 
 const dicePoolAttribute = {

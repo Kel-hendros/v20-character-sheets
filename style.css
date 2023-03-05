@@ -5,7 +5,11 @@
 	src: url("fonts/delavan-webfont.woff2") format("woff2"),
 		url("fonts/delavan-webfont.woff") format("woff");
 }
+@font-face {
+	font-family: 'vampire-sigils';
+	src: url("fonts/vampiresigils.woff2") format("woff2");
 
+}
 
 
 *{
@@ -727,3 +731,118 @@ select{
 }
 
 /* Dados!! */
+.dice-container
+{
+	margin-top: 30px;
+	width: 100%;
+	margin-inline: auto;
+	position: relative;
+
+}
+
+.dice-row
+{
+	display: flex;
+	align-items: last baseline;
+	justify-content: space-around;
+	gap: 10px;
+	
+}
+.groupDie
+{
+	width: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0px;
+}
+
+.groupDie input
+{
+	width: 50px;
+	border-radius: 15px;
+	text-align: center;
+}
+
+.diceLabel
+{
+	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	width: 100%;
+	color: black;
+	font-size: 20px;
+}
+
+.diceResults
+{
+
+	margin-top: 15px;
+	width: 80%;
+	margin-inline: auto;
+	list-style: none;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	
+}
+
+.diceResults *
+{
+	font-family: 'delavan', serif;
+
+}
+
+.diceResult > p
+{
+	font-size: 30px;
+	margin-top: 0;
+	margin-bottom: 5px;
+}
+
+.diceRolls
+{
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-size: 20px;
+		
+}
+
+.diceRolls span
+{
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	box-shadow: 0px 1px 3px 0px black;
+}
+
+.diceRolls .success
+{
+	background-color: rgb(129, 255, 129);
+	/* border: 1px solid black; */
+	
+}
+
+.diceRolls .botch
+{
+	background-color: red;
+	color: white;
+	font-size: 30px;
+	text-align: center;
+	border: 2px solid red;
+	font-family: 'vampire-sigils', serif;
+	
+}
+
