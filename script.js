@@ -226,6 +226,8 @@ function updateHealthSquares() {
 const addButtons = document.querySelectorAll(".button-add");
 const removeButtons = document.querySelectorAll(".button-remove");
 
+
+//AGREGAR DANIO
 addButtons.forEach((button) => {
   button.addEventListener("click", () => {
     let healthValues = getHealthValues();
@@ -263,15 +265,63 @@ addButtons.forEach((button) => {
     //Ordena los valores
     healthValues.sort((a, b) => b - a);
     
-    //Pone en los valores del array healthValues en los hidden inputs values.
+    //Pone los valores del array healthValues en los hidden inputs values.
     healthSquares.forEach((square, index) => {
       square.nextElementSibling.value = healthValues[index];
     });
+    //Actualiza los span class="square" con las clases correspondientes
     updateHealthSquares();
     console.log("final" + healthValues);
   });
 });
 
+//RESTAR DANIO
+removeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let healthValues = getHealthValues();
+    console.log("Al clickear, este es el valor de healthValues" + healthValues);
+
+    //para buscar en el array el daño a remover
+    let searchValue = "0";
+    let i;
+    if (button.id == "contundenteRemove") {
+      console.log("contundente remove clickeado");
+      searchValue="1";
+    }
+    if (button.id == "letalRemove") {
+      console.log("letal remove clickeado");
+      searchValue="2";
+    }
+    if (button.id == "agravadoRemove") {
+      console.log("agravado remove clickeado");
+      searchValue="3";
+    }
+
+    //Buscar en el array el tipo de daño a remover
+    for(i = 0; i < healthValues.length; i++) {
+      if (healthValues[i] === searchValue) {
+        console.log("hay un " + searchValue + " en la posicion " + i);
+        break;
+      }
+    }
+    if (i < healthValues.length) {
+      healthValues[i] = "0";
+      console.log("danio removido" + healthValues);
+    } else {
+      console.log("no hay un " + searchValue + " en el array");
+    }
+    //Ordena los valores
+    healthValues.sort((a, b) => b - a);
+
+    //Pone los valores del array healthValues en los hidden inputs values.
+    healthSquares.forEach((square, index) => {
+      square.nextElementSibling.value = healthValues[index];
+    });
+    //Actualiza los span class="square" removiendo las clases correspondientes
+    updateHealthSquares();
+    console.log("final" + healthValues);
+  });
+});
 
 
 
