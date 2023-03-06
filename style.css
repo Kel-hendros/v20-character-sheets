@@ -156,7 +156,7 @@ html, body {
 .modal-content {
 	
 	background-color: #fff;
-	margin: 7vh auto;
+	margin: 5vh auto;
 	padding: 20px;
 	border: 1px solid #888;
 	width: 50%;
@@ -183,7 +183,7 @@ html, body {
 
 .clanlist-container
 {
-	flex-grow: 1;
+	flex-grow: 2;
 	flex-basis: 70%;
 }
 
@@ -202,9 +202,9 @@ ul li
 	padding-block: 0.2em;
 	margin: 0.2em;
 	cursor: pointer;
-	border: 2px solid black;
+	border: 1px solid black;
 	background-color: whitesmoke;
-	border-radius: 20em;
+	border-radius: 5px;
 	
 }
   
@@ -228,8 +228,10 @@ ul li.active
 .clan-logo p
 {
 	font-family: 'vampire-sigils', serif;
-	font-size: 20em;
+	font-size: 15em;
 	margin: auto;
+	text-shadow: 0px 18px 10px rgba(44, 0, 0, 0.494);
+	
 }
 
 .modal-buttons
@@ -261,24 +263,11 @@ ul li.active
   
 #close-btn 
 {
-	
+	background-color: rgb(96, 3, 3);
+	color:white;
 }
   
 
-
-  /* Por que esta tocando esto? Mejor lo apago */
-  /* .form-group.info {
-	position: relative;
-  }
-  
-  .form-group.info .modal {
-	display: block;
-  }
-  
-  .form-group.info #clan {
-	position: relative;
-	z-index: 2;
-  } */
 
 
 /* TABS */
