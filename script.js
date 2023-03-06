@@ -2,14 +2,46 @@ const ratings = document.querySelectorAll('.rating');
 let editMode = true;
 
 
-//Los que tienen que quedar sin edicion son:
-//los INFO
-//La voluntad temporal
-//La reserva de sangre
-//Las Disciplinas
-//Los trasfondos
-//las Virtudes
-//Meritos y defectos
+// MODAL SELECCION DE CLAN
+const modal = document.getElementById("clan-modal");
+const inputField = document.getElementById("clan");
+const acceptBtn = document.getElementById("accept-btn");
+const closeBtn = document.getElementById("close-btn");
+const clanList =document.querySelectorAll('#clan-modal li');
+const logoDisplay = document.querySelector('#logo-display');
+let clanSelected = "";
+
+inputField.addEventListener("click", () => {
+  modal.style.display = "block";
+  console.log("click en input clan");
+});
+
+clanList.forEach((clan) => {
+  clan.addEventListener("click", () => {
+    clanSelected = clan.innerText;
+    clanList.forEach((clan) => clan.classList.remove("active"));
+    clan.classList.add("active");
+    logoDisplay.innerHTML = clan.dataset.clan;
+    console.log(clanSelected, clan.dataset.clan);
+  });
+});
+
+acceptBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+  inputField.value = clanSelected;
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+});
+
+
 
 
 
