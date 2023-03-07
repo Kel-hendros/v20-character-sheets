@@ -442,6 +442,53 @@ ul li.active {
 	cursor: var(--customPointer);
 }
 
+/* ----------EXPERIENCIA------------ */
+.experiencia-container {
+	margin-top: 25px;
+}
+
+.experiencia-pool {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: inset 0 2px 5px 0px var(--colorDarkRed);
+	padding-block:20px;
+}
+
+
+.xp-row .rating {
+	display: grid;
+	grid-template-columns: repeat(10, auto);
+	grid-template-rows: repeat(3, auto);
+	gap: 5px;
+	justify-items: center;
+	align-items: center;
+}
+
+.xp-row .rating span {
+	grid-column: span 1;
+  }
+  
+  .xp-row .rating span:nth-child(10n-5) {
+	margin-right: 20px;
+  }
+
+.xp-row .dot {
+	width: 12;
+	height: 12px;
+	border-radius: 0;
+	border: 2px solid black;
+	margin: 0 1px;
+	cursor: var(--customPointer);
+}
+
+
+
+
+
+
+
 /* Columna del Medio */
 
 
@@ -935,6 +982,8 @@ input[type="checkbox"] {
 
 
 .gg-trash {
+
+	align-self: center;
 	box-sizing: border-box;
 	position: relative;
 	display: block;
