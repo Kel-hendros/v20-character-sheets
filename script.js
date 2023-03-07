@@ -29,6 +29,7 @@ clanList.forEach((clan) => {
 acceptBtn.addEventListener("click", () => {
   modal.style.display = "none";
   inputField.value = clanSelected;
+  saveCharacterData()
 });
 
 closeBtn.addEventListener("click", () => {
@@ -528,7 +529,7 @@ function blockBloodPool (){
 
 
 
-// ROLL THE DICE!!!
+// ROLL THE DICE!!! DADOS!
 function rollDice(pool1, pool2, modifier, difficulty) {
   // combine the two dice pools into one array
   const dicePool = [...Array(pool1).fill(0), ...Array(pool2).fill(0)];
@@ -618,8 +619,6 @@ document.querySelector("#diceButton").addEventListener("click", function() {
   
 });
 
-
-
 const dicePoolAttribute = {
   name: "",
   die: 0,
@@ -639,6 +638,17 @@ attributesPool.forEach((attributePool) => {
     const input = event.currentTarget.nextElementSibling.nextElementSibling;
     dicePoolAttribute.name = capitalizeFirstLetter(input.getAttribute('name'));
     dicePoolAttribute.die = input.getAttribute('value');
+
+    //remove class from the previously selected attribute
+    const previouslySelectedAttribute = document.querySelectorAll('.atributo-seleccionado');
+    previouslySelectedAttribute.forEach((attribute) => {
+      attribute.classList.remove('atributo-seleccionado');
+    });
+
+    //add class to the selected attribute
+    const selectedAttribute = event.currentTarget;
+    selectedAttribute.classList.add('atributo-seleccionado');
+
     console.log(dicePoolAttribute);
     updateDicePool1();
     updateDicePool1Label();
@@ -654,11 +664,84 @@ abilitiesPool.forEach((abilityPool) => {
     const input = event.currentTarget.nextElementSibling.nextElementSibling;
     dicePoolAbility.name = capitalizeFirstLetter(input.getAttribute('name'));
     dicePoolAbility.die = input.getAttribute('value');
+    
+    //remove class from the previously selected ability
+    const previouslySelectedAbility = document.querySelectorAll('.habilidad-seleccionada');
+    previouslySelectedAbility.forEach((ability) => {
+      ability.classList.remove('habilidad-seleccionada');
+    });
+        
+    //add class to the selected ability
+    const selectedAbility = event.currentTarget;
+    selectedAbility.classList.add('habilidad-seleccionada');
+
     console.log(dicePoolAbility);
     updateDicePool2();
     updateDicePool2Label();
   });
 });
+
+
+
+
+
+////////// Borrar los inputs de los pools de dados al hacer click
+
+
+document.querySelector("#dicePool1").addEventListener("click", function() {
+  resetDicePool1();
+  this.select()
+});
+document.querySelector("#dicePool2").addEventListener("click", function() {
+  resetDicePool2();
+  this.select()
+});
+document.querySelector("#diceMod").addEventListener("click", function() {
+  resetDiceMod();
+  this.select()
+});
+document.querySelector("#difficulty").addEventListener("click", function() {
+  document.querySelector("#difficulty").value = 6;
+  this.select()
+});
+
+function resetDicePool1() {
+  document.querySelector("#dicePool1").value = "0";
+  document.querySelector("#dicePool1Label").innerHTML = ("");
+
+  //remove class from the previously selected attribute
+  const previouslySelectedAttribute = document.querySelectorAll('.atributo-seleccionado');
+  previouslySelectedAttribute.forEach((attribute) => {
+    attribute.classList.remove('atributo-seleccionado');
+  });
+}
+function resetDicePool2() {
+  document.querySelector("#dicePool2").value = "0";
+  document.querySelector("#dicePool2Label").innerHTML = ("");
+
+  //remove class from the previously selected ability
+  const previouslySelectedAbility = document.querySelectorAll('.habilidad-seleccionada');
+  previouslySelectedAbility.forEach((ability) => {
+    ability.classList.remove('habilidad-seleccionada');
+  });
+
+}
+function resetDiceMod() {
+  document.querySelector("#diceMod").value = "0";
+}
+
+function resetAllDice() {
+  resetDicePool1();
+  resetDicePool2();
+  resetDiceMod();
+  document.querySelector("#difficulty").value = 6;
+} 
+
+document.querySelector(".gg-trash").addEventListener("click", function() {
+  resetAllDice();
+});
+
+
 
 
 

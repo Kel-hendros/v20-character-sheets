@@ -652,9 +652,9 @@
         
           <!--  ATRIBUTOS  -->
           <div class="seccion-container">
-                <div class="seccion-linea"></div>
+                <div class="seccion-linea-izq">3</div>
                 <h1 class="seccion">Atributos</h1>
-                <div class="seccion-linea"></div>
+                <div class="seccion-linea-der">4</div>
               </div>
           <div class="container attributes">
             <!-- PRIMERA COLUMNA ATRIBUTOS: FISICOS  -->
@@ -772,9 +772,9 @@
 
           <!-- HABILIDADES --> 
           <div class="seccion-container">
-            <div class="seccion-linea"></div>
+            <div class="seccion-linea-izq">3</div>
             <h1 class="seccion">Habilidades</h1>
-            <div class="seccion-linea"></div>
+            <div class="seccion-linea-der">4</div>
           </div>
           <div class="container abilities">
             <!-- PRIMERA COLUMNA HABILIDADES: TALENTOS  -->
@@ -1128,13 +1128,19 @@
                 <label class="diceLabel" for="dicePool1" id="dicePool1Label"></label>
                 <input class="dicePool" id="dicePool1" type="number" value=0>
               </div>
-              <span> + </span>
+              <div class="groupDie-span">
+                <span></span>
+                <span> + </span>
+              </div>
               <div class="groupDie">
                 <label class="diceLabel" for="dicePool2" id="dicePool2Label"></label>
                 <input class="dicePool" id="dicePool2" type="number" value=0>
               </div>
-              <span> + </span>
-              <div class="groupDie">
+              <div class="groupDie-span">
+                <span></span>
+                <span> + </span>
+              </div>
+                <div class="groupDie">
                 <label class="diceLabel" for="dieMod" id="modLabel">Modificador</label>
                 <input class="diceMod" id="diceMod" type="number" value=0>
               </div>
@@ -1143,6 +1149,7 @@
                 <input class="diceDifficulty" id="difficulty" type="number" value=6>
               </div>
               <button class="diceButton" id="diceButton">Lanzar</button>
+              <i class="gg-trash"></i>
             </div>
             <div class="diceResults" id="diceResults">
               <label class="diceRolls" id="diceRolls"></label>
@@ -1156,9 +1163,9 @@
         <!-- SALUD -->
         <div class="health-container">
           <div class="seccion-container">
-            <div class="seccion-linea"></div>
+            <div class="seccion-linea-izq"></div>
             <h1 class="seccion">Salud</h1>
-            <div class="seccion-linea"></div>
+            <div class="seccion-linea-der"></div>
           </div>
 
           <div class="health-table">
