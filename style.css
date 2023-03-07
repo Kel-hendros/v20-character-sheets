@@ -32,14 +32,15 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 :root {
-	--colorDarkRed: rgb(44, 0, 0);
+	--colorDarkRed: rgba(44, 0, 0, 0.521);
+	--customPointer: url('images/pointer.png'), pointer;
 
 }
 
 
 html,
 body {
-
+	cursor:url("images/cursor1.png"), auto;
 	margin: 0;
 	width: 100vw;
 	height: 100vh;
@@ -47,10 +48,11 @@ body {
 	/* overflow: auto; */
 	background-color: rgb(255, 255, 255);
 }
-
+  
 
 * {
 	font-family: 'Cormorant Bold', serif;
+	
 }
 
 
@@ -107,7 +109,7 @@ body {
 
 .column-middle {
 	margin-top: 0;
-	box-shadow: 0 2px 20px 0 rgb(0, 0, 0);
+	box-shadow: 0 2px 20px 0 var(--colorDarkRed);
 	padding: 0;
 	padding-inline: 25px;
 	display: flex;
@@ -204,7 +206,7 @@ ul li {
 	padding-inline: 0.7em;
 	padding-block: 0.2em;
 	margin: 0.2em;
-	cursor: pointer;
+	cursor: var(--customPointer);
 	border: 1px solid black;
 	background-color: whitesmoke;
 	border-radius: 5px;
@@ -251,7 +253,7 @@ ul li.active {
 	padding-block: 0.3em;
 	color: white;
 	font-size: 1.2em;
-	cursor: pointer;
+	cursor: var(--customPointer);
 	font-weight: bold;
 	box-shadow: 0 5px 5px 0 rgba(44, 0, 0, 0.494);
 }
@@ -289,7 +291,7 @@ ul li.active {
 	background-color: black;
 	border: 2px solid black;
 	padding: 10px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 	display: inline-block;
 	border-top-right-radius: 20px;
 	border-top-left-radius: 20px;
@@ -437,7 +439,7 @@ ul li.active {
 	border-radius: 0;
 	border: 2px solid black;
 	margin: 0 1px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 /* Columna del Medio */
@@ -489,6 +491,8 @@ ul li.active {
 	font-family: 'vampire-wod3', serif;
 	margin: 0;
 	line-height: 0;
+	text-shadow: 0 5px 10px var(--colorDarkRed);
+
 }
 
 
@@ -509,13 +513,36 @@ h2 {
 	/* font-family: 'DM Serif Display', serif; */
 }
 
+.button-and-image{
+	
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.header-clan-logo {
+	
+	display: flex;
+}
+
+.header-clan-logo p {
+	font-family: 'vampire-sigils', serif;
+	font-size: 7em;
+	margin: auto;
+	text-shadow: 0 10px 10px rgba(44, 0, 0, 0.494);
+
+}
+
+
 
 /* Guardar y Cargar */
 
 .buttons-container {
+	
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	flex-direction: column;
+	
+	margin-top: 20px;
 	gap: 25px;
 }
 
@@ -532,7 +559,7 @@ h2 {
 	border-top: 0;
 	background-color: transparent;
 	box-shadow: -6px -8px 0 -6px, 6px -8px 0 -6px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 .gg-export::after,
@@ -571,7 +598,7 @@ h2 {
 	border: 2px solid;
 	border-top: 0;
 	box-shadow: -6px -8px 0 -6px, 6px -8px 0 -6px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 .gg-import::after,
@@ -741,6 +768,13 @@ h2 {
 
 }
 
+.attributes .form-group.attribute label,
+.abilities .form-group.attribute label
+{
+	cursor: var(--customPointer);
+}
+
+
 label,
 select {
 	display: block;
@@ -769,7 +803,7 @@ select {
 	border-left: 3px solid black;
 	border-right: 3px solid black;
 	margin: 0 1px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 .dot.filled {
@@ -779,18 +813,53 @@ select {
 /* Dados!! */
 
 .dice-container {
-	border: 2px solid green;
+	/* border: 2px solid green; */
 	
 	display: flex;
+	flex-direction: row;
+	margin-top: 20px;
+	justify-content: space-evenly;
+
+}
+.dice-automatizations
+{
+	margin-right: 30px;
+	/* border: 2px solid plum; */
+	display: flex;
 	flex-direction: column;
-	margin-top: 0px;
-	align-items: center;
+	
 
 }
 
-.dice-row {
+.automatization-row {
 	display: flex;
-	border:1px solid red;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 5px;
+	
+	
+}
+
+.automatization-row label
+{
+	font-family: 'delavan', 'serif';
+	font-size: 1rem;
+	margin-inline: 5px;
+}
+
+input[type="checkbox"] {
+	/* Set the size of the checkbox */
+	width: 1rem;
+	height: 1rem;
+
+	background-color: rgb(0, 0, 0);
+	
+}
+
+.dice-row {
+	
+	display: flex;
+	/* border:1px solid red; */
 	justify-content: center;
 	gap: 40px;
 	width: 100%;
@@ -824,7 +893,7 @@ select {
 	border-radius: 5px;
 	text-align: center;
 	font-family: 'delavan', serif;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 
@@ -841,6 +910,28 @@ select {
 
 }
 
+.diceButton {
+	
+	margin-top: auto;
+	width:100px;
+	height: 60px;
+	padding-inline: 0.5em;
+	border-radius: 10px;
+	font-size: 1.2rem;
+	cursor: var(--customPointer);
+
+	background-color: black;
+	color: white;
+	border: 3px solid rgb(255, 255, 255);
+	box-shadow: 0 2px 8px 0px var(--colorDarkRed);
+}
+
+.diceButton:hover {
+	background-color: rgb(255, 255, 255);
+	color: black;
+	border: 3px solid black;
+	box-shadow: inset 0 2px 8px 0px var(--colorDarkRed);
+}
 
 
 .gg-trash {
@@ -858,7 +949,7 @@ select {
 	border-bottom-left-radius: 1px;
 	border-bottom-right-radius: 1px;
 	margin-top: 4px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 .gg-trash:hover{
@@ -970,14 +1061,14 @@ select {
 #dicePool1Label
 {
 	color: rgb(176, 31, 31);
-	text-shadow: red 0px 1px 8px;
+	/* text-shadow: red 0px 1px 8px; */
 }
 
 .habilidad-seleccionada,
 #dicePool2Label
 {
 	color: rgb(0, 152, 56);
-	text-shadow:#0ff851 0px 1px 8px;
+	/* text-shadow:#0ff851 0px 1px 8px; */
 }
 
 
@@ -990,7 +1081,7 @@ select {
 
 .health-container {
 	--contundente: #9a9a9a;
-	--letal: #a76a24;
+	--letal: #d39c5e;
 	--agravado: #bb1515;
 }
 
@@ -1015,7 +1106,7 @@ select {
 	height: 20px;
 	border: 1px solid black;
 	margin-right: 5px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 .square.contundente {
@@ -1172,7 +1263,7 @@ select {
 	border-radius: 0;
 	border: 2px solid black;
 	margin: 0 1px;
-	cursor: pointer;
+	cursor: var(--customPointer);
 }
 
 .info-sangre {

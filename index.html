@@ -581,11 +581,19 @@
             <div class="title-container">
               <div class="title-logo">/</div>
             </div>
-            <div class="buttons-container">
-              <button title="Guardar personaje" class="gg-export" onclick="downloadCharacterData()"></button>
-              <label title="Cargar personaje" for="file-input" class="gg-import"></label>
-              <input type="file" id="file-input" hidden accept=".json">
-             </div>
+            <div class="button-and-image">
+              <div class="header-clandetail-container">
+                <div class="header-clan-logo">
+                  <p id="header-logo-display">G</p>
+                  <input type="hidden" id="header-logo-value" name="logo" value="G">
+                </div>
+              </div>
+              <div class="buttons-container">
+                <button title="Guardar personaje" class="gg-export" onclick="downloadCharacterData()"></button>
+                <label title="Cargar personaje" for="file-input" class="gg-import"></label>
+                <input type="file" id="file-input" hidden accept=".json">
+              </div>
+            </div>
           </div>
 
           <!-- Modal HTML -->
@@ -1123,7 +1131,27 @@
 
           <!-- DADOS! -->
           <div class="dice-container">
-            <div class="dice-row">
+            <div class="dice-automatizations">
+              
+              <!-- Checkbox Penalizador Salud -->
+              <div class="automatization-row">
+                <input type="checkbox" id="penalizadorSalud" name="penalizadorSalud" checked>
+                <label>Penalizador de Salud:</label>
+                <label for="penalizadorSalud" id="penalizadorSaludLabel">0</label>
+              </div>
+              <!-- Checkbox Fuerza de Voluntad -->
+              <div class="automatization-row">
+                <input type="checkbox" id="willpower" name="usaVoluntad">
+                <label>Usar Fuerza de Voluntad</label>
+              </div>
+              <!-- Checkbox Especialidad -->
+              <div class="automatization-row">
+                <input type="checkbox" id="specialty" name="usaEspecialidad">
+                <label>Usar Especialidad</label>
+              </div>
+            </div>
+            <div class="dice-column">
+              <div class="dice-row">
               <div class="groupDie">
                 <label class="diceLabel" for="dicePool1" id="dicePool1Label"></label>
                 <input class="dicePool" id="dicePool1" type="number" value=0>
@@ -1150,11 +1178,13 @@
               </div>
               <button class="diceButton" id="diceButton">Lanzar</button>
               <i class="gg-trash"></i>
+              </div>
+              <div class="diceResults" id="diceResults">
+                <label class="diceRolls" id="diceRolls"></label>
+                <label class="diceResult" id="diceResult"></label>
+              </div>
             </div>
-            <div class="diceResults" id="diceResults">
-              <label class="diceRolls" id="diceRolls"></label>
-              <label class="diceResult" id="diceResult"></label>
-            </div>
+            
           </div>
         </div>
       </div>

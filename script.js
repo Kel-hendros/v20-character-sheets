@@ -9,7 +9,9 @@ const acceptBtn = document.getElementById("accept-btn");
 const closeBtn = document.getElementById("close-btn");
 const clanList =document.querySelectorAll('#clan-modal li');
 const logoDisplay = document.querySelector('#logo-display');
+const headerLogoDisplay = document.querySelector('#header-logo-value');
 let clanSelected = "";
+
 
 inputField.addEventListener("click", () => {
   modal.style.display = "block";
@@ -18,22 +20,41 @@ inputField.addEventListener("click", () => {
 
 clanList.forEach((clan) => {
   clan.addEventListener("click", () => {
+    //Obtener el nombre del clan en ClanSelected
     clanSelected = clan.innerText;
+
+    //Remover la clase Active de todos los otros li
     clanList.forEach((clan) => clan.classList.remove("active"));
+    
+    //Agregar la clase Active al li clickeado
     clan.classList.add("active");
+
+    //Actualizar el logo en el modal
     logoDisplay.innerHTML = clan.dataset.clan;
-    console.log(clanSelected, clan.dataset.clan);
-  });
+
+    //actualizar el logo en el header
+    headerLogoDisplay.value = clan.dataset.clan;
+   });
 });
 
 acceptBtn.addEventListener("click", () => {
   modal.style.display = "none";
   inputField.value = clanSelected;
-  saveCharacterData()
+  updateHeaderLogo();
+  saveCharacterData();
 });
 
 closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
+
+  //resetear el clan seleccionado
+  headerLogoDisplay.value = "G"
+  
+  //remover clan seleccionado
+  clanList.forEach((clan) => clan.classList.remove("active"));
+
+  //reseter logo en el modal
+  logoDisplay.innerHTML = "G";
 });
 
 window.addEventListener("click", (event) => {
@@ -43,6 +64,14 @@ window.addEventListener("click", (event) => {
 });
 
 
+//Function to update the p #header-logo-display innerHTML with the value stored in 
+//#header-logo-value input value
+function updateHeaderLogo(){
+  const headerLogoValue = document.querySelector('#header-logo-value').value;
+  const headerLogoDisplay = document.querySelector('#header-logo-display');
+  headerLogoDisplay.innerHTML = headerLogoValue;
+  console.log(headerLogoValue);
+}
 
 
 
@@ -169,6 +198,12 @@ window.onload = function() {
   updateBloodPerTurn()
   //block the blood pool based on generation
   blockBloodPool();
+  //update damagePenalty
+  updateDamagePenalty();
+  //reset dice roller
+  resetAllDice();
+  //update image clan logo
+  updateHeaderLogo();
 }
 
 // Call saveCharacterData when an input is changed
@@ -270,6 +305,10 @@ fileInput.addEventListener('change', (e) => {
     updateBloodPerTurn()
     //block the blood pool based on generation
     blockBloodPool();
+    //update damagePenalty
+    updateDamagePenalty();
+    //update image clan logo
+    updateHeaderLogo();
 	};
 
 	reader.readAsText(file);
@@ -282,6 +321,8 @@ fileInput.addEventListener('change', (e) => {
 // funcion para obtener un listado de todos los values de los hidden inputs
 // asociados a los span class="square" y ordenarlos de mayor a menor
 const healthSquares = document.querySelectorAll('.square');
+
+
 
 function getHealthValues() {
   let healthValues = [];
@@ -376,9 +417,12 @@ addButtons.forEach((button) => {
     healthSquares.forEach((square, index) => {
       square.nextElementSibling.value = healthValues[index];
     });
+    
     //Actualiza los span class="square" con las clases correspondientes
     updateHealthSquares();
-    console.log("final" + healthValues);
+    
+    //Actualiza el Penalizador de Daño
+    updateDamagePenalty();
   });
 });
 
@@ -426,9 +470,55 @@ removeButtons.forEach((button) => {
     });
     //Actualiza los span class="square" removiendo las clases correspondientes
     updateHealthSquares();
-    console.log("final" + healthValues);
+
+    //Actualiza el Penalizador de Daño
+    updateDamagePenalty();
   });
 });
+
+// // // // Penalizador por Daño // // // //
+let damagePenalty = 0;
+
+//Funcion para actualizar damagePenalty cada vez que se agrega o remueve daño
+function updateDamagePenalty() {
+  let healthValues = getHealthValues();
+
+  //Based on the ammount of 0s in the array, calculate the damage penalty
+  //>=0 = -10
+  //1 = -5
+  //2 = -2
+  //3 = -2
+  //4 = -1
+  //5 = -1
+  //>=6 = 0
+  
+  //contar los 0s en el array healthValues
+  let count = 0;
+  for (let i = 0; i < healthValues.length; i++) {
+    if (healthValues[i] == 0) {
+      count++;
+    }
+  }
+  //update value in damagePenalty based on the count
+  if (count >= 6) {
+    damagePenalty = 0;
+  } else if (count == 5 || count == 4) {
+    damagePenalty = -1;
+  } else if (count == 3 || count == 2) {
+    damagePenalty = -2;
+  } else if (count == 1) {
+    damagePenalty = -5;
+  } else if (count == 0) {
+    damagePenalty = -5;
+  }
+  console.log("damagePenalty = " + damagePenalty);
+  //update the value in the input
+  document.querySelector("#penalizadorSaludLabel").innerHTML = damagePenalty;
+  updateFinalPoolSize();
+}
+
+
+
 
 // PUNTOS DE SANGRE POR TURNO SEGUN GENERACION
 
@@ -527,23 +617,83 @@ function blockBloodPool (){
 }
 
 
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+////////                  DADOS                    ////////
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+
+//REFACTOR: CONSTANTS
+
+//Registra el total de dados en el pool
+let finalPoolSize = 0;
+
+//Boton de tirar dados
+const diceButton = document.querySelector("#diceButton");
+
+//Listado de atributos
+const attributesList = document.querySelectorAll('.attributes .form-group.attribute label');
+
+//Listado de habilidades
+const abilitiesList = document.querySelectorAll('.abilities .form-group.attribute label');
+
+//Todos los checkboxes
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
 
-// ROLL THE DICE!!! DADOS!
-function rollDice(pool1, pool2, modifier, difficulty) {
-  // combine the two dice pools into one array
-  const dicePool = [...Array(pool1).fill(0), ...Array(pool2).fill(0)];
-  
-  // add or subtract dice based on the modifier
-  if (modifier > 0) {
-    dicePool.push(...Array(modifier).fill(0));
-  } else if (modifier < 0) {
-    dicePool.splice(0, -modifier);
+//REFACTOR: Update finalPoolSize
+function updateFinalPoolSize(){
+  const FirstDicePool = parseInt(document.querySelector("#dicePool1").value);
+  const SecondDicePool = parseInt(document.querySelector("#dicePool2").value);
+  const diceMod = parseInt(document.querySelector("#diceMod").value);
+  const penalizadorSalud = document.querySelector("#penalizadorSalud").checked;
+  const penalizadorSaludValue = parseInt(document.querySelector("#penalizadorSaludLabel").innerHTML);
+  console.log("updateFinalPoolSize called");
+  //calculate finalPoolSize
+
+  //check if penalizadorSalud is used
+  if (penalizadorSalud == true){
+    finalPoolSize = FirstDicePool + SecondDicePool + diceMod + penalizadorSaludValue;
+  }else{
+    finalPoolSize = FirstDicePool + SecondDicePool + diceMod;
   }
-  
-  // calculate actual size of the pool, excluding any added or removed dice from modifier
-  const finalPoolSize = pool1 + pool2 + Math.max(modifier, 0);
 
+  //show finalPoolSize in #diceButton
+  if (finalPoolSize <= 0){
+    diceButton.innerHTML = "Sin dados";
+    console.log("finalPoolSize <= 0" + finalPoolSize);
+    
+    //agregar clase disabled al boton
+    diceButton.classList.add("disabled");
+    
+    //disable the button
+    diceButton.disabled = true;
+  }else{
+    diceButton.innerHTML = `Lanzar<br>${finalPoolSize}d10`;
+    
+    //remove clase disabled al boton
+    diceButton.classList.remove("disabled");
+
+    //enable the button
+    diceButton.disabled = false;
+  }
+}
+
+
+//REFACTOR: Tirar los Dados
+function rollTheDice(){
+  //stablish difficulty
+  const difficulty = document.querySelector("#difficulty").value;
+  //check if willpower is used
+  const willpower = document.querySelector("#willpower").checked;  
+  //check if specialty is used
+  const specialty = document.querySelector("#specialty").checked;
+  //Obtain elements for the results
+  const rollsList = document.querySelector("#diceRolls");
+  const resultElement = document.querySelector("#diceResult");
+  //Resetear mensaje de Voluntad usada  
+  let willpowerNotice = "";
+  
   // roll the dice and count successes and botches
   let successes = 0;
   let fails = 0;
@@ -552,13 +702,21 @@ function rollDice(pool1, pool2, modifier, difficulty) {
   for (let i = 0; i < finalPoolSize; i++) {
     const roll = Math.floor(Math.random() * 10) + 1;
     rolls.push(roll);
-    if (roll >= difficulty) {
+    if (specialty === true && roll === 10) {
+      successes += 2;
+    }else if (roll >= difficulty) {
       successes++;
     } else if (roll === 1) {
       botches++;
     }else{
       fails++;
     }
+  }
+    
+  //willpower automatic success
+  if (willpower === true) {
+    successes++;
+    willpowerNotice = " (+1 exito por voluntad)";
   }
   
   // calculate the final result
@@ -576,19 +734,12 @@ function rollDice(pool1, pool2, modifier, difficulty) {
     successes -= botches;
     resultText = `${successes} Exito`;
   }
-  return [rolls, resultText];
-}
-
-document.querySelector("#diceButton").addEventListener("click", function() {
-  const pool1 = parseInt(document.querySelector("#dicePool1").value);
-  const pool2 = parseInt(document.querySelector("#dicePool2").value);
-  const modifier = parseInt(document.querySelector("#diceMod").value);
-  const difficulty = parseInt(document.querySelector("#difficulty").value);
-  const [rolls, resultText] = rollDice(pool1, pool2, modifier, difficulty);
-  const rollsList = document.querySelector("#diceRolls");
-  const resultElement = document.querySelector("#diceResult");
   
-  // clear any previous results
+  //add willpower notice to resultText
+  resultText += willpowerNotice;
+
+  //Show the results
+  //clear any previous results
   rollsList.innerHTML = "";
   resultElement.innerHTML = "";
   
@@ -607,7 +758,7 @@ document.querySelector("#diceButton").addEventListener("click", function() {
     rollsList.appendChild(rollElement);
   }
   
-  // display final result
+  // display final Text result
   const resultTextElement = document.createElement("p");
   resultTextElement.innerHTML = resultText;
   resultElement.appendChild(resultTextElement);
@@ -616,54 +767,47 @@ document.querySelector("#diceButton").addEventListener("click", function() {
   for (let i = 0; i < botchElement.length; i++) {
     botchElement[i].innerHTML = "G";
   }
-  
+}
+
+//REFACTOR: Presionar boton #diceButton
+diceButton.addEventListener("click", () => {
+  rollTheDice();
 });
 
-const dicePoolAttribute = {
-  name: "",
-  die: 0,
-}
-const dicePoolAbility = {
-  name: "",
-  die: 0,
-}
 
 
-//DICE POOL 1
-const attributesPool = document.querySelectorAll('.attributes .form-group.attribute label');
-let dicePool1 = {};
-
-attributesPool.forEach((attributePool) => {
-  attributePool.addEventListener('click', (event) => {
+//REFACTOR: Add dice and name values to DicePool1 on click on attributes.
+attributesList.forEach((attribute) => {
+  attribute.addEventListener('click', (event) => {
     const input = event.currentTarget.nextElementSibling.nextElementSibling;
-    dicePoolAttribute.name = capitalizeFirstLetter(input.getAttribute('name'));
-    dicePoolAttribute.die = input.getAttribute('value');
+    
+    //Update value and label for Pool1
+    document.querySelector("#dicePool1").value = input.getAttribute('value');
+    document.querySelector("#dicePool1Label").innerHTML = capitalizeFirstLetter(input.getAttribute('name'));
 
-    //remove class from the previously selected attribute
-    const previouslySelectedAttribute = document.querySelectorAll('.atributo-seleccionado');
-    previouslySelectedAttribute.forEach((attribute) => {
+    //Remove class from the previously selected attribute
+    const previouslySelectedAttributes = document.querySelectorAll('.atributo-seleccionado');
+    previouslySelectedAttributes.forEach((attribute) => {
       attribute.classList.remove('atributo-seleccionado');
     });
 
     //add class to the selected attribute
     const selectedAttribute = event.currentTarget;
     selectedAttribute.classList.add('atributo-seleccionado');
-
-    console.log(dicePoolAttribute);
-    updateDicePool1();
-    updateDicePool1Label();
+    
+    updateFinalPoolSize();
+    
   });
 });
 
-//DICE POOL 2
-const abilitiesPool = document.querySelectorAll('.abilities .form-group.attribute label');
-let dicePool2 = {};
-
-abilitiesPool.forEach((abilityPool) => {
-  abilityPool.addEventListener('click', (event) => {
+//REFACTOR: Add dice and name values to DicePool2 on click on abilities.
+abilitiesList.forEach((ability) => {
+  ability.addEventListener('click', (event) => {
     const input = event.currentTarget.nextElementSibling.nextElementSibling;
-    dicePoolAbility.name = capitalizeFirstLetter(input.getAttribute('name'));
-    dicePoolAbility.die = input.getAttribute('value');
+    
+    //Update value and label for Pool2
+    document.querySelector("#dicePool2").value = input.getAttribute('value');
+    document.querySelector("#dicePool2Label").innerHTML = capitalizeFirstLetter(input.getAttribute('name'));
     
     //remove class from the previously selected ability
     const previouslySelectedAbility = document.querySelectorAll('.habilidad-seleccionada');
@@ -675,18 +819,37 @@ abilitiesPool.forEach((abilityPool) => {
     const selectedAbility = event.currentTarget;
     selectedAbility.classList.add('habilidad-seleccionada');
 
-    console.log(dicePoolAbility);
-    updateDicePool2();
-    updateDicePool2Label();
+    updateFinalPoolSize();
+  
   });
 });
 
+//REFACTOR: Update the finalPoolSize whenever dicePool1, dicePool2 or diceMod inputs change manually
+//DicePool1 manually change
+document.querySelector("#dicePool1").addEventListener("change", function() {
+  updateFinalPoolSize();
+});
+
+//DicePool2 manually change
+document.querySelector("#dicePool2").addEventListener("change", function() {
+  updateFinalPoolSize();
+});
+
+//DiceMod manually change
+document.querySelector("#diceMod").addEventListener("change", function() {
+  updateFinalPoolSize();
+});
 
 
+//REFACTOR: Update the finalPoolSize whenever a checkbox is checked or unchecked
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', function() {
+    updateFinalPoolSize();
+});
+});
 
 
-////////// Borrar los inputs de los pools de dados al hacer click
-
+//REFACTOR: Borrar los inputs de los pools de dados al hacer click
 
 document.querySelector("#dicePool1").addEventListener("click", function() {
   resetDicePool1();
@@ -705,9 +868,12 @@ document.querySelector("#difficulty").addEventListener("click", function() {
   this.select()
 });
 
+
+//REFACTOR: Reset the dicePool1 when clicked and the finalPoolSize
 function resetDicePool1() {
   document.querySelector("#dicePool1").value = "0";
   document.querySelector("#dicePool1Label").innerHTML = ("");
+  updateFinalPoolSize();
 
   //remove class from the previously selected attribute
   const previouslySelectedAttribute = document.querySelectorAll('.atributo-seleccionado');
@@ -715,25 +881,32 @@ function resetDicePool1() {
     attribute.classList.remove('atributo-seleccionado');
   });
 }
+
+//REFACTOR: Reset the dicePool2 when clicked and the finalPoolSize
 function resetDicePool2() {
   document.querySelector("#dicePool2").value = "0";
   document.querySelector("#dicePool2Label").innerHTML = ("");
+  updateFinalPoolSize();
 
   //remove class from the previously selected ability
   const previouslySelectedAbility = document.querySelectorAll('.habilidad-seleccionada');
   previouslySelectedAbility.forEach((ability) => {
     ability.classList.remove('habilidad-seleccionada');
   });
-
 }
+
+//REFACTOR: Reset the diceMod when clicked and the finalPoolSize
 function resetDiceMod() {
   document.querySelector("#diceMod").value = "0";
+  updateFinalPoolSize();
 }
 
+//REFACTOR: Reset all inputs when clicked on the trash icon
 function resetAllDice() {
   resetDicePool1();
   resetDicePool2();
   resetDiceMod();
+  updateFinalPoolSize();
   document.querySelector("#difficulty").value = 6;
 } 
 
@@ -741,39 +914,7 @@ document.querySelector(".gg-trash").addEventListener("click", function() {
   resetAllDice();
 });
 
-
-
-
-
-
-// Poner en mayuscula la primera letra de un string
+//REFACTOR: Poner en mayuscula la primera letra de un string
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-//funcion para actualizar el campo #dicePool1 con el valor guardado en la const dicePoolAttribute
-function updateDicePool1() {
-  console.log("updateDicePool1");
-  document.querySelector("#dicePool1").value = dicePoolAttribute.die;
-}
-
-//funcion para actualizar el campo #dicePool2 con el valor guardado en la const dicePoolAbility
-function updateDicePool2() {
-  console.log("updateDicePool2");
-  document.querySelector("#dicePool2").value = dicePoolAbility.die;
-}
-
-//funcion para actualizar el label #dicePool2Label con el valor 
-//guardado en la const dicePoolAbility.name
-function updateDicePool2Label() {
-  console.log("updateDicePool2Label");
-  document.querySelector("#dicePool2Label").innerHTML = dicePoolAbility.name;
-}
-
-
-//funcion para actualizar el label #dicePool1Label con el valor 
-//guardado en la const dicePoolAttribute.name
-function updateDicePool1Label() {
-  console.log("updateDicePool1Label");
-  document.querySelector("#dicePool1Label").innerHTML = dicePoolAttribute.name;
 }
