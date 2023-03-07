@@ -453,7 +453,7 @@ ul li.active {
 	align-items: center;
 	justify-content: center;
 	box-shadow: inset 0 2px 5px 0px var(--colorDarkRed);
-	padding-block:20px;
+	padding-block: 15px;
 }
 
 
