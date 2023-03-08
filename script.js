@@ -1,5 +1,9 @@
+const webhookURL = 'https://discord.com/api/webhooks/1082802126947876904/_S0TKR41p7W9FnN3WsdWlnGj_AZ71H98BVIP5ij-qyO5ygeCW-kvbpdZ0rJE--hQIC1d';
+
 const ratings = document.querySelectorAll('.rating');
 let editMode = true;
+
+
 
 
 // MODAL SELECCION DE CLAN
@@ -682,6 +686,7 @@ function updateFinalPoolSize(){
 
 //REFACTOR: Tirar los Dados
 function rollTheDice(){
+  console.log("rollTheDice called");
   //stablish difficulty
   const difficulty = document.querySelector("#difficulty").value;
   //check if willpower is used
@@ -691,13 +696,41 @@ function rollTheDice(){
   //Obtain elements for the results
   const rollsList = document.querySelector("#diceRolls");
   const resultElement = document.querySelector("#diceResult");
+  //obtener el atributo y habilidad seleccionado (si hay)
+  const pool1 = document.querySelector("#dicePool1Label").innerHTML|| "";
+  const pool1Size = document.querySelector("#dicePool1").value;
+  const pool2 = document.querySelector("#dicePool2Label").innerHTML|| "";
+  const pool2Size = document.querySelector("#dicePool2").value;
+  const mods = document.querySelector("#diceMod").value;
+  const damagePenaltyCheckbox = document.querySelector("#penalizadorSalud").checked;
+  const damagePenalty = parseInt(document.querySelector("#penalizadorSaludLabel").innerHTML);
+
+  //obtain character name
+  const characterName = document.querySelector("#nombre").value;
+  //obtain character clan
+  const characterClan = document.querySelector("#clan").value||"";
+  
+  
+  
   //Resetear mensaje de Voluntad usada  
   let willpowerNotice = "";
+  let willpowerTrueFalse = "No";
+  let specialtyTrueFalse = "No";
+  let damagePenaltyTrueFalse = "No";
+  
+  if (specialty === true){
+    specialtyTrueFalse = "Si";
+  }
+  if (damagePenaltyCheckbox == true){
+    damagePenaltyTrueFalse = "Si";
+  }
+
   
   // roll the dice and count successes and botches
   let successes = 0;
   let fails = 0;
   let botches = 0;
+  let color = "";
   const rolls = [];
   for (let i = 0; i < finalPoolSize; i++) {
     const roll = Math.floor(Math.random() * 10) + 1;
@@ -712,29 +745,38 @@ function rollTheDice(){
       fails++;
     }
   }
-    
+  console.log("successes: " + successes);
+  
   //willpower automatic success
   if (willpower === true) {
     successes++;
-    willpowerNotice = " (+1 exito por voluntad)";
+    willpowerNotice = " (1 exito por Voluntad)";
+    willpowerTrueFalse = "Si";
   }
   
   // calculate the final result
   let resultText;
   if (successes === 0 && botches === 0) {
+    color = "11247616";
     resultText = "Fallo";
   } else if (successes === 0 && botches > 0) {
     resultText = "Fracaso";
+    color = "14225681";
   }else if (successes <= botches) {
-      resultText = "Fallo";
+    color = "11247616";
+    resultText = "Fallo";
   }else if ((successes - botches) > 1) {
+    color = "58911";
     successes -= botches;
     resultText = `${successes} Exitos`;
   } else {
+    color = "58911";
     successes -= botches;
     resultText = `${successes} Exito`;
   }
-  
+  console.log("resultText: " + resultText);
+
+
   //add willpower notice to resultText
   resultText += willpowerNotice;
 
@@ -757,6 +799,7 @@ function rollTheDice(){
     }
     rollsList.appendChild(rollElement);
   }
+  console.log(rolls);
   
   // display final Text result
   const resultTextElement = document.createElement("p");
@@ -767,10 +810,80 @@ function rollTheDice(){
   for (let i = 0; i < botchElement.length; i++) {
     botchElement[i].innerHTML = "G";
   }
+
+  // Post to Discord the result
+  // messageToDiscord = "hola";
+  messageToDiscord = `**${resultText}**\n${rolls.join(", ")}`;
+  sendToDiscordRoll(characterName, characterClan, pool1, pool1Size, pool2, pool2Size, mods, resultText, rolls, difficulty, color, damagePenalty, damagePenaltyTrueFalse, willpowerTrueFalse, specialtyTrueFalse);
+
 }
+
+
+// DISCORD WEBHOOK //
+// Send data to Discord webhook
+function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Size, mods, result, rolls, difficulty, color, damagePenalty, damagePenaltyTrueFalse, willpowerTrueFalse, specialtyTrueFalse) {
+  const payload = {
+    "content": "",
+    "embeds": [
+      {
+        "author": {
+          "name": characterName + " de " + clan,
+        },
+        "title": result,
+        "description": pool1 + "(" + pool1Size + ")  +  " + pool2 + "(" + pool2Size + ")  +   Mod: (" + mods + ") = " + finalPoolSize,
+        "color": color,
+        "fields": [
+          {
+            "name": "Tirada",
+            "value": "**" + rolls + "**",
+            "inline": true
+          },
+          {
+            "name": "Dificultad",
+            "value": difficulty,
+            "inline": true
+          },
+          {
+            "name": "Penalizador por Daño",
+            "value": damagePenaltyTrueFalse + " aplicado. " + damagePenalty,
+          },
+          {
+            "name": "Voluntad", 
+            "value": willpowerTrueFalse,
+            "inline": true
+          },
+          {
+            "name": "Especialidad",
+            "value": specialtyTrueFalse,
+            "inline": true
+          }
+        ],
+        "footer": {
+          "text": "Powered by Kelhendros"
+        }
+      }
+    ]
+  };
+  
+  fetch(webhookURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.error(err));
+}
+
+
+
+
 
 //REFACTOR: Presionar boton #diceButton
 diceButton.addEventListener("click", () => {
+  console.log("diceButton clicked");
   rollTheDice();
 });
 
