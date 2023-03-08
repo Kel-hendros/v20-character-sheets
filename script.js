@@ -830,7 +830,7 @@ function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Si
           "name": characterName + " de " + clan,
         },
         "title": result,
-        "description": pool1 + "(" + pool1Size + ")  +  " + pool2 + "(" + pool2Size + ")  +   Mod: (" + mods + ") = " + finalPoolSize,
+        "description": "**" + pool1 + "** (" + pool1Size + ")  +  **" + pool2 + "** (" + pool2Size + ")  +   Mod: (" + mods + ") = " + finalPoolSize,
         "color": color,
         "fields": [
           {
