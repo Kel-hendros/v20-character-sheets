@@ -4,6 +4,21 @@ const ratings = document.querySelectorAll('.rating');
 let editMode = true;
 
 
+// //////// Light / Dark Mode //////// //
+const modeToggle = document.querySelector('.gg-dark-mode');
+const body = document.querySelector('body');
+const stylesheet = document.querySelector('link[href="style light.css"]');
+
+modeToggle.addEventListener('click', () => {
+  if (body.classList.contains('dark-mode')) {
+    body.classList.remove('dark-mode');
+    stylesheet.href = 'style light.css';
+  } else {
+    body.classList.add('dark-mode');
+    stylesheet.href = 'style dark.css';
+  }
+});
+
 
 
 // MODAL SELECCION DE CLAN
