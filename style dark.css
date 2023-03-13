@@ -30,28 +30,6 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-/* :root {
-	--backgroundColor	: #290001;
-
-	--accentColor		: #C87941;
-
-	--secondaryColor	: #87431D;
-	
-	--primaryColor		: #DBCBBD;
-	
-	--shadowColor     	: #000000ca;
-	
-	--successColor		:#4E9F3D;
-	
-	--failureColor		:#497174;
-	
-	--botchColor		:#CF0A0A;
-	
-
-	--customPointer: url('images/pointer.png'), pointer;
-
-} */
-
 
 :root {
 	--backgroundColor	: #2C3639;

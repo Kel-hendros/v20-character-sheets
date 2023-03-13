@@ -110,7 +110,7 @@ ratings.forEach(rating => {
       if (index === 0 && parseInt(input.value) === 1) {
         dots[0].classList.remove('filled');
         input.value = 0;
-        console.log(input.value);
+        
       } else if (index === 0 && parseInt(input.value) === 0) {
         dots[0].classList.add('filled');
         input.value = 1;
@@ -127,7 +127,7 @@ ratings.forEach(rating => {
 
         // Update the hidden input value
         input.value = index + 1;
-        console.log(input.value);
+        
         saveCharacterData();
       }
     });
@@ -583,7 +583,7 @@ function calculateBloodPerTurn(){
 
 //funcion para actualizar el texto del label #bloodPerTurn usando la func calculateBloodPerTurn()
 function updateBloodPerTurn() {
-  console.log("updateBloodPerTurn");
+  
   calculateBloodPerTurn();
 }
 
