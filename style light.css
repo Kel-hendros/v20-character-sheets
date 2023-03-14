@@ -36,7 +36,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 	--accentColor		: #b41200;
 
-	--secondaryColor	: #868686;
+	--secondaryColor	: #7b4b4b;
 	
 	--primaryColor		: #000000;
 	
@@ -500,19 +500,20 @@ ul {
 }
 
 ul li {
-	color: var(--secondaryColor);
+	color: var(--primaryColor);
 	padding-inline: 0.7em;
 	padding-block: 0.2em;
 	margin: 0.2em;
 	cursor: var(--customPointer);
-	border: 1px solid var(--secondaryColor);
-	background-color: var(--primaryColor);
+	border: 1px solid var(--primaryColor);
+	background-color: var(--mutedColor);
 	border-radius: 5px;
 
 }
 
 ul li:hover {
 	color: var(--accentColor);
+	background-color: var(--primaryColor);
 	box-shadow: 0 2px 5px 0 var(--shadowColor);
 }
 
