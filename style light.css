@@ -688,7 +688,8 @@ ion-icon {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
+	flex-wrap: nowrap;
+	gap: 0px;
 }
 
 .seccion {
@@ -697,39 +698,40 @@ ion-icon {
 	position: relative;
 	margin-top: 0;
 	white-space: nowrap;
-	flex: 0;
+	flex: 1;
+	margin-inline: 15px;
 }
 
 .seccion-linea-izq {
 	color: var(--secondaryColor);
 	font-family: 'vampire-dingbats', serif;
-	font-size: 3.1em;
-	text-justify: left;
-	line-height: 2px;
+	font-size: 70px;
+	line-height: 0px;
 	display: block;
-	top: 50%;
-	height: 5px;
-	background-color: var(--secondaryColor);
-	height: 4px;
-	margin: 3px;
-	flex: 1;
+	flex: 0;
+	padding-bottom: 3px;
 
+}
+
+.linea-recta {
+
+	display: block;
+	padding-top: 0px;
+	
+	background-color: var(--secondaryColor);
+	height: 5px;
+	flex: 1;
 }
 
 .seccion-linea-der {
 	color: var(--secondaryColor);
 	font-family: 'vampire-dingbats', serif;
-	font-size: 3.1em;
-	text-justify: auto;
-	text-align: right;
-	line-height: 2px;
+	font-size: 70px;
+	line-height: 0px;
 	display: block;
-	top: 50%;
-	height: 5px;
-	background-color: var(--secondaryColor);
-	height: 4px;
-	margin: 3px;
-	flex: 1;
+	flex: 0;
+	padding-bottom: 3px;
+	margin-left: -2px;
 }
 
 .seccion-linea {
@@ -743,6 +745,8 @@ ion-icon {
 	margin: 3px;
 
 }
+
+
 
 
 

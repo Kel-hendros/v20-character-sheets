@@ -745,6 +745,7 @@ function rollTheDice(){
   //Obtain elements for the results
   const rollsList = document.querySelector("#diceRolls");
   const resultElement = document.querySelector("#diceResult");
+
   //obtener el atributo y habilidad seleccionado (si hay)
   const pool1 = document.querySelector("#dicePool1Label").innerHTML|| "";
   const pool1Size = document.querySelector("#dicePool1").value;
@@ -764,6 +765,7 @@ function rollTheDice(){
   //Resetear mensaje de Voluntad usada  
   let willpowerNotice = "";
   let willpowerTrueFalse = "No";
+  let willpowerSuccess = 0;
   let specialtyTrueFalse = "No";
   let damagePenaltyTrueFalse = "No";
   
@@ -797,29 +799,39 @@ function rollTheDice(){
   
   //willpower automatic success
   if (willpower === true) {
-    successes++;
+    willpowerSuccess++;
     willpowerNotice = " (1 exito por Voluntad)";
     willpowerTrueFalse = "Si";
   }
   
   // calculate the final result
   let resultText;
-  if (successes === 0 && botches === 0) {
+  if (willpowerSuccess === 0 && successes === 0 && botches === 0) {
     color = "11247616";
     resultText = "Fallo";
-  } else if (successes === 0 && botches > 0) {
+  } else if (willpowerSuccess === 0 && successes === 0 && botches > 0) {
     resultText = "Fracaso";
     color = "14225681";
-  }else if (successes <= botches) {
+  }else if (willpowerSuccess === 0 && successes <= botches) {
     color = "11247616";
     resultText = "Fallo";
-  }else if ((successes - botches) > 1) {
+  }else if ((willpowerSuccess + successes - botches) > 1) {
     color = "58911";
-    successes -= botches;
+    if (successes - botches < 0){
+      successes = 0;
+    } else {
+      successes -= botches;
+    }
+    successes += willpowerSuccess;
     resultText = `${successes} Exitos`;
   } else {
-    color = "58911";
-    successes -= botches;
+    color = "58911"; 
+    if (successes - botches < 0){
+      successes = 0;
+    } else {
+      successes -= botches;
+    }
+    successes += willpowerSuccess;
     resultText = `${successes} Exito`;
   }
 
@@ -859,14 +871,46 @@ function rollTheDice(){
 
   // Post to Discord the result
   messageToDiscord = `**${resultText}**\n${rolls.join(", ")}`;
-  sendToDiscordRoll(characterName, characterClan, pool1, pool1Size, pool2, pool2Size, mods, resultText, rolls, difficulty, color, damagePenalty, damagePenaltyTrueFalse, willpowerTrueFalse, specialtyTrueFalse);
+  sendToDiscordRoll(
+    characterName, 
+    characterClan, 
+    pool1, 
+    pool1Size, 
+    pool2, 
+    pool2Size, 
+    mods, 
+    resultText, 
+    rolls, 
+    difficulty, 
+    color, 
+    damagePenalty, 
+    damagePenaltyTrueFalse, 
+    willpowerTrueFalse, 
+    specialtyTrueFalse
+  );
 
 }
 
 
 // DISCORD WEBHOOK //
 // Send data to Discord webhook
-function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Size, mods, result, rolls, difficulty, color, damagePenalty, damagePenaltyTrueFalse, willpowerTrueFalse, specialtyTrueFalse) {
+function sendToDiscordRoll(
+  characterName, 
+  clan, 
+  pool1, 
+  pool1Size, 
+  pool2, 
+  pool2Size, 
+  mods, 
+  result, 
+  rolls, 
+  difficulty, 
+  color, 
+  damagePenalty, 
+  damagePenaltyTrueFalse, 
+  willpowerTrueFalse, 
+  specialtyTrueFalse
+) {
   const webhookURL = discordInput.value;
 
   //check if webhookURL is empty
