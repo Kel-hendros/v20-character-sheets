@@ -26,13 +26,22 @@ const discordBtn = document.getElementById("discord-btn");
 const discordCloseBtn = document.getElementById("discord-modal-close-button");
 const discordSaveBtn = document.getElementById("discord-modal-save-button");
 const discordInput = document.getElementById("discord-modal-webhook-input");
+const discordToggleBtn = document.getElementById("discord-toggle");
+const discordToggleInput = document.getElementById("discord-toggle-input");
 
+let currentDiscordToggle = "";
 let currentDiscordWebhook = "";
 
 discordBtn.addEventListener("click", () => {
   discordModal.style.display = "block";
   currentDiscordWebhook = discordInput.value;
-    
+  //update the discordToggleBtn class based on the value of discordToggleInput
+  if (discordToggleInput.value === "true") {
+    discordToggleBtn.classList.remove("disabled");
+  } else {
+    discordToggleBtn.classList.add("disabled");
+  }
+      
 });
 
 discordCloseBtn.addEventListener("click", () => {
@@ -42,11 +51,24 @@ discordCloseBtn.addEventListener("click", () => {
 
 discordSaveBtn.addEventListener("click", () => {
   discordModal.style.display = "none";
-  
-  
+    
   //guardar el valor de la variable webhookURL en el local storage
   saveCharacterData();
 
+});
+
+discordToggleBtn.addEventListener("click", () => {
+  if (discordToggleInput.value === "true") {
+    discordToggleInput.value = "false";
+    discordToggleBtn.classList.add("disabled");
+    console.log(discordToggleInput.value);
+      
+  } else {
+    discordToggleInput.value = "true";
+    discordToggleBtn.classList.remove("disabled");
+    console.log(discordToggleInput.value);
+  }
+  saveCharacterData();
 });
 
 
@@ -848,7 +870,7 @@ function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Si
   const webhookURL = discordInput.value;
 
   //check if webhookURL is empty
-  if (webhookURL === "") {
+  if (webhookURL === "" || discordToggleInput.value === "false") {
     return;
   }
   const payload = {

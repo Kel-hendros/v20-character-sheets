@@ -56,10 +56,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 
 /* Traer desde al Light Mode a partir de aca */
+/* ----------------------------------- */
+
 
 html,
 body {
-	cursor:url("images/cursor1.png"), auto;
+	cursor: url("images/cursor1.png"), auto;
 	margin: 0;
 	width: 100vw;
 	height: 100vh;
@@ -67,18 +69,26 @@ body {
 	/* overflow: auto; */
 	background-color: var(--backgroundColor);
 }
-  
+
 
 * {
 	font-family: 'Cormorant Bold', serif;
 	color: var(--primaryColor);
-	
+
+	/* Make Everything UNSELECTABLE!! */
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
 }
 
 h1,
 h2 {
 	font-family: 'delavan', serif;
-	
+
 }
 
 
@@ -95,7 +105,7 @@ h2 {
 	overflow: none;
 
 	/* Afecta la pantalla de fondo detras del modal */
-	background-color: rgba(0, 0, 0, 0.8); 
+	background-color: rgba(0, 0, 0, 0.8);
 
 }
 
@@ -134,7 +144,7 @@ h2 {
 	border-radius: 20px;
 	padding-inline: 2em;
 	padding-block: 0.3em;
-	
+
 	font-size: 1.2em;
 	cursor: var(--customPointer);
 	font-weight: bold;
@@ -359,7 +369,7 @@ h2 {
 
 }
 
-.form-group.discipline select{
+.form-group.discipline select {
 	font-size: 16px;
 	border: none;
 }
@@ -453,11 +463,11 @@ h2 {
 
 .xp-row .rating span {
 	grid-column: span 1;
-  }
-  
-  .xp-row .rating span:nth-child(10n-5) {
+}
+
+.xp-row .rating span:nth-child(10n-5) {
 	margin-right: 20px;
-  }
+}
 
 .xp-row .dot {
 	width: 12;
@@ -537,11 +547,50 @@ ul li.active {
 }
 
 /* DISCORD MODAL SYTLES */
+
+#discord-modal {
+
+	min-width: 800px;
+}
 #discord-modal-webhook-input {
-	width: 70%;
+	width: 100%;
 	border: 1px solid var(--secondaryColor);
 	border-radius: 20px;
 	padding-inline: 10px;
+	height: 30px;
+}
+
+.discord-container {
+
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+	border-radius: 20px;	
+	box-shadow: inset 0px 8px 15px 0px var(--shadowColor);
+	margin-inline: 30px;
+	padding: 40px;
+
+
+}
+
+.discordlist {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 3;
+}
+
+.toggle {
+
+	flex-grow: 1;
+	font-size: 2em;
+	margin-right: 0px;
+	color: var(--successColor);
+}
+
+.toggle.disabled {
+
+	color: var(--botchColor);
+	transform: rotate(180deg);
 }
 
 /* Estilos del HEADER 
@@ -564,7 +613,7 @@ ul li.active {
 	gap: 0;
 	align-items: flex-start;
 	justify-content: center;
-	
+
 	/* compensa para que el logo quede centrado */
 	flex: 1.1;
 }
@@ -589,14 +638,14 @@ ul li.active {
 /* Tercera columna del Header: IMAGEN Y BOTONES */
 
 /* IMAGEN DEL LOGO */
-.button-and-image{
-	
+.button-and-image {
+
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	flex: 1;
-	
+
 }
 
 .header-clan-logo p {
@@ -616,9 +665,9 @@ ul li.active {
 }
 
 /* ION ICONS */
-ion-icon{
+ion-icon {
 	font-size: 1.7em;
-	
+
 	cursor: var(--customPointer);
 	position: relative;
 }
@@ -645,21 +694,22 @@ ion-icon{
 	position: relative;
 	margin-top: 0;
 	white-space: nowrap;
+	flex: 0;
 }
 
 .seccion-linea-izq {
 	color: var(--secondaryColor);
 	font-family: 'vampire-dingbats', serif;
 	font-size: 3.1em;
-	text-justify: auto;
+	text-justify: left;
 	line-height: 2px;
 	display: block;
 	top: 50%;
-	width: 100%;
 	height: 5px;
 	background-color: var(--secondaryColor);
 	height: 4px;
 	margin: 3px;
+	flex: 1;
 
 }
 
@@ -672,11 +722,11 @@ ion-icon{
 	line-height: 2px;
 	display: block;
 	top: 50%;
-	width: 100%;
 	height: 5px;
 	background-color: var(--secondaryColor);
 	height: 4px;
 	margin: 3px;
+	flex: 1;
 }
 
 .seccion-linea {
@@ -768,8 +818,7 @@ ion-icon{
 }
 
 .attributes .form-group.attribute label,
-.abilities .form-group.attribute label
-{
+.abilities .form-group.attribute label {
 	cursor: var(--customPointer);
 }
 
@@ -814,19 +863,19 @@ select {
 /* Dados!! */
 
 .dice-container {
-		
+
 	display: flex;
 	flex-direction: row;
 	margin-top: 20px;
 	justify-content: space-evenly;
 
 }
-.dice-automatizations
-{
+
+.dice-automatizations {
 	margin-right: 30px;
 	display: flex;
 	flex-direction: column;
-	
+
 
 }
 
@@ -835,12 +884,11 @@ select {
 	justify-content: flex-start;
 	align-items: center;
 	margin: 5px;
-	
-	
+
+
 }
 
-.automatization-row label
-{
+.automatization-row label {
 	font-family: 'delavan', 'serif';
 	font-size: 1rem;
 	margin-inline: 5px;
@@ -853,7 +901,7 @@ input[type="checkbox"] {
 }
 
 .dice-row {
-	
+
 	display: flex;
 	justify-content: center;
 	gap: 40px;
@@ -861,13 +909,13 @@ input[type="checkbox"] {
 }
 
 .groupDie {
-	
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
 	width: 50px;
-	
+
 }
 
 .groupDie-span {
@@ -881,7 +929,7 @@ input[type="checkbox"] {
 }
 
 .groupDie input {
-	
+
 	font-size: 20px;
 	width: 50px;
 	height: 40px;
@@ -909,9 +957,9 @@ input[type="checkbox"] {
 }
 
 .diceButton {
-	
+
 	margin-top: auto;
-	width:100px;
+	width: 100px;
 	height: 60px;
 	padding-inline: 0.5em;
 	border-radius: 10px;
@@ -952,7 +1000,7 @@ input[type="checkbox"] {
 	cursor: var(--customPointer);
 }
 
-.gg-trash:hover{
+.gg-trash:hover {
 	transform: scale(var(--ggs, 1.3));
 	background-color: red;
 }
@@ -1060,16 +1108,14 @@ input[type="checkbox"] {
 /* Atributos y Habilidades seleccionados */
 
 .atributo-seleccionado,
-#dicePool1Label
-{
+#dicePool1Label {
 	color: var(--accentColor);
 }
 
 .habilidad-seleccionada,
-#dicePool2Label
-{
+#dicePool2Label {
 	color: var(--accentColor);
-	
+
 }
 
 
@@ -1168,7 +1214,7 @@ input[type="checkbox"] {
 }
 
 .botonera .button-remove {
-	
+
 	position: relative;
 	font-weight: normal;
 	font-size: 0;
@@ -1280,6 +1326,6 @@ input[type="checkbox"] {
 }
 
 select,
-input{
+input {
 	background-color: transparent;
 }

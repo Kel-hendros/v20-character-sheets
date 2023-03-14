@@ -674,10 +674,12 @@
                 <a href="https://support.discord.com/hc/es/articles/228383668-Usando-Webhooks" target="_blank">¿Cómo crear un webhook?</a>
               </p>
               <div class="discord-container">
-                  <div class="discordlist">
-                    <label for="discord-webhook">Webhook URL:</label>
-                    <input type="text" id="discord-modal-webhook-input" autocomplete="off">
-                  </div>
+                <div class="discordlist">
+                  <label for="discord-webhook">Webhook URL:</label>
+                  <input type="text" id="discord-modal-webhook-input" autocomplete="off">
+                </div>
+                <ion-icon class="toggle" id="discord-toggle" name="toggle-sharp"></ion-icon>    
+                <input type="hidden" id="discord-toggle-input" name="discord-toggle-input" value="true">
               </div>
               <div class="modal-buttons">
                 <button class="modal-button-save" id="discord-modal-save-button">Guardar</button>
