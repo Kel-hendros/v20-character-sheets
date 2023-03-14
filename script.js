@@ -1,13 +1,14 @@
-const webhookURL = 'https://discord.com/api/webhooks/1082802126947876904/_S0TKR41p7W9FnN3WsdWlnGj_AZ71H98BVIP5ij-qyO5ygeCW-kvbpdZ0rJE--hQIC1d';
+let webhookURL;
 
 const ratings = document.querySelectorAll('.rating');
 let editMode = true;
 
 
 // //////// Light / Dark Mode //////// //
-const modeToggle = document.querySelector('.gg-dark-mode');
+const modeToggle = document.querySelector('#modeToggle');
 const body = document.querySelector('body');
 const stylesheet = document.querySelector('link[href="style light.css"]');
+
 
 modeToggle.addEventListener('click', () => {
   if (body.classList.contains('dark-mode')) {
@@ -19,6 +20,36 @@ modeToggle.addEventListener('click', () => {
   }
 });
 
+// MODAL DISCORD WEBHOOK
+const discordModal = document.getElementById("discord-modal");
+const discordBtn = document.getElementById("discord-btn");
+const discordCloseBtn = document.getElementById("discord-modal-close-button");
+const discordSaveBtn = document.getElementById("discord-modal-save-button");
+const discordInput = document.getElementById("discord-modal-webhook-input");
+
+discordBtn.addEventListener("click", () => {
+  discordModal.style.display = "block";
+  //mostrar en el input el valor de la variable webhookURL
+  //siempre y cuando no sea undefined
+  if(webhookURL !== undefined){
+  discordInput.value = webhookURL;
+  }
+
+});
+
+discordCloseBtn.addEventListener("click", () => {
+  discordModal.style.display = "none";
+});
+
+discordSaveBtn.addEventListener("click", () => {
+  discordModal.style.display = "none";
+  webhookURL = discordInput.value;
+
+  //guardar el valor de la variable webhookURL en el local storage
+  saveCharacterData();
+
+  console.log(webhookURL);
+});
 
 
 // MODAL SELECCION DE CLAN
@@ -285,8 +316,13 @@ function downloadCharacterData() {
 ///////////////////////////
 // Cargar el archivo ///
 //////////////////////////
-
 const fileInput = document.getElementById('file-input');
+const iconForUpload = document.getElementById('file-input-icon');
+
+function clickOnFileInput() {
+ 
+  fileInput.click();
+}
 
 fileInput.addEventListener('change', (e) => {
 	const file = e.target.files[0];

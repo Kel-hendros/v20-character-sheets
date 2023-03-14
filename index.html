@@ -644,11 +644,38 @@
                   <input type="hidden" id="header-logo-value" name="logo" value="G">
                 </div>
               </div>
-              <div class="buttons-container">
-                <button title="Guardar personaje" class="gg-export" onclick="downloadCharacterData()"></button>
-                <label title="Cargar personaje" for="file-input" class="gg-import"></label>
-                <input type="file" id="file-input" hidden accept=".json">
-                <button title="cambiarModo" class="gg-dark-mode""></button>
+            </div>
+            <div class="buttons-container">
+              <!-- <button title="Guardar personaje" class="gg-export" onclick="downloadCharacterData()"></button> -->
+              <ion-icon name="save-sharp" onclick="downloadCharacterData()"></ion-icon>
+              <!-- <label title="Cargar personaje" for="file-input" class="gg-import"></label> -->
+              <ion-icon for="file-input-icon" name="download-sharp" onclick="clickOnFileInput()"></ion-icon>
+              <input type="file" id="file-input" hidden accept=".json">
+              <!-- <button title="cambiarModo" class="gg-dark-mode""></button> -->
+              <ion-icon name="logo-discord" id="discord-btn"></ion-icon>
+              <ion-icon name="contrast-sharp" id="modeToggle"></ion-icon>
+            </div>
+          </div>
+
+          <!-- Modal discord token -->
+          <div id="discord-modal" class="modal">
+            <div class="modal-content">
+              <h1>Discord webhook</h1>
+              <p>Introduce la URL del webhook de Discord para que se envíen los mensajes de las tiradas de dados.
+                <br>
+                Dejar en blanco para desactivar.
+                <br><br>
+                <a href="https://support.discord.com/hc/es/articles/228383668-Usando-Webhooks" target="_blank">¿Cómo crear un webhook?</a>
+              </p>
+              <div class="discord-container">
+                  <div class="discordlist">
+                    <label for="discord-webhook">Webhook URL:</label>
+                    <input type="text" id="discord-modal-webhook-input" autocomplete="off">
+                  </div>
+              </div>
+              <div class="modal-buttons">
+                <button class="modal-button-save" id="discord-modal-save-button">Guardar</button>
+                <button class="modal-button-close" id="discord-modal-close-button">Cancelar</button>
               </div>
             </div>
           </div>
@@ -709,8 +736,8 @@
                 </div>
               </div>
               <div class="modal-buttons">
-                <button id="accept-btn">Aceptar</button>
-                <button id="close-btn">Cerrar</button>
+                <button class="modal-button-save" id="accept-btn">Aceptar</button>
+                <button class="modal-button-close" id="close-btn">Cerrar</button>
               </div>
             </div>
           </div>
@@ -1369,6 +1396,8 @@
       </div>
       </div>
       </div>
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   </body>
   <script src="script.js"></script>
 </html>

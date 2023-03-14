@@ -55,6 +55,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+/* Traer desde al Light Mode a partir de aca */
+
 html,
 body {
 	cursor:url("images/cursor1.png"), auto;
@@ -73,8 +75,94 @@ body {
 	
 }
 
+h1,
+h2 {
+	font-family: 'delavan', serif;
+	
+}
 
-/* ----------CONTEINERS AND COLUMNS--------------- */
+
+/*  ESTILOS DE MODALES GENERAL  */
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 3;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: none;
+
+	/* Afecta la pantalla de fondo detras del modal */
+	background-color: rgba(0, 0, 0, 0.8); 
+
+}
+
+.modal-content {
+
+	background-color: var(--backgroundColor);
+	margin: 5vh auto;
+	padding: 20px;
+	border: 1px solid var(--accentColor);
+	width: 50%;
+	border-radius: 30px;
+	border: 5px solid var(--primaryColor);
+	box-shadow: 0 10px 20px 0 var(--shadowColor);
+
+}
+
+.modal-content h1 {
+	text-align: center;
+	font-family: 'delavan', serif;
+	font-size: 3em;
+	margin: 0;
+}
+
+.modal-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	flex-wrap: nowrap;
+	margin: 30px;
+	gap: 20px;
+
+}
+
+.modal-buttons button {
+	border-radius: 20px;
+	padding-inline: 2em;
+	padding-block: 0.3em;
+	
+	font-size: 1.2em;
+	cursor: var(--customPointer);
+	font-weight: bold;
+	box-shadow: 0 5px 5px 0 var(--shadowColor);
+}
+
+.modal-button-save {
+	background-color: var(--primaryColor);
+	color: var(--backgroundColor);
+}
+
+.modal-button-close {
+	background-color: var(--backgroundColor);
+	color: var(--primaryColor);
+}
+
+.modal-buttons button:hover {
+	background-color: var(--accentColor);
+	box-shadow: 0 2px 5px 0 var(--shadowColor);
+}
+
+
+
+
+
+
+
+/* ----------CONTAINERS AND COLUMNS--------------- */
 .super-container {
 	display: flex;
 	flex-direction: row;
@@ -162,135 +250,8 @@ body {
 
 /* PRIMERA SUPER COLUMN */
 
-/* MODAL SELECCION DE CLAN */
 
-.modal {
-	display: none;
-	position: fixed;
-	z-index: 3;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: none;
 
-	/* Afecta la pantalla de fondo detras del modal */
-	background-color: rgba(0, 0, 0, 0.8); 
-
-}
-
-.modal-content {
-
-	background-color: var(--backgroundColor);
-	margin: 5vh auto;
-	padding: 20px;
-	border: 1px solid var(--accentColor);
-	width: 50%;
-	border-radius: 30px;
-	border: 5px solid var(--primaryColor);
-	box-shadow: 0 10px 20px 0 var(--shadowColor);
-
-}
-
-.modal-content h1 {
-	text-align: center;
-	font-family: 'delavan', serif;
-	font-size: 3em;
-	margin: 0;
-}
-
-.clan-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	flex-wrap: none;
-}
-
-.clanlist-container {
-	flex-grow: 2;
-	flex-basis: 70%;
-}
-
-ul {
-	display: flex;
-	flex-wrap: wrap;
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-ul li {
-	color: var(--backgroundColor);
-	padding-inline: 0.7em;
-	padding-block: 0.2em;
-	margin: 0.2em;
-	cursor: var(--customPointer);
-	border: 2px solid var(--secondaryColor);
-	background-color: var(--primaryColor);
-	border-radius: 5px;
-
-}
-
-ul li:hover {
-	color: var(--accentColor);
-	box-shadow: 0 2px 8px 2px var(--shadowColor);
-}
-
-ul li.active {
-	color: var(--primaryColor);
-	background-color: var(--accentColor);
-}
-
-.clan-logo {
-	width: 400px;
-	display: flex;
-}
-
-.clan-logo p {
-	font-family: 'vampire-sigils', serif;
-	font-size: 15em;
-	margin: auto;
-	text-shadow: 0 10px 10px var(--shadowColor);
-
-}
-
-.modal-buttons {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: center;
-	flex-wrap: nowrap;
-	margin: 30px;
-	gap: 20px;
-
-}
-
-.modal-buttons button {
-	border-radius: 20px;
-	padding-inline: 2em;
-	padding-block: 0.3em;
-	color: var(--primaryColor);
-	font-size: 1.2em;
-	cursor: var(--customPointer);
-	font-weight: bold;
-	box-shadow: 0 5px 5px 0 var(--shadowColor);
-}
-
-#accept-btn {
-	background-color: var(--accentColor);
-	color: var(--primaryColor);
-
-}
-
-#close-btn {
-	background-color: var(--secondaryColor);
-	color: var(--backgroundColor);
-}
-
-.modal-buttons button:hover {
-	box-shadow: 0 2px 5px 0 rgb(234, 0, 0);
-}
 
 
 /* TABS */
@@ -513,48 +474,106 @@ ul li.active {
 
 
 
-/* Columna del Medio */
+/* //////////////////////////////////
+//////// Columna del Medio //////////
+///////////////////////////////////*/
 
+/* MODAL SELECCION DE CLAN */
+.clan-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: none;
+}
+
+.clanlist-container {
+	flex-grow: 2;
+	flex-basis: 70%;
+}
+
+ul {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul li {
+	color: var(--secondaryColor);
+	padding-inline: 0.7em;
+	padding-block: 0.2em;
+	margin: 0.2em;
+	cursor: var(--customPointer);
+	border: 1px solid var(--secondaryColor);
+	background-color: var(--primaryColor);
+	border-radius: 5px;
+
+}
+
+ul li:hover {
+	color: var(--accentColor);
+	box-shadow: 0 2px 5px 0 var(--shadowColor);
+}
+
+ul li.active {
+	color: var(--primaryColor);
+	background-color: var(--accentColor);
+}
+
+.clan-logo {
+	width: 400px;
+	display: flex;
+}
+
+.clan-logo p {
+	font-family: 'vampire-sigils', serif;
+	font-size: 15em;
+	margin: auto;
+	text-shadow: 0 10px 10px var(--shadowColor);
+
+}
+
+/* DISCORD MODAL SYTLES */
+#discord-modal-webhook-input {
+	width: 70%;
+	border: 1px solid var(--secondaryColor);
+	border-radius: 20px;
+	padding-inline: 10px;
+}
 
 /* Estilos del HEADER 
  TITULO Y BOTONES */
 
 .header {
 	display: flex;
+	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	text-align: center;
 	margin-top: 10px;
-	margin-bottom: 0;
-	margin-inline: 0;
+
+	gap: 10px;
 }
 
+/* Primera columna del Header: INFO */
 .header .container.info {
 	display: flex;
 	flex-direction: column;
 	gap: 0;
 	align-items: flex-start;
 	justify-content: center;
-	padding-right: 10px;
+	
+	/* compensa para que el logo quede centrado */
+	flex: 1.1;
 }
 
-.header>div {
-	flex-basis: 33.33%;
-
-}
-
-.header-container {
-	text-align: center;
-
-}
-
-.buttons-container {
+/* Segunda columna del Header: LOGO VAMPIRO */
+.title-container {
 	display: flex;
+	align-items: center;
 	justify-content: center;
-	align-items: baseline;
-	margin-top: -20px;
-	gap: 15px;
-
+	flex: 1;
 }
 
 .title-logo {
@@ -566,189 +585,44 @@ ul li.active {
 
 }
 
+/* Tercera columna del Header: IMAGEN Y BOTONES */
 
-.header h1 {
-	margin: auto;
-	font-size: 65px;
-}
-
-.header h2 {
-	margin-top: -20px;
-	letter-spacing: 9px;
-
-}
-
-h1,
-h2 {
-	font-family: 'delavan', serif;
-	
-}
-
+/* IMAGEN DEL LOGO */
 .button-and-image{
 	
 	display: flex;
+	flex-direction: row;
 	align-items: center;
-	justify-content: space-evenly;
-}
-
-.header-clan-logo {
+	justify-content: center;
+	flex: 1;
 	
-	display: flex;
 }
 
 .header-clan-logo p {
+
 	font-family: 'vampire-sigils', serif;
-	font-size: 7em;
+	font-size: 8em;
 	margin: auto;
 	text-shadow: 0 10px 10px var(--shadowColor);
-
 }
 
-
-
-/* Guardar y Cargar */
-
+/* BOTONES DE OPCIONES */
 .buttons-container {
-	
+	position: relative;
 	display: flex;
 	flex-direction: column;
+	gap: 4px;
+}
+
+/* ION ICONS */
+ion-icon{
+	font-size: 1.7em;
 	
-	margin-top: 20px;
-	gap: 25px;
-}
-
-/* Set Iconos */
-.gg-export {
-	top: -2px;
-	box-sizing: border-box;
-	position: relative;
-	display: block;
-	transform: scale(var(--ggs, 1.5));
-	width: 18px;
-	height: 14px;
-	border: 2px solid;
-	border-top: 0;
-	background-color: transparent;
-	box-shadow: -6px -8px 0 -6px, 6px -8px 0 -6px;
 	cursor: var(--customPointer);
-}
-
-.gg-export::after,
-.gg-export::before {
-	content: "";
-	display: block;
-	box-sizing: border-box;
-	position: absolute;
-}
-
-.gg-export::before {
-	background: currentColor;
-	width: 2px;
-	height: 14px;
-	right: 6px;
-	bottom: 5px;
-}
-
-.gg-export::after {
-	width: 6px;
-	height: 6px;
-	border-left: 2px solid;
-	border-top: 2px solid;
-	right: 4px;
-	bottom: 14px;
-	transform: rotate(45deg);
-}
-
-.gg-import {
-	box-sizing: border-box;
 	position: relative;
-	display: block;
-	transform: scale(var(--ggs, 1.5));
-	width: 18px;
-	height: 14px;
-	border: 2px solid;
-	border-top: 0;
-	box-shadow: -6px -8px 0 -6px, 6px -8px 0 -6px;
-	cursor: var(--customPointer);
 }
 
-.gg-import::after,
-.gg-import::before {
-	content: "";
-	display: block;
-	box-sizing: border-box;
-	position: absolute;
-}
 
-.gg-import::before {
-	background: currentColor;
-	width: 2px;
-	height: 14px;
-	right: 6px;
-	bottom: 5px;
-}
-
-.gg-import::after {
-	width: 6px;
-	height: 6px;
-	border-right: 2px solid;
-	border-bottom: 2px solid;
-	right: 4px;
-	bottom: 4px;
-	transform: rotate(45deg);
-}
-
-.gg-export:hover,
-.gg-import:hover {
-	color: var(--accentColor);
-}
-
-/* ------Toggle Dark/Light Mode------- */
-.gg-dark-mode {
-	box-sizing: border-box;
-	position: relative;
-	display: block;
-	transform: scale(var(--ggs,1.5));
-	border:2px solid var(--primaryColor);
-	border-radius:100px;
-	width:20px;
-	height:20px;
-	cursor: var(--customPointer);
-
-   }
-   
-   .gg-dark-mode::after,
-   .gg-dark-mode::before {
-	content: "";
-	box-sizing: border-box;
-	position: absolute;
-	display: block;
-	color: var(--backgroundColor);
-   }
-   
-   .gg-dark-mode::before {
-	border:5px solid;
-	border-top-left-radius:100px;
-	border-bottom-left-radius:100px;
-	border-right: 0;
-	width:9px;
-	height:18px;
-	top:-1px;
-	left:-1px;
-	color: var(--backgroundColor);
-   }
-   
-   .gg-dark-mode::after {
-	border:4px solid;
-	border-top-right-radius:100px;
-	border-bottom-right-radius:100px;
-	border-left: 0;
-	width:4px;
-	height:8px;
-	right:4px;
-	top:4px;
-	
-   } 
 
 
 
@@ -1043,9 +917,9 @@ input[type="checkbox"] {
 	font-size: 1.2rem;
 	cursor: var(--customPointer);
 
-	background-color: var(--secondaryColor);
-	color: var(--backgroundColor);
-	border: 3px solid var(--accentColor);
+	background-color: var(--mutedColor);
+	color: var(--primaryColor);
+	border: 3px solid var(--primaryColor);
 	box-shadow: 0 5px 10px 0px var(--shadowColor);
 }
 
