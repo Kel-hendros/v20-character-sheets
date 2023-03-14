@@ -1,4 +1,4 @@
-let webhookURL;
+
 
 const ratings = document.querySelectorAll('.rating');
 let editMode = true;
@@ -27,28 +27,26 @@ const discordCloseBtn = document.getElementById("discord-modal-close-button");
 const discordSaveBtn = document.getElementById("discord-modal-save-button");
 const discordInput = document.getElementById("discord-modal-webhook-input");
 
+let currentDiscordWebhook = "";
+
 discordBtn.addEventListener("click", () => {
   discordModal.style.display = "block";
-  //mostrar en el input el valor de la variable webhookURL
-  //siempre y cuando no sea undefined
-  if(webhookURL !== undefined){
-  discordInput.value = webhookURL;
-  }
-
+  currentDiscordWebhook = discordInput.value;
+    
 });
 
 discordCloseBtn.addEventListener("click", () => {
   discordModal.style.display = "none";
+  discordInput.value = currentDiscordWebhook;
 });
 
 discordSaveBtn.addEventListener("click", () => {
   discordModal.style.display = "none";
-  webhookURL = discordInput.value;
-
+  
+  
   //guardar el valor de la variable webhookURL en el local storage
   saveCharacterData();
 
-  console.log(webhookURL);
 });
 
 
@@ -65,7 +63,6 @@ let clanSelected = "";
 
 inputField.addEventListener("click", () => {
   modal.style.display = "block";
-  console.log("click en input clan");
 });
 
 clanList.forEach((clan) => {
@@ -120,7 +117,6 @@ function updateHeaderLogo(){
   const headerLogoValue = document.querySelector('#header-logo-value').value;
   const headerLogoDisplay = document.querySelector('#header-logo-display');
   headerLogoDisplay.innerHTML = headerLogoValue;
-  console.log(headerLogoValue);
 }
 
 
@@ -145,7 +141,6 @@ ratings.forEach(rating => {
       } else if (index === 0 && parseInt(input.value) === 0) {
         dots[0].classList.add('filled');
         input.value = 1;
-        console.log(input.value);
       } else {
         // Update the dot display
         dots.forEach((innerDot, innerIndex) => {
@@ -434,14 +429,12 @@ const removeButtons = document.querySelectorAll(".button-remove");
 addButtons.forEach((button) => {
   button.addEventListener("click", () => {
     let healthValues = getHealthValues();
-    console.log("Al clickear, este es el valor de healthValues" + healthValues);
     
     //Buscar un "0" en el array "healthValues
     let searchValue = "0";
     let i;
     for(i = 0; i < healthValues.length; i++) {
       if (healthValues[i] === searchValue) {
-        console.log("hay un 0 en la posicion " + i);
         break;
       }
     }
@@ -449,21 +442,15 @@ addButtons.forEach((button) => {
     if (i < healthValues.length) {
       if (button.id == "contundenteAdd") {
         healthValues[i] = 1;
-        console.log("contundente clickeado");
-        console.log(healthValues);
       }
       if (button.id == "letalAdd") {
         healthValues[i] = 2;
-        console.log("letal clickeado");
-        console.log(healthValues);
       }
       if (button.id == "agravadoAdd") {
         healthValues[i] = 3;
-        console.log(healthValues);
       }
       
     } else {
-      console.log("no hay un 0 en el array");
     }
     //Ordena los valores
     healthValues.sort((a, b) => b - a);
@@ -485,36 +472,29 @@ addButtons.forEach((button) => {
 removeButtons.forEach((button) => {
   button.addEventListener("click", () => {
     let healthValues = getHealthValues();
-    console.log("Al clickear, este es el valor de healthValues" + healthValues);
 
     //para buscar en el array el daño a remover
     let searchValue = "0";
     let i;
     if (button.id == "contundenteRemove") {
-      console.log("contundente remove clickeado");
       searchValue="1";
     }
     if (button.id == "letalRemove") {
-      console.log("letal remove clickeado");
       searchValue="2";
     }
     if (button.id == "agravadoRemove") {
-      console.log("agravado remove clickeado");
       searchValue="3";
     }
 
     //Buscar en el array el tipo de daño a remover
     for(i = 0; i < healthValues.length; i++) {
       if (healthValues[i] === searchValue) {
-        console.log("hay un " + searchValue + " en la posicion " + i);
         break;
       }
     }
     if (i < healthValues.length) {
       healthValues[i] = "0";
-      console.log("danio removido" + healthValues);
     } else {
-      console.log("no hay un " + searchValue + " en el array");
     }
     //Ordena los valores
     healthValues.sort((a, b) => b - a);
@@ -566,7 +546,6 @@ function updateDamagePenalty() {
   } else if (count == 0) {
     damagePenalty = -5;
   }
-  console.log("damagePenalty = " + damagePenalty);
   //update the value in the input
   document.querySelector("#penalizadorSaludLabel").innerHTML = damagePenalty;
   updateFinalPoolSize();
@@ -703,7 +682,6 @@ function updateFinalPoolSize(){
   const diceMod = parseInt(document.querySelector("#diceMod").value);
   const penalizadorSalud = document.querySelector("#penalizadorSalud").checked;
   const penalizadorSaludValue = parseInt(document.querySelector("#penalizadorSaludLabel").innerHTML);
-  console.log("updateFinalPoolSize called");
   //calculate finalPoolSize
 
   //check if penalizadorSalud is used
@@ -716,7 +694,6 @@ function updateFinalPoolSize(){
   //show finalPoolSize in #diceButton
   if (finalPoolSize <= 0){
     diceButton.innerHTML = "Sin dados";
-    console.log("finalPoolSize <= 0" + finalPoolSize);
     
     //agregar clase disabled al boton
     diceButton.classList.add("disabled");
@@ -737,7 +714,6 @@ function updateFinalPoolSize(){
 
 //REFACTOR: Tirar los Dados
 function rollTheDice(){
-  console.log("rollTheDice called");
   //stablish difficulty
   const difficulty = document.querySelector("#difficulty").value;
   //check if willpower is used
@@ -796,7 +772,6 @@ function rollTheDice(){
       fails++;
     }
   }
-  console.log("successes: " + successes);
   
   //willpower automatic success
   if (willpower === true) {
@@ -825,7 +800,6 @@ function rollTheDice(){
     successes -= botches;
     resultText = `${successes} Exito`;
   }
-  console.log("resultText: " + resultText);
 
 
   //add willpower notice to resultText
@@ -850,7 +824,6 @@ function rollTheDice(){
     }
     rollsList.appendChild(rollElement);
   }
-  console.log(rolls);
   
   // display final Text result
   const resultTextElement = document.createElement("p");
@@ -863,7 +836,6 @@ function rollTheDice(){
   }
 
   // Post to Discord the result
-  // messageToDiscord = "hola";
   messageToDiscord = `**${resultText}**\n${rolls.join(", ")}`;
   sendToDiscordRoll(characterName, characterClan, pool1, pool1Size, pool2, pool2Size, mods, resultText, rolls, difficulty, color, damagePenalty, damagePenaltyTrueFalse, willpowerTrueFalse, specialtyTrueFalse);
 
@@ -873,14 +845,22 @@ function rollTheDice(){
 // DISCORD WEBHOOK //
 // Send data to Discord webhook
 function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Size, mods, result, rolls, difficulty, color, damagePenalty, damagePenaltyTrueFalse, willpowerTrueFalse, specialtyTrueFalse) {
+  const webhookURL = discordInput.value;
+
+  //check if webhookURL is empty
+  if (webhookURL === "") {
+    return;
+  }
   const payload = {
     "content": "",
     "embeds": [
       {
         "author": {
           "name": characterName + " de " + clan,
+          "url": "https://kel-hendros.github.io/v20-character-sheets/"
         },
         "title": result,
+        "url": "https://kel-hendros.github.io/v20-character-sheets/",
         "description": "**" + pool1 + "** (" + pool1Size + ")  +  **" + pool2 + "** (" + pool2Size + ")  +   Mod: (" + mods + ") = " + finalPoolSize,
         "color": color,
         "fields": [
@@ -923,9 +903,6 @@ function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Si
     },
     body: JSON.stringify(payload)
   })
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(err => console.error(err));
 }
 
 
@@ -934,7 +911,6 @@ function sendToDiscordRoll(characterName, clan, pool1, pool1Size, pool2, pool2Si
 
 //REFACTOR: Presionar boton #diceButton
 diceButton.addEventListener("click", () => {
-  console.log("diceButton clicked");
   rollTheDice();
 });
 
