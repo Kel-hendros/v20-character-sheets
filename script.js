@@ -1,7 +1,45 @@
-
-
 const ratings = document.querySelectorAll('.rating');
 let editMode = true;
+
+
+//Funcion que actualiza todos lo que hay que actualizar al visualizar/cargar la pagina
+function updateAll(){
+
+// Loop through each rating element and update the dots
+  const ratings = document.querySelectorAll('.rating');
+  ratings.forEach(rating => {
+    updateRatingDots(rating);
+  });
+  
+  //update health squares based on health status
+  updateHealthSquares()
+  
+  //update blood per turn based on generation
+  updateBloodPerTurn()
+  
+  //block the blood pool based on generation
+  blockBloodPool();
+  
+  //update damagePenalty
+  //en el tirador de dados basado en el daño actual
+  updateDamagePenalty();
+
+  //reset dice roller
+  resetAllDice();
+  
+  //update image clan logo
+  //basado en la letra del clan seleccionado
+  updateHeaderLogo();
+
+  //update discpline buttons para mostrar
+  //los botones en las disciplinas no-vacias
+  updateDisciplineButtons();
+
+
+}
+
+
+
 
 
 // //////// Light / Dark Mode //////// //
@@ -226,6 +264,7 @@ function updateRatingDots(rating) {
 // GUARDAR EN LOCAL STORAGE
 // Save character data to local storage
 function saveCharacterData() {
+  
   // Get character data as JSON string
   const characterJSON = getCharacterData();
   // Save character data to local storage
@@ -254,29 +293,16 @@ function loadCharacterData() {
 // Call loadCharacterData when the page loads
 window.onload = function() {
   loadCharacterData();
-  // Loop through each rating element and update the dots
-  const ratings = document.querySelectorAll('.rating');
-  ratings.forEach(rating => {
-  updateRatingDots(rating);
-  });
-  //update health squares
-  updateHealthSquares()
-  //update blood per turn
-  updateBloodPerTurn()
-  //block the blood pool based on generation
-  blockBloodPool();
-  //update damagePenalty
-  updateDamagePenalty();
-  //reset dice roller
-  resetAllDice();
-  //update image clan logo
-  updateHeaderLogo();
+  updateAll();
 }
 
 // Call saveCharacterData when an input is changed
 const inputs = document.querySelectorAll('input' + ', select');
 inputs.forEach(input => {
-  input.addEventListener('change', saveCharacterData);
+  input.addEventListener('change', () => {
+    updateDisciplineButtons();
+    saveCharacterData();
+  });
 });
 
 
@@ -366,21 +392,7 @@ fileInput.addEventListener('change', (e) => {
 			}
 		}
 
-		// Loop through each rating element and update the dots
-		const ratings = document.querySelectorAll('.rating');
-		ratings.forEach(rating => {
-		updateRatingDots(rating);
-		});
-    //update health squares
-    updateHealthSquares()
-    //update blood per turn
-    updateBloodPerTurn()
-    //block the blood pool based on generation
-    blockBloodPool();
-    //update damagePenalty
-    updateDamagePenalty();
-    //update image clan logo
-    updateHeaderLogo();
+		updateAll();
 	};
 
 	reader.readAsText(file);
@@ -393,8 +405,6 @@ fileInput.addEventListener('change', (e) => {
 // funcion para obtener un listado de todos los values de los hidden inputs
 // asociados a los span class="square" y ordenarlos de mayor a menor
 const healthSquares = document.querySelectorAll('.square');
-
-
 
 function getHealthValues() {
   let healthValues = [];
@@ -442,12 +452,11 @@ function updateHealthSquares() {
 }
 
 
+//AGREGAR DANIO
 
 const addButtons = document.querySelectorAll(".button-add");
 const removeButtons = document.querySelectorAll(".button-remove");
 
-
-//AGREGAR DANIO
 addButtons.forEach((button) => {
   button.addEventListener("click", () => {
     let healthValues = getHealthValues();
@@ -1143,3 +1152,53 @@ document.querySelector(".gg-trash").addEventListener("click", function() {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+
+// Lanzar Disciplinas
+
+//Funcion para actualizar los botones a mostrar en cada .form-group discipline 
+//si es que el input del tipo text tiene un valor
+
+  //obtener todos los iconos de las disciplinas basado en que son el primer elemento ion-icon dentro
+  //de un form-group-discipline
+  const disciplineIcons = document.querySelectorAll('.discipline-icon');
+  //obtener todos los inputs de tipo text dentro de los items con clase .form-group discipline
+  const disciplineInputs = document.querySelectorAll('#tab1 input[type="text"]');
+  //obtener todos los valores de los inputs de tipo text, que se encuentran dentro del div .form-group discipline
+  const disciplineHiddenInputs = document.querySelectorAll('#tab1 input[type="hidden"]');
+
+function updateDisciplineButtons() {
+  console.log(disciplineIcons);
+  console.log(disciplineInputs);
+  console.log(disciplineHiddenInputs);
+
+  //recorrer los inputs de tipo text
+  disciplineInputs.forEach((input, index) => {
+    //si el input no esta vacio
+    if (input.value !== "") {
+      //mostrar el disciplineIcon correspondiente al input agregandole la clase .visible
+      disciplineIcons[index].classList.add('visible');
+
+      //si el input esta vacio, ocultar el disciplineIcon correspondiente al input quitandole la clase .visible
+    } else {
+      disciplineIcons[index].classList.remove('visible');
+    }
+ });
+}
+
+
+//TO REFACTOR: Add dice and name values to DicePool2 on click on discpline buttons.
+disciplineIcons.forEach((icon) => {
+  icon.addEventListener('click', (event) => {
+    const disciplineName = event.currentTarget.nextElementSibling.value;
+    const disciplineDice = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling.value;
+    
+    //Update value and label for Pool2
+    document.querySelector("#dicePool2").value = disciplineDice;
+    document.querySelector("#dicePool2Label").innerHTML = capitalizeFirstLetter(disciplineName);
+    
+
+    updateFinalPoolSize();
+  
+  });
+});

@@ -347,6 +347,16 @@ h2 {
 	margin-bottom: 5px;
 }
 
+.discipline-icon {
+
+	font-size: 1.3em;
+	display: none;
+}
+
+.discipline-icon.visible {
+	display: inline-block;
+}
+
 
 /* Virtudes - HUMANIDAD / SENDA */
 .humanidad-container {
