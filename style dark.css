@@ -63,7 +63,6 @@ input[type="number"]::-webkit-outer-spin-button {
 /* ----------------------------------- */
 
 
-
 html,
 body {
 	cursor: url("images/cursor1.png"), auto;
@@ -1161,15 +1160,15 @@ input[type="checkbox"] {
 }
 
 .health-container.lesionado{
-	background-image: url(../images/health1.png);
+	background-image: url('images/health1.png');
 }
 
 .health-container.malherido{
-	background-image: url(../images/health2.png);
+	background-image: url('images/health2.png');
 }
 
 .health-container.tullido {
-	background-image: url(../images/health3.png);
+	background-image: url('images/health3.png');
 }
 
 .health-table {
