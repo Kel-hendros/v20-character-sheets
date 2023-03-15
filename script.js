@@ -1232,10 +1232,7 @@ document.querySelector("#diceMod").addEventListener("click", function() {
   resetDiceMod();
   this.select()
 });
-document.querySelector("#difficulty").addEventListener("click", function() {
-  document.querySelector("#difficulty").value = 6;
-  this.select()
-});
+
 
 
 //REFACTOR: Reset the dicePool1 when clicked and the finalPoolSize

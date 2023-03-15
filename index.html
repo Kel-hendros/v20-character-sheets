@@ -1300,12 +1300,22 @@
                 <span> + </span>
               </div>
                 <div class="groupDie">
-                <label class="diceLabel" for="dieMod" id="modLabel">Modificador</label>
+                <label class="diceLabel" for="dieMod" id="modLabel">Modif.</label>
                 <input class="diceMod" id="diceMod" type="number" value=0>
               </div>
               <div class="groupDie">
-                <label class="dificultadLabel" for="difficulty">Dificultad</label>
-                <input class="diceDifficulty" id="difficulty" type="number" value=6>
+                <label class="dificultadLabel" for="difficulty">Dif.</label>
+                <!-- <input class="diceDifficulty" id="difficulty" type="number" value=6> -->
+                <select id="difficulty" autocomplete="off">
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6" selected>6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
               </div>
               <button class="diceButton" id="diceButton">Lanzar</button>
               <i class="gg-trash"></i>

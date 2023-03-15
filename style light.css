@@ -1034,7 +1034,8 @@ input[type="checkbox"] {
 	width: 5px;
 }
 
-.groupDie input {
+.groupDie input,
+.groupDie select {
 
 	font-size: 20px;
 	width: 50px;
@@ -1046,9 +1047,15 @@ input[type="checkbox"] {
 	background-color: transparent;
 	border: 2px solid var(--primaryColor);
 	box-shadow: inset 0px 4px 9px 0px var(--shadowColor);
+	appearance: none; /* Other */
+	margin-bottom: 0;
 }
 
+.groupDie select {
 
+	background-color: var(--primaryColor);
+	color: var(--backgroundColor);
+}
 
 .groupDie label {
 
