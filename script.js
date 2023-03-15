@@ -725,6 +725,24 @@ virtueButtons.forEach((button) => {
 });
 
 
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+////////            DADOS HUMANIDAD                ////////
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+
+const sendaButtons = document.querySelector(".senda-icon");
+
+sendaButtons.addEventListener('click', (event) => {
+  console.log("click");
+  const sendaName = "Senda"
+  const sendaDice = event.currentTarget.nextElementSibling.nextElementSibling.value;
+
+  //add to Pool1
+  addToPool1(sendaDice, sendaName);
+});
+
+
 /*
 permanentWillpowerIcons.forEach((icon) => {
   icon.addEventListener('click', (event) => {

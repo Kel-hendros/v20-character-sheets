@@ -104,7 +104,7 @@ h2 {
 .modal {
 	display: none;
 	position: fixed;
-	z-index: 3;
+	z-index: 13;
 	left: 0;
 	top: 0;
 	width: 100%;
@@ -266,8 +266,18 @@ h2 {
 
 /* PRIMERA SUPER COLUMN */
 
+.column-left ion-icon {
+	
+	color: var(--secondaryColor);
+	/* animate color transformation */
+	transition: color 1.5s ease-in-out;
+	
+}
 
-
+.column-left ion-icon:hover {
+	color: var(--accentColor);
+	transition: color 0.15s ease-in-out;
+}
 
 
 /* TABS */
@@ -299,7 +309,7 @@ h2 {
 }
 
 .tab-button.active {
-	background-color: transparent;
+	background: var(--backgroundColor);
 	color: var(--primaryColor);
 	border: 2px solid var(--primaryColor);
 	border-bottom: none;
@@ -414,6 +424,20 @@ h2 {
 	border-bottom: 1px solid var(--primaryColor);
 
 }
+
+.senda-icon {
+	font-size: 1.5em;
+}
+
+.humanidad-form-group {
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+
+}
+
 
 .form-group.discipline select {
 	font-size: 16px;
@@ -540,6 +564,23 @@ h2 {
 /* //////////////////////////////////
 //////// Columna del Medio //////////
 ///////////////////////////////////*/
+.column-middle ion-icon {
+	
+	color: var(--primaryColor);
+	/* animate color transformation */
+	transition: color 1.5s ease-in-out;
+	
+}
+
+.column-middle ion-icon:hover {
+	color: var(--accentColor);
+	transition: color 0.15s ease-in-out;
+}
+
+
+
+
+
 
 /* MODAL SELECCION DE CLAN */
 .clan-container {
@@ -632,18 +673,26 @@ ul li.active {
 	flex-grow: 3;
 }
 
-.toggle {
+.column-middle .toggle {
 
 	flex-grow: 1;
 	font-size: 2em;
 	margin-right: 0px;
 	color: var(--successColor);
+	transition: color 0.15s ease-in-out;
+
 }
 
-.toggle.disabled {
+.column-middle .toggle.disabled {
 
 	color: var(--botchColor);
 	transform: rotate(180deg);
+}
+
+.column-middle .toggle:hover {
+	
+	color: var(--accentColor);
+	transition: color 0.15s ease-in-out;
 }
 
 /* Estilos del HEADER 
