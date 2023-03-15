@@ -559,12 +559,31 @@ function updateDamagePenalty() {
   //update value in damagePenalty based on the count
   if (count >= 6) {
     damagePenalty = 0;
+    //remover otras clases al div .health-container
+    document.querySelector(".health-container").classList.remove("lesionado");
+    document.querySelector(".health-container").classList.remove("malherido");
+    document.querySelector(".health-container").classList.remove("tullido");
   } else if (count == 5 || count == 4) {
     damagePenalty = -1;
+    //remover otras clases al div .health-container
+    document.querySelector(".health-container").classList.remove("malherido");
+    document.querySelector(".health-container").classList.remove("tullido");
+    //agregar clase "lesionado" al div .health-container
+    document.querySelector(".health-container").classList.add("lesionado");
   } else if (count == 3 || count == 2) {
     damagePenalty = -2;
+    //remover otras clases al div .health-container
+    document.querySelector(".health-container").classList.remove("lesionado");
+    document.querySelector(".health-container").classList.remove("tullido");
+    //agregar clase "malherido" al div .health-container
+    document.querySelector(".health-container").classList.add("malherido");
   } else if (count == 1) {
     damagePenalty = -5;
+    //remover otras clases al div .health-container
+    document.querySelector(".health-container").classList.remove("lesionado");
+    document.querySelector(".health-container").classList.remove("malherido");
+    //agregar clase "tullido" al div .health-container
+    document.querySelector(".health-container").classList.add("tullido");
   } else if (count == 0) {
     damagePenalty = -5;
   }

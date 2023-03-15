@@ -57,10 +57,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 	--customPointer: url('images/pointer.png'), pointer;
 
+	--colorDeAdornos: var(--mutedColor);
+
+
 }
 
 /* LLevar al Dark Mode a partir de aca */
 /* ----------------------------------- */
+
 
 html,
 body {
@@ -215,8 +219,7 @@ h2 {
 	flex-grow: 1;
 	min-width: 15rem;
 	flex-basis: 25%;
-	margin: 20px 5px 5px;
-	max-height: 100vh;
+	margin: 0 5px 5px;
 }
 
 .column-left {
@@ -703,7 +706,7 @@ ion-icon {
 }
 
 .seccion-linea-izq {
-	color: var(--secondaryColor);
+	color: var(--colorDeAdornos);
 	font-family: 'vampire-dingbats', serif;
 	font-size: 70px;
 	line-height: 0px;
@@ -718,13 +721,13 @@ ion-icon {
 	display: block;
 	padding-top: 0px;
 	
-	background-color: var(--secondaryColor);
+	background-color: var(--colorDeAdornos);
 	height: 5px;
 	flex: 1;
 }
 
 .seccion-linea-der {
-	color: var(--secondaryColor);
+	color: var(--colorDeAdornos);
 	font-family: 'vampire-dingbats', serif;
 	font-size: 70px;
 	line-height: 0px;
@@ -740,7 +743,7 @@ ion-icon {
 	top: 50%;
 	width: 100%;
 	height: 5px;
-	background-color: var(--secondaryColor);
+	background-color: var(--colorDeAdornos);
 	height: 4px;
 	margin: 3px;
 
@@ -1137,8 +1140,39 @@ input[type="checkbox"] {
 	--contundente: #9a9a9a;
 	--letal: #d39c5e;
 	--agravado: #bb1515;
+
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	border-radius: 10px;
+	box-shadow: inset 0px 4px 9px 0px var(--shadowColor);
+
 }
 
+.health-container .seccion-container .seccion{
+	
+	z-index: 2;
+	background-color: var(--backgroundColor);
+	box-shadow: 0px 0px 5px 5px var(--backgroundColor); 
+}
+
+.health-container .seccion-container .seccion-linea{
+	z-index: 3;
+}
+
+.health-container.lesionado{
+	background-image: url(../images/health1.png);
+}
+
+.health-container.malherido{
+	background-image: url(../images/health2.png);
+}
+
+.health-container.tullido {
+	background-image: url(../images/health3.png);
+}
 
 .health-table {
 	width: 210px;
@@ -1146,7 +1180,20 @@ input[type="checkbox"] {
 	display: grid;
 	grid-template-rows: repeat(7, 25px);
 
+	background-color: var(--backgroundColor);
+	box-shadow: 0px 0px 25px 25px var(--backgroundColor); 
+	
+
+	z-index: 0;
+
 }
+
+.health-buttons-container{
+
+	background-color: var(--backgroundColor);
+	box-shadow: 0px 0px 25px 25px var(--backgroundColor); 
+}
+
 
 .table-row.salud {
 	display: grid;
@@ -1183,6 +1230,7 @@ input[type="checkbox"] {
 	margin-top: 20px;
 	margin-inline: auto;
 	flex-direction: column;
+	z-index: 3;
 }
 
 .botonera {
