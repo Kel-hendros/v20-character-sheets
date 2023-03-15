@@ -1153,8 +1153,9 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-
-// Lanzar Disciplinas
+/////////////////////////////////////
+////      Lanzar Disciplinas     ////
+/////////////////////////////////////
 
 //Funcion para actualizar los botones a mostrar en cada .form-group discipline 
 //si es que el input del tipo text tiene un valor
@@ -1187,7 +1188,7 @@ function updateDisciplineButtons() {
 }
 
 
-//TO REFACTOR: Add dice and name values to DicePool2 on click on discpline buttons.
+//Add dice and name values to DicePool2 on click on discpline buttons.
 disciplineIcons.forEach((icon) => {
   icon.addEventListener('click', (event) => {
     const disciplineName = event.currentTarget.nextElementSibling.value;

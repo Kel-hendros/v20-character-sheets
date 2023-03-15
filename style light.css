@@ -349,7 +349,7 @@ h2 {
 
 .discipline-icon {
 
-	font-size: 1.3em;
+	font-size: 1em;
 	display: none;
 }
 
@@ -682,10 +682,10 @@ ul li.active {
 
 /* ION ICONS */
 ion-icon {
+	
 	font-size: 1.7em;
-
 	cursor: var(--customPointer);
-	position: relative;
+	
 }
 
 

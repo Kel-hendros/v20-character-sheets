@@ -63,6 +63,7 @@ input[type="number"]::-webkit-outer-spin-button {
 /* ----------------------------------- */
 
 
+
 html,
 body {
 	cursor: url("images/cursor1.png"), auto;
@@ -342,6 +343,16 @@ h2 {
 	flex-grow: 1;
 	padding-right: 5px;
 	margin-bottom: 5px;
+}
+
+.discipline-icon {
+
+	font-size: 1em;
+	display: none;
+}
+
+.discipline-icon.visible {
+	display: inline-block;
 }
 
 
