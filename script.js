@@ -35,6 +35,8 @@ function updateAll(){
   //los botones en las disciplinas no-vacias
   updateDisciplineButtons();
 
+  //update block temporal Willpower
+  blockTemporalWillpower();
 
 }
 
@@ -99,12 +101,10 @@ discordToggleBtn.addEventListener("click", () => {
   if (discordToggleInput.value === "true") {
     discordToggleInput.value = "false";
     discordToggleBtn.classList.add("disabled");
-    console.log(discordToggleInput.value);
       
   } else {
     discordToggleInput.value = "true";
     discordToggleBtn.classList.remove("disabled");
-    console.log(discordToggleInput.value);
   }
   saveCharacterData();
 });
@@ -214,8 +214,10 @@ ratings.forEach(rating => {
         // Update the hidden input value
         input.value = index + 1;
         
-        saveCharacterData();
+        
       }
+      blockTemporalWillpower();
+      saveCharacterData();
     });
   });
 });
@@ -300,8 +302,9 @@ window.onload = function() {
 const inputs = document.querySelectorAll('input' + ', select');
 inputs.forEach(input => {
   input.addEventListener('change', () => {
-    updateDisciplineButtons();
     saveCharacterData();
+    updateDisciplineButtons();
+    
   });
 });
 
@@ -699,6 +702,33 @@ function blockBloodPool (){
   const bloodValue = document.querySelector("#blood-value");
   bloodValue.value = maxBloodPool;
 }
+
+
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+////////            FUERZA DE VOLUNTAD             ////////
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+
+// Funcion: Bloquear FUERZA DE VOLUNTAD TEMPORAL
+function blockTemporalWillpower (){
+  const permanentWillpower = parseInt(document.querySelector("#voluntad-value").value);
+  const tempWillpowerRating = document.querySelector("#voluntadTemp-rating");
+  const dots = tempWillpowerRating.querySelectorAll(".dot");
+
+  //disable dots based on permanentWillpower
+  for(let i = 0; i < dots.length; i++){
+    const dot = dots[i];
+    const dotValue = parseInt(dot.getAttribute("data-value"));
+    
+    if(dotValue > (permanentWillpower-1) ){
+      dot.classList.add("disabled");
+    }else{
+      dot.classList.remove("disabled");
+    }
+  }
+}
+
 
 
 ////////-------------------------------------------////////
@@ -1169,9 +1199,6 @@ function capitalizeFirstLetter(string) {
   const disciplineHiddenInputs = document.querySelectorAll('#tab1 input[type="hidden"]');
 
 function updateDisciplineButtons() {
-  console.log(disciplineIcons);
-  console.log(disciplineInputs);
-  console.log(disciplineHiddenInputs);
 
   //recorrer los inputs de tipo text
   disciplineInputs.forEach((input, index) => {
