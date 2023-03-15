@@ -703,6 +703,49 @@ function blockBloodPool (){
   bloodValue.value = maxBloodPool;
 }
 
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+////////            DADOS VIRTUDES                 ////////
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+
+const virtueButtons = document.querySelectorAll(".virtue-icon");
+
+virtueButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    console.log("click");
+    const virtueName = capitalizeFirstLetter(event.currentTarget.nextElementSibling.value);
+    const virtueDice = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling.value;
+    
+    //add to Pool1
+    addToPool1(virtueDice, virtueName);
+
+
+  });
+});
+
+
+/*
+permanentWillpowerIcons.forEach((icon) => {
+  icon.addEventListener('click', (event) => {
+    const disciplineName = event.currentTarget.nextElementSibling.value;
+    const disciplineDice = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling.value;
+    
+    //Update value and label for Pool2
+    document.querySelector("#dicePool2").value = disciplineDice;
+    document.querySelector("#dicePool2Label").innerHTML = capitalizeFirstLetter(disciplineName);
+    
+
+    updateFinalPoolSize();
+  
+  });
+});
+
+*/
+
+
+
+
 
 ////////-------------------------------------------////////
 ////////-------------------------------------------////////
@@ -712,7 +755,7 @@ function blockBloodPool (){
 
 // Funcion: Bloquear FUERZA DE VOLUNTAD TEMPORAL
 function blockTemporalWillpower (){
-  const permanentWillpower = parseInt(document.querySelector("#voluntad-value").value);
+  const permanentWillpower = parseInt(document.querySelector("#voluntadPerm-value").value);
   const tempWillpowerRating = document.querySelector("#voluntadTemp-rating");
   const dots = tempWillpowerRating.querySelectorAll(".dot");
 
@@ -733,9 +776,53 @@ function blockTemporalWillpower (){
 
 ////////-------------------------------------------////////
 ////////-------------------------------------------////////
+////////            DADOS DE VOLUNTAD              ////////
+////////-------------------------------------------////////
+////////-------------------------------------------////////
+function rollVoluntad(input){
+  console.log("addToPool1");
+  //get the value from the input string assuming is the ID of the input
+  const inputId = input;
+  const inputElement = document.querySelector(`#${inputId}`);
+  const inputValue = inputElement.value;
+  const inputName = inputElement.getAttribute("name");
+
+  //Roll on Pool 1
+  addToPool1(inputValue, inputName);
+    
+}
+
+
+
+
+////////-------------------------------------------////////
+////////-------------------------------------------////////
 ////////                  DADOS                    ////////
 ////////-------------------------------------------////////
 ////////-------------------------------------------////////
+
+//Add anything to Pool 1
+//with a Dice number and a Name
+function addToPool1(diceValue, labelName){
+
+  //Update value and label for Pool
+  document.querySelector("#dicePool1").value = diceValue;
+  document.querySelector("#dicePool1Label").innerHTML = capitalizeFirstLetter(labelName);
+  updateFinalPoolSize();
+}
+
+//Add anything to Pool 2
+//with a Dice number and a Name
+function addToPool2(diceNumber, name){
+  
+  //Update value and label for Pool2
+  document.querySelector("#dicePool2").value = inputValue;
+  document.querySelector("#dicePool2Label").innerHTML = capitalizeFirstLetter(inputName);
+  updateFinalPoolSize();
+}
+
+
+
 
 //REFACTOR: CONSTANTS
 

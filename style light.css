@@ -359,6 +359,36 @@ h2 {
 
 
 /* Virtudes - HUMANIDAD / SENDA */
+
+.virtue-container {
+	display: flex;
+	flex-direction: column;
+}
+
+.virtue-icon {
+	font-size: 1em;
+}
+
+.virtue-container .form-group.discipline {
+
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.virtue-container .rating {
+
+	flex-grow: 1;
+}
+#tab3 input,
+#tab3 select {
+
+	font-size: 20px;
+	font-weight: bold;
+
+
+}
+
 .humanidad-container {
 	display: grid;
 	padding-top: 0;
@@ -415,9 +445,9 @@ h2 {
 
 .form-group.voluntad {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	width: 90%;
 	margin-top: 25px;
 	gap: 15px;
@@ -427,9 +457,9 @@ h2 {
 
 .form-group.voluntadTemp {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	width: 90%;
 	margin-top: 10px;
 	gap: 15px;
@@ -452,6 +482,13 @@ h2 {
 	margin: 0 1px;
 	cursor: var(--customPointer);
 }
+
+.will-icon {
+	font-size: 1.5em;
+	
+}
+
+
 
 /* ----------EXPERIENCIA------------ */
 .experiencia-container {

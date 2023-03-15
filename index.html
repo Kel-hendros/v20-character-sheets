@@ -332,51 +332,61 @@
             <div id="tab3" class="tab-content">
               <div class="discipline-container">
                 <!-- dropdown field with two options-->
-                <div class="form-group discipline">
-                  <select id="virtue1" name="virtue1">
-                    <option value="conciencia" selected>Conciencia</option>
-                    <option value="conviccion">Conviccion</option>
-                  </select>
-                  <div class="rating" id="virtue1-rating">
-                    <span class="dot" data-value="0"></span>
-                    <span class="dot" data-value="1"></span>
-                    <span class="dot" data-value="2"></span>
-                    <span class="dot" data-value="3"></span>
-                    <span class="dot" data-value="4"></span>
+                <div class="virtue-container">
+                  
+                  <div class="form-group discipline">
+                    <ion-icon class="virtue-icon" name="dice-sharp"></ion-icon>
+                    <select id="virtue1" name="virtue1">
+                      <option value="conciencia" selected>Conciencia</option>
+                      <option value="conviccion">Conviccion</option>
+                    </select>
+                    <div class="rating" id="virtue1-rating">
+                      <span class="dot" data-value="0"></span>
+                      <span class="dot" data-value="1"></span>
+                      <span class="dot" data-value="2"></span>
+                      <span class="dot" data-value="3"></span>
+                      <span class="dot" data-value="4"></span>
+                    </div>
+                    <input type="hidden" id="virtue1-value" name="virtue1" value="0">
                   </div>
-                  <input type="hidden" id="virtue1-value" name="virtue1" value="0">
-                </div>
-                <div class="form-group discipline">
-                  <select id="virtue2" name="virtue2">
-                    <option value="autocontrol" selected>Autocontrol</option>
-                    <option value="instinto">Instinto</option>
-                  </select>
-                  <div class="rating" id="virtue2-rating">
-                    <span class="dot" data-value="0"></span>
-                    <span class="dot" data-value="1"></span>
-                    <span class="dot" data-value="2"></span>
-                    <span class="dot" data-value="3"></span>
-                    <span class="dot" data-value="4"></span>
+                  
+                  <div class="form-group discipline">
+                    <ion-icon class="virtue-icon" name="dice-sharp"></ion-icon>
+                    <select id="virtue2" name="virtue2">
+                      <option value="autocontrol" selected>Autocontrol</option>
+                      <option value="instinto">Instinto</option>
+                    </select>
+                    <div class="rating" id="virtue2-rating">
+                        <span class="dot" data-value="0"></span>
+                        <span class="dot" data-value="1"></span>
+                        <span class="dot" data-value="2"></span>
+                        <span class="dot" data-value="3"></span>
+                        <span class="dot" data-value="4"></span>
+                    </div>
+                    <input type="hidden" id="virtue2-value" name="virtue2" value="0">
                   </div>
-                  <input type="hidden" id="virtue2-value" name="virtue2" value="0">
-                </div>
-                <div class="form-group discipline">
-                  <label for="virtue3">Coraje:</label>
-                  <div class="rating" id="virtue3-rating">
-                    <span class="dot" data-value="0"></span>
-                    <span class="dot" data-value="1"></span>
-                    <span class="dot" data-value="2"></span>
-                    <span class="dot" data-value="3"></span>
-                    <span class="dot" data-value="4"></span>
+                  
+                  <div class="form-group discipline">
+                    <ion-icon class="virtue-icon" name="dice-sharp"></ion-icon>
+                    <input for="virtue3" value="Coraje" readonly>
+                    <div class="rating" id="virtue3-rating">
+                        <span class="dot" data-value="0"></span>
+                        <span class="dot" data-value="1"></span>
+                        <span class="dot" data-value="2"></span>
+                        <span class="dot" data-value="3"></span>
+                        <span class="dot" data-value="4"></span>
+                    </div>
+                    <input type="hidden" id="virtue3-value" name="virtue3" value="0">
                   </div>
-                  <input type="hidden" id="virtue3-value" name="virtue3" value="0">
                 </div>
+                  
                 <div class="humanidad-container">
                   <div class="seccion-container">
                     <div class="seccion-linea"></div>
                     <h2 class="seccion">Humanidad/Senda</h2>
                     <div class="seccion-linea"></div>
                   </div>
+                
                   <!-- Contenido Humanidad/Senda -->
                   <div class="form-group humanidad">
                     <input type="text" id="humanidad" autocomplete="off" placeholder="Humanidad/Senda">
@@ -397,6 +407,7 @@
                 </div>
               </div>
             </div>
+          
             <!-- Meritos y Defectos -->
             <div id="tab4" class="tab-content">
               <div class="discipline-container">
@@ -534,6 +545,7 @@
               <div class="seccion-linea"></div>
             </div>
             <div class="form-group voluntad">
+              <ion-icon class="will-icon perm" name="dice-sharp" onclick="rollVoluntad('voluntadPerm-value')"></ion-icon>
               <div class="rating" id="voluntad-rating">
                 <span class="dot" data-value="0"></span>
                 <span class="dot" data-value="1"></span>
@@ -546,9 +558,10 @@
                 <span class="dot" data-value="8"></span>
                 <span class="dot" data-value="9"></span>
               </div>
-              <input type="hidden" id="voluntad-value" name="voluntad" value="0">
+              <input type="hidden" id="voluntadPerm-value" name="Vol.Perm." value="0">
             </div>
             <div class="form-group voluntadTemp">
+              <ion-icon class="will-icon temp" name="dice-sharp" onclick="rollVoluntad('voluntadTemp-value')""></ion-icon>
               <div class="rating" id="voluntadTemp-rating">
                 <span class="dot" data-value="0"></span>
                 <span class="dot" data-value="1"></span>
@@ -561,7 +574,7 @@
                 <span class="dot" data-value="8"></span>
                 <span class="dot" data-value="9"></span>
               </div>
-              <input type="hidden" id="voluntadTemp-value" name="voluntad" value="0">
+              <input type="hidden" id="voluntadTemp-value" name="Vol.Temp." value="0">
             </div>
           </div>
           <!-- EXPERIENCIA -->
