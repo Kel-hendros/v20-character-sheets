@@ -55,6 +55,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 	--colorDeAdornos: var(--mutedColor);
 
+	--historySuccessColor: rgba(0, 128, 0, 0.308);
+
+	--historyFailureColor: #83b7bb44;
+
+	--historyBotchColor: #f8484846;
+
 
 }
 
@@ -1076,20 +1082,24 @@ input[type="checkbox"] {
 	box-shadow: inset 0px 4px 9px 0px var(--shadowColor);
 	appearance: none; /* Other */
 	margin-bottom: 0;
+	padding: 1px 2px;
 }
 
 .groupDie select {
 
 	background-color: var(--primaryColor);
 	color: var(--backgroundColor);
+	height: 46px;
+	width: 58px;
+	
 }
 
 .groupDie label {
 
-	/* white-space: nowrap;
+	width: 130px;
+	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis; */
-	white-space: break-spaces;
+	text-overflow: ellipsis;
 	text-align: center;
 	color: var(--primaryColor);
 	font-size: 20px;
@@ -1513,4 +1523,128 @@ input[type="checkbox"] {
 select,
 input {
 	background-color: transparent;
+}
+
+
+/* SECCION TIRADAS */
+
+.tiradas-container {
+
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+}
+
+/* INICIATIVA */
+
+.tiradas-botonera {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	gap: 10px;
+	margin-top: 0px;
+	width: 90%;
+
+}
+
+.iniciativa-button {
+
+	color: var(--backgroundColor);
+	background-color: var(--primaryColor);
+	border: none;
+	box-shadow: 0px 2px 5px 0px var(--shadowColor);
+	padding: 5px;
+	border-radius: 5px;
+
+	cursor: var(--customPointer);
+
+}
+
+.iniciativa-button:hover {
+	background-color: var(--secondaryColor);
+	box-shadow: 0px 2px 1px 0px var(--shadowColor);
+}
+
+/* HISTORIAL DE TIRADAS */
+
+.historial {
+	
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	gap: 5px;
+
+}
+
+.row-container {
+
+	border-radius: 5px;
+	box-shadow: inset 0px 1px 15px 2px var(--shadowColor);
+	width: 100%;
+
+}
+
+
+.history-row {
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	text-align: center;
+
+	padding-inline: .2em;
+	padding-block: .3em;
+}
+
+.historial .line {
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+		
+}
+
+.historial .timestamp {
+
+	color: var(--secondaryColor);
+	font-size: 15px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+}
+
+
+.historial .roll {
+	
+	margin-bottom: 0;
+}
+
+.historial .rollResult {
+
+	font-size: 20px;
+	margin-bottom: 0;
+	color: var(--secondaryColor);
+}
+
+.historial .fail {
+	background-color: var(--historyFailureColor);
+	
+}
+
+.historial .success {
+	background-color: var(--historySuccessColor);
+
+}
+
+.historial .botch {
+	background-color: var(--historyBotchColor);
+
+
 }

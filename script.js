@@ -764,7 +764,7 @@ const virtueButtons = document.querySelectorAll(".virtue-icon");
 
 virtueButtons.forEach((button) => {
   button.addEventListener('click', (event) => {
-    console.log("click");
+    resetDicePool1()
     const virtueName = capitalizeFirstLetter(event.currentTarget.nextElementSibling.value);
     const virtueDice = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling.value;
     
@@ -785,7 +785,7 @@ virtueButtons.forEach((button) => {
 const sendaButtons = document.querySelector(".senda-icon");
 
 sendaButtons.addEventListener('click', (event) => {
-  console.log("click");
+  resetDicePool1()
   const sendaName = "Senda"
   const sendaDice = event.currentTarget.nextElementSibling.nextElementSibling.value;
 
@@ -838,8 +838,9 @@ function rollVoluntad(input){
   const inputElement = document.querySelector(`#${inputId}`);
   const inputValue = inputElement.value;
   const inputName = inputElement.getAttribute("name");
-
+  
   //Roll on Pool 1
+  resetDicePool1();
   addToPool1(inputValue, inputName);
     
 }
@@ -957,7 +958,8 @@ function rollTheDice(){
   //obtain character clan
   const characterClan = document.querySelector("#clan").value||"";
   
-  
+  //Array to the roll history
+  const rollToHistory = [];
   
   //Resetear mensaje de Voluntad usada  
   let willpowerNotice = "";
@@ -1085,7 +1087,55 @@ function rollTheDice(){
     willpowerTrueFalse, 
     specialtyTrueFalse
   );
+
+
+  const timestamp = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+
+  historyRoll = 
+  `<div class="history-row">
+    <label class="timestamp">${timestamp}:</label>
+    <div class="line">
+      <label class="roll"> ${pool1} + ${pool2} (${finalPoolSize}d10)</label> 
+      <label class="rollResult">${resultText}</label>
+    </div>
+  </div>`;
+  
+  rollToHistory.push(historyRoll);
+    
+
+  //guardar las ultimas 5 tiradas
+  rollHistory.push(rollToHistory);
+    if (rollHistory.length > 5) {
+    rollHistory.shift();
+  }
+
+  //update the HTML "historial" section
+  const historialDiv = document.querySelector(".historial");
+  historialDiv.innerHTML = "";
+   for (let i = 0; i < rollHistory.length; i++) {
+    const roll = rollHistory[i];
+    const rollString = roll.join(", ");
+    const rollElement = document.createElement("div");
+    rollElement.innerHTML = `${rollString}`;
+    rollElement.classList.add("row-container");
+    if (rollString.includes("Exito")) {
+      rollElement.classList.add("success");
+    }
+    if (rollString.includes("Fallo")) {
+      rollElement.classList.add("fail");
+    }
+    if (rollString.includes("Fracaso")) {
+      rollElement.classList.add("botch");
+    }
+
+
+  
+    historialDiv.appendChild(rollElement);
+  }
+
+
 uncheckWillpowerAndSpecialty();
+
 }
 
 
@@ -1094,6 +1144,9 @@ function uncheckWillpowerAndSpecialty(){
   document.querySelector("#willpower").checked = false;
   document.querySelector("#specialty").checked = false;
 }
+
+// History Rolls const
+const rollHistory = [];
 
 
 
@@ -1217,7 +1270,8 @@ attributesList.forEach((attribute) => {
     //add class to the selected attribute
     const selectedAttribute = event.currentTarget;
     selectedAttribute.classList.add('atributo-seleccionado');
-    
+
+      
     updateFinalPoolSize();
     
   });
@@ -1375,6 +1429,8 @@ function updateDisciplineButtons() {
 //Add dice and name values to DicePool2 on click on discpline buttons.
 disciplineIcons.forEach((icon) => {
   icon.addEventListener('click', (event) => {
+    resetDicePool2();
+
     const disciplineName = event.currentTarget.nextElementSibling.value;
     const disciplineDice = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling.value;
     
@@ -1382,8 +1438,21 @@ disciplineIcons.forEach((icon) => {
     document.querySelector("#dicePool2").value = disciplineDice;
     document.querySelector("#dicePool2Label").innerHTML = capitalizeFirstLetter(disciplineName);
     
-
     updateFinalPoolSize();
   
   });
 });
+
+
+//funcion para tirar Iniciativa
+//Debe sumar el valor del input de Astucia y el valor del input de Destreza, mas un numero random entre 1 y 10
+// menos el penalizador por salud
+//y mostrar el resultado en el label #valorIniciativa
+function tirarIniciativa() {
+  const astucia = document.querySelector("#astucia-value").value;
+  const destreza = document.querySelector("#destreza-value").value;
+  const damagePenalty = parseInt(document.querySelector("#penalizadorSaludLabel").innerHTML);
+  const random = Math.floor(Math.random() * 10) + 1;
+  const valorIniciativa = (parseInt(astucia) + parseInt(destreza) + random) + parseInt(damagePenalty);
+  document.querySelector("#valorIniciativa").innerHTML = `1d10 (${random}) + Destreza (${destreza}) + Astucia (${astucia}) - Daño (${damagePenalty}) = ${valorIniciativa}`;
+}
