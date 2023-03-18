@@ -4,8 +4,10 @@ let editMode = true;
 
 //Funcion que actualiza todos lo que hay que actualizar al visualizar/cargar la pagina
 function updateAll(){
-
-// Loop through each rating element and update the dots
+  //update the HTML title based on the character name
+  updateHTMLTitle();
+  
+  // Loop through each rating element and update the dots
   const ratings = document.querySelectorAll('.rating');
   ratings.forEach(rating => {
     updateRatingDots(rating);
@@ -40,7 +42,16 @@ function updateAll(){
 
 }
 
-
+//function to update the HTML title based on the character name
+function updateHTMLTitle(){
+  //only if the character name is not empty
+  if(document.querySelector('#nombre').value !== ""){  
+    var charName = document.querySelector('#nombre').value;
+    document.title = charName + " - Vampiro v20 - Hoja de personaje";
+  } else {
+    document.title = "Vampiro v20 - Hoja de personaje";
+  }
+}
 
 
 
@@ -335,6 +346,13 @@ function getCharacterData() {
 function downloadCharacterData() {
 	//get the character data as a JSON string
 	let characterJSON = getCharacterData();
+
+  //Get character name
+  let characterName = document.getElementById('nombre').value;
+  //Check if character name is empty
+  if (!characterName) {
+    characterName = 'Nuevo Personaje';
+  }
 	
 	//create a Blob objetc from the JSON data
 	let characterBlob = new Blob([characterJSON], {type: 'application/json'});
@@ -345,7 +363,7 @@ function downloadCharacterData() {
 	//create a download link
 	let downloadLink = document.createElement('a');
 	downloadLink.href = characterURL;
-	downloadLink.download = 'character.json';
+	downloadLink.download = characterName + '.json';
 	downloadLink.textContent = 'Download character data';
 	
 	//append the download link to the document body
