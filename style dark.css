@@ -69,7 +69,6 @@ input[type="number"]::-webkit-outer-spin-button {
 /* ----------------------------------- */
 
 
-
 html,
 body {
 	cursor: url("images/cursor1.png"), auto;
@@ -1481,7 +1480,7 @@ input[type="checkbox"] {
 }
 
 .blood-pool {
-	margin-top: 30px;
+	margin-top: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1513,6 +1512,7 @@ input[type="checkbox"] {
 	align-items: center;
 	justify-content: center;
 	gap: 5px;
+	margin-bottom: 20px;
 }
 
 .rating .dot.disabled {
