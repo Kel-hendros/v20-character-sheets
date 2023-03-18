@@ -192,6 +192,39 @@ function updateHeaderLogo(){
 
 
 
+
+//////////////////////////////////////////////
+// // // Atributos Fisicos Temporales // // // 
+//////////////////////////////////////////////
+
+//obtener los form group fisicos
+const atributosFisicos = document.querySelectorAll('.form-group.attribute.fisicos');
+
+atributosFisicos.forEach((atributoFisico) => {
+  //obtener el select correspondiente
+  const select = atributoFisico.querySelector('select');
+
+  //Agregar event listener al atributoFisico para mostrar el select u ocultarlo en mouse enter y leave
+  atributoFisico.addEventListener('mouseenter', () => {
+    select.style.display = "block";
+  });
+
+  atributoFisico.addEventListener('mouseleave', () => {
+    if (select.value !== "0") {
+      select.style.display = "block";
+    }else{
+    select.style.display = "none";
+    }
+  });
+})
+
+
+
+
+
+
+
+
 /// FUNCIONALIDAD DE LOS PUNTITOS AL HACER CLICK ///
 ////////////////////////////////////////////////////
 // Loop through each rating element
@@ -761,23 +794,6 @@ sendaButtons.addEventListener('click', (event) => {
 });
 
 
-/*
-permanentWillpowerIcons.forEach((icon) => {
-  icon.addEventListener('click', (event) => {
-    const disciplineName = event.currentTarget.nextElementSibling.value;
-    const disciplineDice = event.currentTarget.nextElementSibling.nextElementSibling.nextElementSibling.value;
-    
-    //Update value and label for Pool2
-    document.querySelector("#dicePool2").value = disciplineDice;
-    document.querySelector("#dicePool2Label").innerHTML = capitalizeFirstLetter(disciplineName);
-    
-
-    updateFinalPoolSize();
-  
-  });
-});
-
-*/
 
 
 
@@ -869,7 +885,7 @@ let finalPoolSize = 0;
 const diceButton = document.querySelector("#diceButton");
 
 //Listado de atributos
-const attributesList = document.querySelectorAll('.attributes .form-group.attribute label');
+const attributesList = document.querySelectorAll('.attributes .form-group.attribute');
 
 //Listado de habilidades
 const abilitiesList = document.querySelectorAll('.abilities .form-group.attribute label');
@@ -1173,11 +1189,23 @@ diceButton.addEventListener("click", () => {
 
 //REFACTOR: Add dice and name values to DicePool1 on click on attributes.
 attributesList.forEach((attribute) => {
-  attribute.addEventListener('click', (event) => {
-    const input = event.currentTarget.nextElementSibling.nextElementSibling;
-    
+  label = attribute.querySelector('label');
+
+  label.addEventListener('click', (event) => {
+    // const input = event.currentTarget.nextElementSibling.nextElementSibling;
+    // const input = event.currentTarget.querySelector('input[type="hidden"]');
+
+    const input = event.currentTarget.parentElement.querySelector('input[type="hidden"]');
+
+    //checkear que haya un atributo temporal para el atributo
+    const selectElement = event.currentTarget.parentElement.querySelector('select');
+    //Si hay, poner el valor del atributo temporal en la variable temporalAtribute y sino, ponerla en 0
+    const temporalAtribute = selectElement ? parseInt(selectElement.value) : 0;
+    const permanentAttribute = parseInt(input.getAttribute('value'));
+    const finalAttribute = permanentAttribute + temporalAtribute;
+
     //Update value and label for Pool1
-    document.querySelector("#dicePool1").value = input.getAttribute('value');
+    document.querySelector("#dicePool1").value = finalAttribute;
     document.querySelector("#dicePool1Label").innerHTML = capitalizeFirstLetter(input.getAttribute('name'));
 
     //Remove class from the previously selected attribute
