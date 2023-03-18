@@ -1051,8 +1051,16 @@ function rollTheDice(){
     willpowerTrueFalse, 
     specialtyTrueFalse
   );
-
+uncheckWillpowerAndSpecialty();
 }
+
+
+// function to unckeck the checkboxes for using Willpower and Specialty
+function uncheckWillpowerAndSpecialty(){
+  document.querySelector("#willpower").checked = false;
+  document.querySelector("#specialty").checked = false;
+}
+
 
 
 // DISCORD WEBHOOK //
@@ -1273,6 +1281,7 @@ function resetAllDice() {
   resetDicePool2();
   resetDiceMod();
   updateFinalPoolSize();
+  uncheckWillpowerAndSpecialty();
   document.querySelector("#difficulty").value = 6;
 } 
 

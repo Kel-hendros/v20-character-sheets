@@ -941,7 +941,40 @@ select {
 	border: none;
 }
 
+.form-group.attribute label{
+	flex-grow: 1;
 
+
+}
+
+/* TO DO
+.tempAttr {
+
+
+	background-color: transparent;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	
+	-webkit-appearance: none; 
+  	-moz-appearance: none; 
+  	appearance: none; 
+
+
+	width: 30px;
+	border-radius: 5px;
+	color: transparent;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	border:0px;
+}
+
+.tempAttr .show {
+
+	display: block;
+	background-color: var(--accentColor);
+}
+
+*/
 
 
 .rating {
