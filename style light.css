@@ -961,7 +961,7 @@ select {
 
 	width: 30px;
 	border-radius: 5px;
-	color: green;
+	color: var(--accentColor);
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;

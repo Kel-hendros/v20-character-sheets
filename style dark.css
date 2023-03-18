@@ -945,7 +945,7 @@ select {
 
 }
 
-/* TO DO
+/* TO DO */
 .tempAttr {
 
 
@@ -959,20 +959,16 @@ select {
 
 	width: 30px;
 	border-radius: 5px;
-	color: transparent;
+	color: var(--accentColor);
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
 	border:0px;
 }
 
-.tempAttr .show {
 
-	display: block;
-	background-color: var(--accentColor);
-}
 
-*/
+/* END OF TO DO */
 
 
 .rating {
