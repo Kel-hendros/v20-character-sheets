@@ -33,6 +33,8 @@ function updateAll(){
   //basado en la letra del clan seleccionado
   updateHeaderLogo();
 
+  
+
   //update discpline buttons para mostrar
   //los botones en las disciplinas no-vacias
   updateDisciplineButtons();
@@ -130,11 +132,14 @@ const clanList =document.querySelectorAll('#clan-modal li');
 const logoDisplay = document.querySelector('#logo-display');
 const headerLogoDisplay = document.querySelector('#header-logo-value');
 let clanSelected = "";
+let currentLogoDisplay;
 
-
-inputField.addEventListener("click", () => {
+function showClanModal(){
   modal.style.display = "block";
-});
+}
+
+inputField.addEventListener("focus", showClanModal);
+inputField.addEventListener("click", showClanModal);
 
 clanList.forEach((clan) => {
   clan.addEventListener("click", () => {
@@ -151,13 +156,14 @@ clanList.forEach((clan) => {
     logoDisplay.innerHTML = clan.dataset.clan;
 
     //actualizar el logo en el header
-    headerLogoDisplay.value = clan.dataset.clan;
+    currentLogoDisplay = clan.dataset.clan;
    });
 });
 
 acceptBtn.addEventListener("click", () => {
   modal.style.display = "none";
   inputField.value = clanSelected;
+  headerLogoDisplay.value = currentLogoDisplay;
   updateHeaderLogo();
   saveCharacterData();
 });
@@ -166,7 +172,7 @@ closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
 
   //resetear el clan seleccionado
-  headerLogoDisplay.value = "G"
+  // headerLogoDisplay.value = "G"
   
   //remover clan seleccionado
   clanList.forEach((clan) => clan.classList.remove("active"));
@@ -832,7 +838,6 @@ function blockTemporalWillpower (){
 ////////-------------------------------------------////////
 ////////-------------------------------------------////////
 function rollVoluntad(input){
-  console.log("addToPool1");
   //get the value from the input string assuming is the ID of the input
   const inputId = input;
   const inputElement = document.querySelector(`#${inputId}`);
@@ -1456,3 +1461,4 @@ function tirarIniciativa() {
   const valorIniciativa = (parseInt(astucia) + parseInt(destreza) + random) + parseInt(damagePenalty);
   document.querySelector("#valorIniciativa").innerHTML = `1d10 (${random}) + Destreza (${destreza}) + Astucia (${astucia}) - Daño (${damagePenalty}) = ${valorIniciativa}`;
 }
+

@@ -2,53 +2,58 @@
 	font-family: 'delavan';
 	src: url("fonts/delavan-webfont.woff2") format("woff2"), url("fonts/delavan-webfont.woff") format("woff");
 }
+
 @font-face {
 	font-family: 'vampire-sigils';
 	src: url("fonts/vampiresigils.woff2") format("woff2");
 }
+
 @font-face {
 	font-family: 'vampire-dingbats';
 	src: url("fonts/VampireDingbats.woff2") format("woff2");
 }
+
 @font-face {
 	font-family: 'vampire-wod3';
 	src: url("fonts/WOD3.woff2") format("woff2");
 }
+
 @font-face {
 	font-family: 'Cormorant Garamond';
 	src: url("fonts/CormorantGaramond-Regular.woff") format("woff");
 }
+
 @font-face {
 	font-family: 'Cormorant Bold';
 	src: url("fonts/CormorantGaramond-Bold.woff") format("woff");
 }
 
 /* ELIMINAR LAS FLECHITAS EN LOS CAMPOS NUMERICOS (SOLO CHROME Y OTROS POCOS) */
-input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 
 :root {
-	--backgroundColor	: #2C3639;
+	--backgroundColor: #2C3639;
 
-	--accentColor		: #A27B5C;
+	--accentColor: #A27B5C;
 
-	--secondaryColor	: #F1D3B3;
-	
-	--primaryColor		: #DCD7C9;
-	
-	--shadowColor     	: #000000ca;
-	
-	--successColor		:#4E9F3D;
-	
-	--failureColor		:#497174;
-	
-	--botchColor		:#CF0A0A;
+	--secondaryColor: #F1D3B3;
 
-	--mutedColor		:  #77888e;
+	--primaryColor: #DCD7C9;
+
+	--shadowColor: #000000ca;
+
+	--successColor: #4E9F3D;
+
+	--failureColor: #497174;
+
+	--botchColor: #CF0A0A;
+
+	--mutedColor: #77888e;
 
 	--customPointer: url('images/pointer.png'), pointer;
 
@@ -73,11 +78,16 @@ html,
 body {
 	cursor: url("images/cursor1.png"), auto;
 	margin: 0;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	padding: 0;
-	/* overflow: auto; */
-	background-color: var(--backgroundColor);
+
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	overflow-y: auto;
+	overflow-x: auto;
+
 }
 
 
@@ -87,13 +97,83 @@ body {
 
 	/* Make Everything UNSELECTABLE!! */
 	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 
 }
+
+
+/* ----------CONTAINERS AND COLUMNS--------------- */
+
+
+
+
+.super-container {
+
+	flex-grow: 1;
+
+
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr;
+
+	gap: 20px;
+	overflow-x: auto;
+	min-height: fit-content;
+
+	flex-wrap: nowrap;
+	padding-inline: 15px;
+	
+
+	background-color: var(--backgroundColor);
+
+}
+
+
+
+
+
+.column-left {
+	
+
+	padding-top: 10px;
+	padding-bottom: 50px;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.column-middle {
+
+	
+	padding-top: 10px;
+	padding-bottom: 50px;
+	
+	
+
+	box-shadow: 0 2px 20px 0 var(--shadowColor);
+	padding-inline: 20px;	
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	
+}
+
+.column-right {
+	
+	padding-top: 10px;
+	padding-bottom: 50px;
+
+	min-width: 250px;
+
+	display: flex;
+	flex-direction: column;
+}
+
+
+
 
 h1,
 h2 {
@@ -112,7 +192,7 @@ h2 {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	overflow: none;
+	overflow-y: auto;
 
 	/* Afecta la pantalla de fondo detras del modal */
 	background-color: rgba(0, 0, 0, 0.8);
@@ -125,7 +205,11 @@ h2 {
 	margin: 5vh auto;
 	padding: 20px;
 	border: 1px solid var(--accentColor);
-	width: 50%;
+	width: clamp(800px, 50%, 800px);
+	/* show scroll bar horizontally if the modal is bigger than the width of the screen */
+	overflow-x: auto;
+	overflow-y: auto;
+
 	border-radius: 30px;
 	border: 5px solid var(--primaryColor);
 	box-shadow: 0 10px 20px 0 var(--shadowColor);
@@ -135,7 +219,7 @@ h2 {
 .modal-content h1 {
 	text-align: center;
 	font-family: 'delavan', serif;
-	font-size: 3em;
+	font-size: 2em;
 	margin: 0;
 }
 
@@ -149,6 +233,7 @@ h2 {
 	gap: 20px;
 
 }
+
 
 .modal-buttons button {
 	border-radius: 20px;
@@ -182,72 +267,6 @@ h2 {
 
 
 
-/* ----------CONTAINERS AND COLUMNS--------------- */
-.super-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: stretch;
-	flex-wrap: nowrap;
-	height: 100%;
-	padding-inline: 15px;
-	margin-inline: 20px;
-
-}
-
-.super-column:nth-child(1) {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	min-width: 20rem;
-	flex-basis: 30%;
-	margin: 0 5px 5px;
-	height: 100%;
-}
-
-.super-column:nth-child(2) {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: stretch;
-	min-width: 800px;
-	margin: 0;
-	flex-basis: 70%;
-	flex-grow: 2;
-}
-
-.super-column:nth-child(3) {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
-	min-width: 15rem;
-	flex-basis: 25%;
-	margin: 0 5px 5px;
-}
-
-.column-left {
-	padding: 10px 10px 10px 0;
-	display: flex;
-	flex-direction: column;
-}
-
-.column-middle {
-	margin-top: 0;
-	box-shadow: 0 2px 20px 0 var(--shadowColor);
-	padding: 0;
-	padding-inline: 25px;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	flex-grow: 1;
-}
-
-.column-right {
-	padding: 10px 0 10px 10px;
-	display: flex;
-	flex-direction: column;
-	align-items: cen;
-}
 
 /* ----------------------------------------------- */
 
@@ -270,11 +289,11 @@ h2 {
 /* PRIMERA SUPER COLUMN */
 
 .column-left ion-icon {
-	
+
 	color: var(--secondaryColor);
 	/* animate color transformation */
 	transition: color 1.5s ease-in-out;
-	
+
 }
 
 .column-left ion-icon:hover {
@@ -386,13 +405,14 @@ h2 {
 
 	display: flex;
 	justify-content: space-between;
-	
+
 }
 
 .virtue-container .rating {
 
 	flex-grow: 1;
 }
+
 #tab3 input,
 #tab3 select {
 
@@ -512,7 +532,7 @@ h2 {
 
 .will-icon {
 	font-size: 1.5em;
-	
+
 }
 
 
@@ -534,7 +554,7 @@ h2 {
 
 .xp-row .rating {
 	display: grid;
-	grid-template-columns: repeat(10, auto);
+	grid-template-columns: repeat(15, auto);
 	grid-template-rows: repeat(3, auto);
 	gap: 5px;
 	justify-items: center;
@@ -545,7 +565,7 @@ h2 {
 	grid-column: span 1;
 }
 
-.xp-row .rating span:nth-child(10n-5) {
+.xp-row .rating span:nth-child(5n-5) {
 	margin-right: 20px;
 }
 
@@ -568,11 +588,11 @@ h2 {
 //////// Columna del Medio //////////
 ///////////////////////////////////*/
 .column-middle ion-icon {
-	
+
 	color: var(--primaryColor);
 	/* animate color transformation */
 	transition: color 1.5s ease-in-out;
-	
+
 }
 
 .column-middle ion-icon:hover {
@@ -631,7 +651,7 @@ ul li.active {
 }
 
 .clan-logo {
-	width: 400px;
+	width: 300px;
 	display: flex;
 }
 
@@ -649,6 +669,7 @@ ul li.active {
 
 	min-width: 800px;
 }
+
 #discord-modal-webhook-input {
 	width: 100%;
 	border: 1px solid var(--secondaryColor);
@@ -662,7 +683,7 @@ ul li.active {
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-end;
-	border-radius: 20px;	
+	border-radius: 20px;
 	box-shadow: inset 0px 8px 15px 0px var(--shadowColor);
 	margin-inline: 30px;
 	padding: 40px;
@@ -693,7 +714,7 @@ ul li.active {
 }
 
 .column-middle .toggle:hover {
-	
+
 	color: var(--accentColor);
 	transition: color 0.15s ease-in-out;
 }
@@ -706,7 +727,6 @@ ul li.active {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 10px;
 
 	gap: 10px;
 }
@@ -771,10 +791,10 @@ ul li.active {
 
 /* ION ICONS */
 ion-icon {
-	
+
 	font-size: 1.7em;
 	cursor: var(--customPointer);
-	
+
 }
 
 
@@ -819,7 +839,7 @@ ion-icon {
 
 	display: block;
 	padding-top: 0px;
-	
+
 	background-color: var(--colorDeAdornos);
 	height: 5px;
 	flex: 1;
@@ -891,7 +911,7 @@ ion-icon {
 }
 
 .column label {
-	font-size: 20px;
+	font-size: 16px;
 }
 
 /* //QUE ES ESTO */
@@ -944,7 +964,7 @@ select {
 	border: none;
 }
 
-.form-group.attribute label{
+.form-group.attribute label {
 	flex-grow: 1;
 
 
@@ -956,10 +976,10 @@ select {
 
 	background-color: transparent;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	
-	-webkit-appearance: none; 
-  	-moz-appearance: none; 
-  	appearance: none; 
+
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 
 
 	width: 30px;
@@ -968,7 +988,7 @@ select {
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
-	border:0px;
+	border: 0px;
 }
 
 
@@ -1079,7 +1099,8 @@ input[type="checkbox"] {
 	background-color: transparent;
 	border: 2px solid var(--primaryColor);
 	box-shadow: inset 0px 4px 9px 0px var(--shadowColor);
-	appearance: none; /* Other */
+	appearance: none;
+	/* Other */
 	margin-bottom: 0;
 	padding: 1px 2px;
 }
@@ -1090,7 +1111,7 @@ input[type="checkbox"] {
 	color: var(--backgroundColor);
 	height: 46px;
 	width: 58px;
-	
+
 }
 
 .groupDie label {
@@ -1217,7 +1238,7 @@ input[type="checkbox"] {
 	justify-content: center;
 	gap: 10px;
 	font-size: 20px;
-	margin-bottom: 100px;
+	margin-bottom: 10px;
 
 }
 
@@ -1290,22 +1311,22 @@ input[type="checkbox"] {
 
 }
 
-.health-container .seccion-container .seccion{
-	
+.health-container .seccion-container .seccion {
+
 	z-index: 2;
 	background-color: var(--backgroundColor);
-	box-shadow: 0px 0px 5px 5px var(--backgroundColor); 
+	box-shadow: 0px 0px 5px 5px var(--backgroundColor);
 }
 
-.health-container .seccion-container .seccion-linea{
+.health-container .seccion-container .seccion-linea {
 	z-index: 3;
 }
 
-.health-container.lesionado{
+.health-container.lesionado {
 	background-image: url('images/health1.png');
 }
 
-.health-container.malherido{
+.health-container.malherido {
 	background-image: url('images/health2.png');
 }
 
@@ -1320,17 +1341,17 @@ input[type="checkbox"] {
 	grid-template-rows: repeat(7, 25px);
 
 	background-color: var(--backgroundColor);
-	box-shadow: 0px 0px 25px 25px var(--backgroundColor); 
-	
+	box-shadow: 0px 0px 25px 25px var(--backgroundColor);
+
 
 	z-index: 0;
 
 }
 
-.health-buttons-container{
+.health-buttons-container {
 
 	background-color: var(--backgroundColor);
-	box-shadow: 0px 0px 25px 25px var(--backgroundColor); 
+	box-shadow: 0px 0px 25px 25px var(--backgroundColor);
 }
 
 
@@ -1383,6 +1404,8 @@ input[type="checkbox"] {
 
 .botonera:hover {
 	box-shadow: inset 0 5px 5px 0 var(--shadowColor);
+	/* change the background-color to a linear gradient from Green -> Transparent -> red */
+	background: linear-gradient(to right, Green 15%,  transparent 16%, transparent 85%, red 86%);
 }
 
 .botonera.contundente {
@@ -1439,7 +1462,7 @@ input[type="checkbox"] {
 }
 
 .botonera .button-add::after {
-	color: var(--primaryColor);
+	color: var(--backgroundColor);
 	position: absolute;
 	content: "+";
 	font-size: 20px;
@@ -1448,7 +1471,7 @@ input[type="checkbox"] {
 }
 
 .botonera .button-remove::after {
-	color: var(--primaryColor);
+	color: var(--backgroundColor);
 	position: absolute;
 	content: "-";
 	font-size: 20px;
@@ -1534,7 +1557,7 @@ input {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	
+
 }
 
 /* INICIATIVA */
@@ -1571,7 +1594,7 @@ input {
 /* HISTORIAL DE TIRADAS */
 
 .historial {
-	
+
 	width: 100%;
 	margin-top: 20px;
 	display: flex;
@@ -1608,7 +1631,7 @@ input {
 	align-items: center;
 	justify-content: center;
 
-		
+
 }
 
 .historial .timestamp {
@@ -1622,7 +1645,7 @@ input {
 
 
 .historial .roll {
-	
+
 	margin-bottom: 0;
 }
 
@@ -1635,7 +1658,7 @@ input {
 
 .historial .fail {
 	background-color: var(--historyFailureColor);
-	
+
 }
 
 .historial .success {
