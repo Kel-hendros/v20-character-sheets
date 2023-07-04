@@ -1181,7 +1181,7 @@ function sendToDiscordRoll(
     return;
   }
   const payload = {
-    "content": "",
+    "content": characterName + ": " + result,
     "embeds": [
       {
         "author": {
@@ -1205,7 +1205,7 @@ function sendToDiscordRoll(
           },
           {
             "name": "Penalizador por Daño",
-            "value": damagePenaltyTrueFalse + " aplicado. " + damagePenalty,
+            "value": damagePenaltyTrueFalse + " aplicado: " + damagePenalty,
           },
           {
             "name": "Voluntad", 
