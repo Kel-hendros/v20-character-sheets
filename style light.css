@@ -113,25 +113,21 @@ body {
 
 	flex-grow: 1;
 
-
 	display: grid;
 	grid-template-columns: 1fr 3fr 1fr;
 
-	gap: 20px;
+	gap: 10px;
 	overflow-x: auto;
 	min-height: fit-content;
 
 	flex-wrap: nowrap;
-	padding-inline: 15px;
+	padding-inline: 25px;
 	
 
 	background-color: var(--backgroundColor);
+	
 
 }
-
-
-
-
 
 .column-left {
 	
@@ -149,8 +145,6 @@ body {
 	padding-top: 10px;
 	padding-bottom: 50px;
 	
-	
-
 	box-shadow: 0 2px 20px 0 var(--shadowColor);
 	padding-inline: 20px;	
 	display: flex;
@@ -312,7 +306,7 @@ h2 {
 .tab-button {
 	color: var(--mutedColor);
 	font-family: 'delavan', serif;
-	font-size: 15px;
+	font-size: 11px;
 	flex-grow: 1;
 	background-color: var(--backgroundColor);
 	border: 2px solid var(--primaryColor);
@@ -333,6 +327,7 @@ h2 {
 	color: var(--primaryColor);
 	border: 2px solid var(--primaryColor);
 	border-bottom: none;
+	font-size: 15px;
 }
 
 .tab-content {
@@ -568,8 +563,8 @@ h2 {
 }
 
 .xp-row .dot {
-	width: 12;
-	height: 12px;
+	width: 8px;
+	height: 8px;
 	border-radius: 0;
 	border: 2px solid var(--primaryColor);
 	margin: 0 1px;
@@ -1008,7 +1003,7 @@ select {
 	border: 1px solid var(--primaryColor);
 	border-left: 3px solid var(--primaryColor);
 	border-right: 3px solid var(--primaryColor);
-	margin: 0 1px;
+	margin: 0 0.5px;
 	cursor: var(--customPointer);
 }
 
@@ -1046,7 +1041,7 @@ select {
 
 .automatization-row label {
 	font-family: 'delavan', 'serif';
-	font-size: 1rem;
+	font-size: .8rem;
 	margin-inline: 5px;
 }
 
@@ -1498,15 +1493,26 @@ input[type="checkbox"] {
 	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
+	
 }
+
 
 .blood-pool {
 	margin-top: 10px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	align-items: flex-start;
+	justify-content: space-evenly;
 }
 
+.blood-pool i {
+	cursor: var(--customPointer);
+}
+
+.blood-action-add {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
 
 .blood-row .rating {
 	display: grid;
@@ -1525,6 +1531,37 @@ input[type="checkbox"] {
 	margin: 0 1px;
 	cursor: var(--customPointer);
 }
+
+.blood-type-1 {
+	width: 12;
+	height: 12px;
+	border-radius: 0;
+	border: 2px solid var(--primaryColor);
+	background-color: #000000;
+	margin: 0 1px;
+	cursor: var(--customPointer);
+}
+
+.blood-type-2 {
+	width: 12;
+	height: 12px;
+	border-radius: 0;
+	border: 2px solid var(--primaryColor);
+	background-color: red;
+	margin: 0 1px;
+	cursor: var(--customPointer);
+}
+
+.blood-type-3 {
+	width: 12;
+	height: 12px;
+	border-radius: 0;
+	border: 2px solid var(--primaryColor);
+	background-color: blue;
+	margin: 0 1px;
+	cursor: var(--customPointer);
+}
+
 
 .info-sangre {
 	margin-top: 10px;
